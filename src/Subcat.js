@@ -3,8 +3,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { useParams } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
-
-
+import { usePaystackPayment } from "react-paystack";
 
 const Subcat = () => {
   const { courseId } = useParams();
@@ -15,8 +14,7 @@ const Subcat = () => {
   const [error, setError] = useState(null);
   const storedId = localStorage.getItem('id');
   const id = JSON.parse(storedId);
-  const [userData, setuserData] = useState ({})
-  console.log(id);
+  const [userData, setuserData] = useState({})
 
   useEffect(() => {
     const fetchCourse = async () => {
@@ -34,59 +32,54 @@ const Subcat = () => {
       }
     };
 
-  
-      axios.get(`http://localhost:5009/udemy/student/getdata/id/${id}`)
+    axios.get(`http://localhost:5009/udemy/student/getdata/id/${id}`)
       .then((res) =>{
-        // console.log(res.data);
         setuserData(res.data)
-        console.log(userData);
         setLoading(false);
       }).catch ((error) =>{
         console.log(error);
         setLoading(false);
         toast.error("Failed to fetch admin data");
       })
-    
 
     fetchCourse();
   }, [courseId]);
 
-  console.log(userData);
+  const config = {
+    reference: (new Date()).getTime().toString(),
+    email: userData.email,
+    amount: video.price * 100,
+    publicKey: 'pk_test_6dbb10e57606b65e31e7be9d5ab4e13b3e5f74e1',
+  };
+
+  const onSuccess = (reference) => {
+    axios.post('http://localhost:5009/udemy/student/payment', {
+      reference: reference,
+      courseTitle: course.title,
+      courseId: course.id,
+      userId: id,
+    })
+    .then((res) => {
+      if (res.data.success) {
+        toast.success("Payment successful!");
+      } else {
+        toast.error("Payment verification failed");
+      }
+    })
+    .catch((error) => {
+      console.error("Error verifying payment:", error);
+      toast.error("An error occurred during payment verification");
+    });
+  };
+
+  const onClose = () => {
+    toast.error("Transaction was not completed.");
+  };
+
+  const initializePayment = usePaystackPayment(config);
 
   const buyCourse = () => {
-    const handler = window.PaystackPop.setup({
-      key: 'pk_test_6dbb10e57606b65e31e7be9d5ab4e13b3e5f74e1', 
-      email: userData.email,
-      amount: video.price * 100, 
-      currency: "NGN",
-      ref: `ref_${Date.now()}`,
-      callback: function(response) {
-       
-        axios.post('http://localhost:5009/udemy/student/payment', {
-          reference: response.reference,
-          courseTitle:course.title,
-          courseId:course.id,
-          userId: id,
-  
-        })
-        .then((res) => {
-          if (res.data.success) {
-            toast.success("Payment successful!");
-          } else {
-            toast.error("Payment verification failed");
-          }
-        })
-        .catch((error) => {
-          console.error("Error verifying payment:", error);
-          toast.error("An error occurred during payment verification");
-        });
-      },
-      onClose: function() {
-        toast.error("Transaction was not completed.");
-      }
-    });
-
-    handler.openIframe();
+    initializePayment(onSuccess, onClose);
   };
 
   if (loading) {

@@ -8,8 +8,11 @@ import './bigvideobox.css'
 
 const Videos = () => {
   const [video, setvideo] = useState([])
+  const [paidvideo, setpaidvideo] = useState([])
   const Naira = "$"
   const navigate = useNavigate()
+  const storedId = localStorage.getItem('id');
+  const id = JSON.parse(storedId);
 
   useEffect(()=>{
     axios.get("http://localhost:5009/courses/getallcourses")
@@ -19,6 +22,17 @@ const Videos = () => {
       console.log(err);
       toast.error("Failed to fetch course");
     })
+
+    axios.get(`http://localhost:5009/udemy/student/paidCourses/id/id/${id}`)
+    .then((res) => {
+      if (res.data.success) {
+        setpaidvideo(res.data)
+        toast.success("Payment successful!");
+      } else {
+        toast.error("Payment verification failed");
+      }
+    })
+    
   }, [])
 
   console.log(video);
@@ -34,18 +48,37 @@ const Videos = () => {
 
   return (
     <>
-      <div className='Mainvideos2'>
+     <div className='bigContinerDiv' >
+     <div className='Mainvideos2'>
         {video.map((courses, index) => (
           <div key={index} className="videos" onClick={(()=>showmore(courses))}>
-            <video className="vidImage" src={courses.previewVideo} controls></video>
+            <div className="videoImage">
+              <video src={courses.previewVideo} controls></video>
+            </div>
             <p className="title">{courses.title}</p>
             <p className="authorName">{courses.authors_name}</p>
             <p className="price">{Naira} {courses.price}</p>
           </div>
         ))}
       </div>
+
+      <div className='Mainvideos2'>
+        {video.map((courses, index) => (
+          <div key={index} className="videos" onClick={(()=>showmore(courses))}>
+           <div className="videoImage">
+              <video src={courses.previewVideo} controls></video>
+            </div>
+            <p className="title">{courses.title}</p>
+            <p className="authorName">{courses.authors_name}</p>
+            <p className="price">{Naira} {courses.price}</p>
+          </div>
+        ))}
+      </div>
+
+      </div>
     </>
   )
 }
 
 export default Videos
+
