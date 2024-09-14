@@ -23,7 +23,7 @@ const Videos = () => {
       toast.error("Failed to fetch course");
     })
 
-    axios.get(`http://localhost:5009/udemy/student/paidCourses/id/id/${id}`)
+    axios.get(`http://localhost:5009/udemy/student/paidCourses/id/${id}`)
     .then((res) => {
       if (res.data.success) {
         setpaidvideo(res.data)
@@ -32,10 +32,14 @@ const Videos = () => {
         toast.error("Payment verification failed");
       }
     })
-    
+    .catch((err) => {
+      console.error(err);
+      toast.error("Failed to fetch paid courses. Please try again later.");
+    })
+
   }, [])
 
-  console.log(video);
+  console.log(paidvideo);
 
   const showmore = (courses) =>{
     let courseId = (courses._id)

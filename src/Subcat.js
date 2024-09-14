@@ -45,6 +45,11 @@ const Subcat = () => {
     fetchCourse();
   }, [courseId]);
 
+  // console.log(course.tittle);
+  console.log(course._id)
+  console.log(course)
+  
+
   const config = {
     reference: (new Date()).getTime().toString(),
     email: userData.email,
@@ -56,7 +61,7 @@ const Subcat = () => {
     axios.post('http://localhost:5009/udemy/student/payment', {
       reference: reference,
       courseTitle: course.title,
-      courseId: course.id,
+      courseId: course._id,
       userId: id,
     })
     .then((res) => {
@@ -71,6 +76,8 @@ const Subcat = () => {
       toast.error("An error occurred during payment verification");
     });
   };
+
+
 
   const onClose = () => {
     toast.error("Transaction was not completed.");
