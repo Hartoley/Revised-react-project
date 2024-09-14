@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 
 
+
 const Subcat = () => {
   const { courseId } = useParams();
   const [course, setCourse] = useState({});
@@ -12,6 +13,10 @@ const Subcat = () => {
   const [previewVideo, setPreviewVideo] = useState();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const storedId = localStorage.getItem('id');
+  const id = JSON.parse(storedId);
+  const [userData, setuserData] = useState ({})
+  console.log(id);
 
   useEffect(() => {
     const fetchCourse = async () => {
@@ -29,21 +34,39 @@ const Subcat = () => {
       }
     };
 
+  
+      axios.get(`http://localhost:5009/udemy/student/getdata/id/${id}`)
+      .then((res) =>{
+        // console.log(res.data);
+        setuserData(res.data)
+        console.log(userData);
+        setLoading(false);
+      }).catch ((error) =>{
+        console.log(error);
+        setLoading(false);
+        toast.error("Failed to fetch admin data");
+      })
+    
+
     fetchCourse();
   }, [courseId]);
 
+  console.log(userData);
+
   const buyCourse = () => {
     const handler = window.PaystackPop.setup({
-      key: 'pk_test_6dbb10e57606b65e31e7be9d5ab4e13b3e5f74e1', // Replace with your Paystack public key
-      email: "user@example.com",
-      amount: video.price, // Amount in kobo
+      key: 'pk_test_6dbb10e57606b65e31e7be9d5ab4e13b3e5f74e1', 
+      email: userData.email,
+      amount: video.price * 100, 
       currency: "NGN",
       ref: `ref_${Date.now()}`,
       callback: function(response) {
-        // Payment successful, notify backend
-        axios.post('http://localhost:5009/udemy/student/payment/verify', {
+       
+        axios.post('http://localhost:5009/udemy/student/payment', {
           reference: response.reference,
           courseTitle:course.title,
+          courseId:course.id,
+          userId: id,
   
         })
         .then((res) => {

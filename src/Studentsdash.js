@@ -10,6 +10,7 @@ import Body1 from './Body1'
 import Footer from './Footer'
 import Bigvideobox from './Bigvideobox'
 
+
 const Studentsdash = () => {
   const [adminData, setAdminData] = useState({});
   const [loading, setLoading] = useState(true);
@@ -30,6 +31,9 @@ const Studentsdash = () => {
       })
     }, [id])
     console.log(realadmin);
+    console.log(id);
+    
+    localStorage.setItem('id', JSON.stringify(id));
     
    
   return (
@@ -39,6 +43,7 @@ const Studentsdash = () => {
       {/* <p>{realadmin[1]}</p> */}
       <Body1></Body1>
       <Bigvideobox viewed='Because you viewed “'vspan='DevOps Beginners to Advanced with Projects' extra='”' />
+      
     
       <Footer></Footer>
     </>
