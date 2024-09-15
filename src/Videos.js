@@ -25,23 +25,22 @@ const Videos = () => {
 
     axios.get(`http://localhost:5009/udemy/student/paidCourses/id/${id}`)
     .then((res) => {
-      if (res.data.success) {
+      if (res.data) {
         setpaidvideo(res.data)
         console.log(res.data);
-        
-        toast.success("Payment successful!");
+        toast.success("course fetching successful!");
       } else {
-        toast.error("Payment verification failed");
+        console.log('I do not have the data');
+        toast.error("course fetching failed");
       }
-    })
-    .catch((err) => {
+    }).catch((err) => {
       console.error(err);
       toast.error("Failed to fetch paid courses. Please try again later.");
     })
 
   }, [])
 
-  console.log(paidvideo);
+  
 
   const showmore = (courses) =>{
     let courseId = (courses._id)
@@ -56,12 +55,12 @@ const Videos = () => {
     <>
      <div className='bigContinerDiv' >
      <div className='Mainvideos2'>
-        {video.map((courses, index) => (
+        {paidvideo.map((courses, index) => (
           <div key={index} className="videos" onClick={(()=>showmore(courses))}>
             <div className="videoImage">
               <video src={courses.previewVideo} controls></video>
             </div>
-            <p className="title">{courses.title}</p>
+            <p className="title">{courses.courseTitle}</p>
             <p className="authorName">{courses.authors_name}</p>
             <p className="price">{Naira} {courses.price}</p>
           </div>

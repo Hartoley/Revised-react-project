@@ -20,7 +20,7 @@ const Bigvideobox = ({viewed, vspan, extra}) => {
     })
   }, [])
 
-  console.log(video);
+  // console.log(video);
 
 
   return (
