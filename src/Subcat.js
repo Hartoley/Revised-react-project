@@ -3,7 +3,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { useParams } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
-import { usePaystackPayment } from "react-paystack";
+import { PaystackButton } from "react-paystack";
 
 const Subcat = () => {
   const { courseId } = useParams();
@@ -14,7 +14,7 @@ const Subcat = () => {
   const [error, setError] = useState(null);
   const storedId = localStorage.getItem('id');
   const id = JSON.parse(storedId);
-  const [userData, setuserData] = useState({})
+  const [userData, setUserData] = useState({});
 
   useEffect(() => {
     const fetchCourse = async () => {
@@ -33,60 +33,50 @@ const Subcat = () => {
     };
 
     axios.get(`http://localhost:5009/udemy/student/getdata/id/${id}`)
-      .then((res) =>{
-        setuserData(res.data)
+      .then((res) => {
+        setUserData(res.data);
         setLoading(false);
-      }).catch ((error) =>{
+      }).catch((error) => {
         console.log(error);
         setLoading(false);
-        toast.error("Failed to fetch admin data");
-      })
+        toast.error("Failed to fetch user data");
+      });
 
     fetchCourse();
-  }, [courseId]);
+  }, [courseId, id]);
 
-  // console.log(course.tittle);
-  console.log(course._id)
-  console.log(course)
-  
-
-  const config = {
+  const componentProps = {
+    email: userData.email || '', // Ensure email is defined
+    amount: video.price * 100, // amount in kobo (e.g., 1000 kobo = 10 Naira)
     reference: (new Date()).getTime().toString(),
-    email: userData.email,
-    amount: video.price * 100,
-    publicKey: 'pk_test_6dbb10e57606b65e31e7be9d5ab4e13b3e5f74e1',
-  };
-
-  const onSuccess = (reference) => {
-    axios.post('http://localhost:5009/udemy/student/payment', {
-      reference: reference,
-      courseTitle: course.title,
-      courseId: course._id,
+    metadata: {
+      name: userData.username || '',
       userId: id,
-    })
-    .then((res) => {
-      if (res.data.success) {
-        toast.success("Payment successful!");
-      } else {
-        toast.error("Payment verification failed");
-      }
-    })
-    .catch((error) => {
-      console.error("Error verifying payment:", error);
-      toast.error("An error occurred during payment verification");
-    });
-  };
-
-
-
-  const onClose = () => {
-    toast.error("Transaction was not completed.");
-  };
-
-  const initializePayment = usePaystackPayment(config);
-
-  const buyCourse = () => {
-    initializePayment(onSuccess, onClose);
+    },
+    publicKey: 'pk_test_6dbb10e57606b65e31e7be9d5ab4e13b3e5f74e1', // Replace with your actual public key
+    text: "Course payment",
+    onSuccess: (reference) => {
+      console.log('Payment successful! Reference:', reference);
+      axios.post('http://localhost:5009/udemy/student/payment', {
+        reference: reference,
+        courseTitle: course.title,
+        courseId: course._id,
+        userId: id,
+      }).then((res) => {
+        if (res.data.success) {
+          toast.success("Payment successful!");
+        } else {
+          toast.error("Payment verification failed");
+        }
+      }).catch((error) => {
+        console.error("Error verifying payment:", error.message);
+        toast.error("An error occurred during payment verification");
+      });
+    },
+    onClose: () => {
+      console.log('Transaction was not completed.');
+      toast.error("Transaction was not completed.");
+    },
   };
 
   if (loading) {
@@ -109,9 +99,7 @@ const Subcat = () => {
           )}
         </div>
         <h1>{course.title || "Course Title"}</h1>
-        <button onClick={buyCourse} disabled={loading}>
-          Buy Course
-        </button>
+        <PaystackButton className="paystack-button" {...componentProps} />
       </div>
     </div>
   );

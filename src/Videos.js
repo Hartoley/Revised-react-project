@@ -27,6 +27,8 @@ const Videos = () => {
     .then((res) => {
       if (res.data.success) {
         setpaidvideo(res.data)
+        console.log(res.data);
+        
         toast.success("Payment successful!");
       } else {
         toast.error("Payment verification failed");
