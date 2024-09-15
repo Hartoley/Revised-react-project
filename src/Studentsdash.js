@@ -30,8 +30,8 @@ const Studentsdash = () => {
         toast.error("Failed to fetch admin data");
       })
     }, [id])
-    console.log(realadmin);
-    console.log(id);
+    // console.log(realadmin);
+    // console.log(id);
     
     localStorage.setItem('id', JSON.stringify(id));
     

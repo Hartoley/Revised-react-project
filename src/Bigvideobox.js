@@ -26,9 +26,9 @@ const Bigvideobox = ({viewed, vspan, extra}) => {
   return (
     <>
         <div className="bigBox">
-            <p className='videoHeadlines'>{viewed}<span>{vspan}</span>{extra} </p>
+           
             <div className="videoBox">
-                <  Videos className='Mainvideos'/>
+                <  Videos className='Mainvideos' viewed={viewed} vspan={vspan} extra={extra}/>
             </div>
             {/* Master Your DevOps Skills with Real challengeRating: 4.7 out of 52915 reviews40 total hours246 lecturesIntermediateCurrent price: ₦39,900 */}
         </div>

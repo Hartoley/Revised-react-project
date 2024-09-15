@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify'
 import './bigvideobox.css'
 
-const Videos = () => {
+const Videos = ({viewed, vspan, extra}) => {
   const [video, setvideo] = useState([])
   const [paidvideo, setpaidvideo] = useState([])
   const Naira = "$"
@@ -27,7 +27,7 @@ const Videos = () => {
     .then((res) => {
       if (res.data) {
         setpaidvideo(res.data)
-        console.log(res.data);
+        // console.log(res.data);
         toast.success("course fetching successful!");
       } else {
         console.log('I do not have the data');
@@ -44,7 +44,7 @@ const Videos = () => {
 
   const showmore = (courses) =>{
     let courseId = (courses._id)
-    console.log(courseId);
+    // console.log(courseId);
     navigate(`/course/${courseId}`); 
     
 }
@@ -60,13 +60,13 @@ const Videos = () => {
             <div className="videoImage">
               <video src={courses.previewVideo} controls></video>
             </div>
-            <p className="title">{courses.courseTitle}</p>
+            <p className="title">{courses.title}</p>
             <p className="authorName">{courses.authors_name}</p>
             <p className="price">{Naira} {courses.price}</p>
           </div>
         ))}
       </div>
-
+      <p className='videoHeadlines'>{viewed}<span>{vspan}</span>{extra} </p>
       <div className='Mainvideos2'>
         {video.map((courses, index) => (
           <div key={index} className="videos" onClick={(()=>showmore(courses))}>
