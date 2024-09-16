@@ -38,8 +38,7 @@ const Subcat = () => {
       .then((res) => {
         if (res.data) {
           setPaidVideo(res.data);
-          const ids = res.data.map(course => course._id);
-          
+          const ids = res.data.map(course => course._id);         
           setPaidVideoId(ids);
           toast.success("Course fetching successful!");
         } else {

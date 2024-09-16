@@ -16,11 +16,18 @@ const Subcategory = () => {
   const [course, setcourse] = useState([]);
   const [videos, setvideos] = useState([]);
   const [learn, setlearn] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const Naira = "$";
   const sub = "Video Title:";
   const subCategory = document.querySelector('.subCategory');
   const category3 = document.querySelectorAll('.category');
   const subCategoryRef = useRef(null);
+  const [paidvideo, setPaidVideo] = useState([]);
+  const [paidvideoId, setPaidVideoId] = useState([]);
+  const storedId = localStorage.getItem('id');
+  const id = JSON.parse(storedId);
+  const [userData, setUserData] = useState({});
 
   useEffect(() => {
     axios
@@ -35,6 +42,31 @@ const Subcategory = () => {
 
         toast.error("Failed to fetch corse data");
       });
+
+      axios.get(`http://localhost:5009/udemy/student/getdata/id/${id}`)
+      .then((res) => {
+        setUserData(res.data);
+        setLoading(true);
+      }).catch((error) => {
+        console.log('Error:', error);
+        setLoading(false);
+        toast.error("Failed to fetch user data");
+      })
+
+      axios.get(`http://localhost:5009/udemy/student/paidCourses/id/${id}`)
+      .then((res) => {
+        if (res.data) {
+          setPaidVideo(res.data);
+          const ids = res.data.map(course => course._id);  
+          setPaidVideoId(ids);
+          toast.success("Course fetching successful!");
+        } else {
+          toast.error("Course fetching failed");
+        }
+      }).catch((err) => {
+        console.error(err);
+        toast.error("Failed to fetch paid courses. Please try again later.");
+      });
   }, [courseId]);
 
   // console.log(course);
@@ -42,7 +74,21 @@ const Subcategory = () => {
   const handleStarClick = () => {
     console.log("Star clicked!");
   };
-
+  const playVideo = (videoId) => {
+    const isPaid = paidvideoId.includes(videoId); 
+    if (isPaid) {
+      const video = videos.find(v => v._id === videoId);
+      if (video) {
+        console.log("Paid video URL:", video.url);
+      } else {
+        console.error("Video not found!");
+      }
+    } else {
+      console.log("This video is not paid.");
+  
+    }
+  };
+  
   const headerChange = () => {
     const subCategory = subCategoryRef.current; 
     if (subCategory) {
@@ -70,12 +116,22 @@ const Subcategory = () => {
   return (
     <>
       <Dashheader />
+      
       <div onScroll={headerChange} className="subCategory">
         <div className="category">
           <div className="category1">
 
           </div>
+
           <Subcat/>
+          <div className="Mainvideos3">
+          {/* {videos.map((videoItem, index) => (
+                  <div key={index} className="videoItem">
+                    <video className="vidImage" src={videoItem.url} controls></video>
+                    <h4 className="title">{sub} {videoItem.sub_title}</h4>
+                  </div>
+                ))} */}
+          </div>
           <div className="category2">
             <p className="line1">
               TOTAL: Cloud Computing / CompTIA Cloud+ (CV0-003)
@@ -194,8 +250,8 @@ const Subcategory = () => {
             <div className="sub2">
               {videos.map((videoItem, index) => (
                 <div key={index} className="videoItem">
-                  <div className="videocon">
-                    <h4 className="title">
+                  <div  onClick={(()=>playVideo(videoItem._id))} className="videocon">
+                    <h4 className="title">                   
                       <span class="material-symbols-outlined">star</span>
 
                       {videoItem.sub_title}
@@ -236,14 +292,6 @@ const Subcategory = () => {
           </div>
         </div>
 
-        <div className="Mainvideos2">
-          {/* {videos.map((videoItem, index) => (
-                  <div key={index} className="videoItem">
-                    <video className="vidImage" src={videoItem.url} controls></video>
-                    <h4 className="title">{sub} {videoItem.sub_title}</h4>
-                  </div>
-                ))} */}
-        </div>
         <Footer/>
       </div>
     </>
