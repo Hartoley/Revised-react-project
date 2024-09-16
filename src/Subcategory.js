@@ -230,6 +230,7 @@ const Subcategory = () => {
             <div className="sub4">
                 <div className="subb2">
                     <p>Description</p>
+                    <p id="subbP2" >{course.description}</p>
                 </div>
             </div>
           </div>

@@ -39,7 +39,7 @@ const Subcat = () => {
         if (res.data) {
           setPaidVideo(res.data);
           const ids = res.data.map(course => course._id);
-          console.log('Fetched course IDs:', ids);
+          
           setPaidVideoId(ids);
           toast.success("Course fetching successful!");
         } else {
@@ -63,6 +63,8 @@ const Subcat = () => {
     fetchCourse();
     
   }, [courseId, id]);
+
+  console.log('Fetched course IDs:', paidvideoId);
 
   const componentProps = {
     email: userData.email || '',
@@ -121,7 +123,7 @@ const Subcat = () => {
             <p>No preview video available</p>
           )}
         </div>
-        <h1>{course.title || "Course Title"}</h1>
+        <h6>{course.title || "Course Title"}</h6>
         {isVideoPaid(video._id) ? (
           <p>This video is already paid for!</p>
         ) : (

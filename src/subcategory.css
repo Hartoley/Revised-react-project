@@ -62,7 +62,9 @@
 .category3{
     width: 28%;
     height: 150vh;
-    background-color: rgb(198, 7, 86);
+    background-color: white;
+    color: black;
+    box-shadow: 10px 10px 20px gray;
     top: 5%;
     left: 66.8%;
     position: absolute;
@@ -188,7 +190,7 @@
 
 .sub4{
     width: 90%;
-    height: 50vh;
+    height: auto;
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -293,11 +295,16 @@
     height: 6vh;
     /* background-color: aqua; */
     display: flex;
+    flex-direction: column;
     Font-size: 24px;
     Font-weight: 700;
     Line-height: 28.8px;
     color: rgb(45, 47, 49);
     /* padding: 10px 50px; */
+}
+#subbP2{
+    Font-size: 16px;
+    Font-weight: 400;
 }
 
 .subb1{
