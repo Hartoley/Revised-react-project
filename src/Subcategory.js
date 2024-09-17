@@ -10,7 +10,6 @@ import Star from "./Star";
 import Footer from "./Footer";
 import Subcat from "./Subcat";
 
-
 const Subcategory = () => {
   const { courseId } = useParams();
   const [course, setcourse] = useState([]);
@@ -20,9 +19,9 @@ const Subcategory = () => {
   const [error, setError] = useState(null);
   const Naira = "$";
   const sub = "Video Title:";
-  const subCategory = document.querySelector('.subCategory');
-  const category3 = document.querySelectorAll('.category');
-  const subCategoryRef = useRef(null);
+  const subcategoryRef = useRef(null);
+  const headerRef = useRef(null);
+  const videoToplayRef = useRef(null);
   const [paidvideo, setPaidVideo] = useState([]);
   const [paidvideoId, setPaidVideoId] = useState([]);
   const storedId = localStorage.getItem('id');
@@ -39,11 +38,10 @@ const Subcategory = () => {
       })
       .catch((error) => {
         console.log(error);
-
-        toast.error("Failed to fetch corse data");
+        toast.error("Failed to fetch course data");
       });
 
-      axios.get(`http://localhost:5009/udemy/student/getdata/id/${id}`)
+    axios.get(`http://localhost:5009/udemy/student/getdata/id/${id}`)
       .then((res) => {
         setUserData(res.data);
         setLoading(true);
@@ -51,13 +49,13 @@ const Subcategory = () => {
         console.log('Error:', error);
         setLoading(false);
         toast.error("Failed to fetch user data");
-      })
+      });
 
-      axios.get(`http://localhost:5009/udemy/student/paidCourses/id/${id}`)
+    axios.get(`http://localhost:5009/udemy/student/paidCourses/id/${id}`)
       .then((res) => {
         if (res.data) {
           setPaidVideo(res.data);
-          const ids = res.data.map(course => course._id);  
+          const ids = res.data.map(course => course._id);
           setPaidVideoId(ids);
           toast.success("Course fetching successful!");
         } else {
@@ -69,68 +67,70 @@ const Subcategory = () => {
       });
   }, [courseId]);
 
-  // console.log(course);
-  // console.log(videos);
   const handleStarClick = () => {
     console.log("Star clicked!");
   };
+
+  const isPaid = paidvideoId.includes(courseId);
+
   const playVideo = (videoId) => {
-    const isPaid = paidvideoId.includes(videoId); 
     if (isPaid) {
       const video = videos.find(v => v._id === videoId);
       if (video) {
-        console.log("Paid video URL:", video.url);
+        if (subcategoryRef.current) {
+          subcategoryRef.current.style.position = 'fixed';
+        }
+        if (videoToplayRef.current) {
+          videoToplayRef.current.style.display = 'flex';
+        }
+        // console.log("Paid video URL:", video.url);
+        // toast.success(`Paid video URL: ${video.url}`);
       } else {
+        toast.error("Video not found!");
         console.error("Video not found!");
       }
     } else {
+      toast.info("This video is not paid.");
       console.log("This video is not paid.");
-  
     }
   };
-  
-  const headerChange = () => {
-    const subCategory = subCategoryRef.current; 
-    if (subCategory) {
-      const windowScrollY = window.scrollY;
-      const subCategoryHeight = subCategory.clientHeight;
 
-      if (windowScrollY >= subCategoryHeight - window.innerHeight) {
-        category3.style.position = "fixed";
-        category3.style.backgroundColor = "black";
-        category3.style.top = "-50vh";
-      } else {
-        category3.style.position = "absolute";
-        category3.style.top = "0";
-      }
-    }
+  const headerChange = () => {
+    const header = headerRef.current;
+    // if (header && subcategoryRef.current) {
+    //   const windowScrollY = window.scrollY;
+    //   const subCategoryHeight = subcategoryRef.current.clientHeight;
+
+    //   if (windowScrollY >= subCategoryHeight - window.innerHeight) {
+    //     header.style.position = "fixed";
+    //     header.style.backgroundColor = "black";
+    //     header.style.top = "-50vh";
+    //   } else {
+    //     header.style.position = "absolute";
+    //     header.style.top = "0";
+    //   }
+    // }
   };
 
   useEffect(() => {
-    window.addEventListener("scroll",headerChange); 
-    return () => window.removeEventListener("scroll",headerChange);
-  },[])
-
-  // console.log(learn);
+    window.addEventListener("scroll", headerChange);
+    return () => window.removeEventListener("scroll", headerChange);
+  }, []);
 
   return (
     <>
       <Dashheader />
-      
-      <div onScroll={headerChange} className="subCategory">
-        <div className="category">
-          <div className="category1">
-
-          </div>
-
-          <Subcat/>
-          <div className="Mainvideos3">
-          {/* {videos.map((videoItem, index) => (
-                  <div key={index} className="videoItem">
-                    <video className="vidImage" src={videoItem.url} controls></video>
-                    <h4 className="title">{sub} {videoItem.sub_title}</h4>
-                  </div>
-                ))} */}
+      <div onScroll={headerChange} ref={subcategoryRef} className="subCategory">
+        <div ref={headerRef} className="category">
+          <div className="category1"></div>
+          <Subcat />
+          <div className="Mainvideos3" ref={videoToplayRef}>
+            {/* {videos.map((videoItem, index) => (
+              <div key={index} className="videoItem">
+                <video className="vidImage" src={videoItem.url} controls></video>
+                <h4 className="title">{sub} {videoItem.sub_title}</h4>
+              </div>
+            ))} */}
           </div>
           <div className="category2">
             <p className="line1">
@@ -176,19 +176,18 @@ const Subcategory = () => {
           </div>
           <div className="last">
             <div className="time">
-              <span class="material-symbols-outlined">new_releases</span>
+              <span className="material-symbols-outlined">new_releases</span>
               <p>Last updated </p>
             </div>
             <div className="time">
-              <span class="material-symbols-outlined">language</span>
+              <span className="material-symbols-outlined">language</span>
               <p>{course.language}</p>
             </div>
             <div className="time">
-              <span class="material-symbols-outlined">subtitles</span>
+              <span className="material-symbols-outlined">subtitles</span>
               <p>English [Auto], Arabic [Auto] , Italian [Auto]</p>
             </div>
           </div>
-          
         </div>
         <div className="section1">
           <div className="subsection1">
@@ -198,7 +197,7 @@ const Subcategory = () => {
                 {learn.map((learnItem, index) => (
                   <div key={index} className="check1">
                     <p className="checkText">
-                      <span class="material-symbols-outlined" id="span1">
+                      <span className="material-symbols-outlined" id="span1">
                         check
                       </span>
                       {learnItem}
@@ -250,49 +249,41 @@ const Subcategory = () => {
             <div className="sub2">
               {videos.map((videoItem, index) => (
                 <div key={index} className="videoItem">
-                  <div  onClick={(()=>playVideo(videoItem._id))} className="videocon">
-                    <h4 className="title">                   
-                      <span class="material-symbols-outlined">star</span>
-
+                  <div onClick={() => playVideo(videoItem._id)} className="videocon">
+                    <h4 className="title">
+                      <span className="material-symbols-outlined">star</span>
                       {videoItem.sub_title}
                     </h4>
-                    {videoItem.duration && ( 
+                    {videoItem.duration && (
                       <span className="duration">
                         {" "}
                         ({Math.floor(videoItem.duration / 60)} min){" "}
                       </span>
                     )}
-                    
                   </div>
                 </div>
               ))}
-
-           
-             
             </div>
             <div className="sub3">
-                <div className="subb2">
-                    <p>Requirements</p>
-                </div>
-
-                <p className="checkText1">
-                <span class="material-symbols-outlined" id="span1">
-                    check_circle
-                    </span>
-
-                    {course.requirements}
-                </p>
+              <div className="subb2">
+                <p>Requirements</p>
+              </div>
+              <p className="checkText1">
+                <span className="material-symbols-outlined" id="span1">
+                  check_circle
+                </span>
+                {course.requirements}
+              </p>
             </div>
             <div className="sub4">
-                <div className="subb2">
-                    <p>Description</p>
-                    <p id="subbP2" >{course.description}</p>
-                </div>
+              <div className="subb2">
+                <p>Description</p>
+                <p id="subbP2">{course.description}</p>
+              </div>
             </div>
           </div>
         </div>
-
-        <Footer/>
+        <Footer />
       </div>
     </>
   );

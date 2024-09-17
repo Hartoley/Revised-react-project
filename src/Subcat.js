@@ -63,7 +63,7 @@ const Subcat = () => {
     
   }, [courseId, id]);
 
-  console.log('Fetched course IDs:', paidvideoId);
+  // console.log('Fetched course IDs:', paidvideoId);
 
   const componentProps = {
     email: userData.email || '',
