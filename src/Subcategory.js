@@ -9,6 +9,7 @@ import Dashheader from "./Dashheader";
 import Star from "./Star";
 import Footer from "./Footer";
 import Subcat from "./Subcat";
+import { Cursor } from "mongoose";
 
 const Subcategory = () => {
   const { courseId } = useParams();
@@ -23,6 +24,7 @@ const Subcategory = () => {
   const headerRef = useRef(null);
   const videoToplayRef = useRef(null);
   const [paidvideo, setPaidVideo] = useState([]);
+  const [playvideo, setplayVideo] = useState("");
   const [paidvideoId, setPaidVideoId] = useState([]);
   const storedId = localStorage.getItem('id');
   const id = JSON.parse(storedId);
@@ -58,6 +60,7 @@ const Subcategory = () => {
           const ids = res.data.map(course => course._id);
           setPaidVideoId(ids);
           toast.success("Course fetching successful!");
+          
         } else {
           toast.error("Course fetching failed");
         }
@@ -73,9 +76,11 @@ const Subcategory = () => {
 
   const isPaid = paidvideoId.includes(courseId);
 
-  const playVideo = (videoId) => {
+  const playVideo = (videoId, index) => {
     if (isPaid) {
       const video = videos.find(v => v._id === videoId);
+      console.log(video.url);
+      setplayVideo(video.url)
       if (video) {
         if (subcategoryRef.current) {
           subcategoryRef.current.style.position = 'fixed';
@@ -83,9 +88,20 @@ const Subcategory = () => {
         if (videoToplayRef.current) {
           videoToplayRef.current.style.display = 'flex';
         }
-        // console.log("Paid video URL:", video.url);
-        // toast.success(`Paid video URL: ${video.url}`);
-      } else {
+       
+        axios.post('http://localhost:5009/udemy/student/updateProgress', {
+          userId: id,
+          courseId: courseId,
+          videoId: videoId,
+          index: index
+        }).then(response => {
+          toast.success("Progress updated successfully!");
+        }).catch(error => {
+          toast.error("Failed to update progress");
+          console.log(error);
+        });
+      }
+       else {
         toast.error("Video not found!");
         console.error("Video not found!");
       }
@@ -94,6 +110,12 @@ const Subcategory = () => {
       console.log("This video is not paid.");
     }
   };
+
+  const stop =() => {
+    subcategoryRef.current.style.position = 'static';
+    videoToplayRef.current.style.display = 'none';
+  }
+
 
   const headerChange = () => {
     const header = headerRef.current;
@@ -117,6 +139,8 @@ const Subcategory = () => {
     return () => window.removeEventListener("scroll", headerChange);
   }, []);
 
+  
+
   return (
     <>
       <Dashheader />
@@ -125,6 +149,33 @@ const Subcategory = () => {
           <div className="category1"></div>
           <Subcat />
           <div className="Mainvideos3" ref={videoToplayRef}>
+            <div className="playvideo">
+                <div className="videoPlayer">
+                {playvideo && (
+                  <video controls>
+                    <source src={playvideo} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                )}
+                </div>
+                <div className="buttonPay">
+                <span class="material-symbols-outlined">
+                  skip_previous
+                  </span>
+                  <span onClick={stop} class="material-symbols-outlined">
+                  stop_circle
+                  </span>
+                <span class="material-symbols-outlined">
+                  play_arrow
+                  </span>
+                  <span class="material-symbols-outlined">
+                  <span class="material-symbols-outlined">
+                      skip_next
+                      </span>
+                  </span>
+
+                </div>
+            </div>
             {/* {videos.map((videoItem, index) => (
               <div key={index} className="videoItem">
                 <video className="vidImage" src={videoItem.url} controls></video>
@@ -249,7 +300,7 @@ const Subcategory = () => {
             <div className="sub2">
               {videos.map((videoItem, index) => (
                 <div key={index} className="videoItem">
-                  <div onClick={() => playVideo(videoItem._id)} className="videocon">
+                  <div onClick={() => playVideo(videoItem._id, index)} className="videocon">
                     <h4 className="title">
                       <span className="material-symbols-outlined">star</span>
                       {videoItem.sub_title}
