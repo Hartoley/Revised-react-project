@@ -24,11 +24,12 @@ const Subcategory = () => {
   const headerRef = useRef(null);
   const videoToplayRef = useRef(null);
   const [paidvideo, setPaidVideo] = useState([]);
-  const [playvideo, setplayVideo] = useState("");
+  let [playvideo, setplayVideo] = useState("");
   const [paidvideoId, setPaidVideoId] = useState([]);
   const storedId = localStorage.getItem('id');
   const id = JSON.parse(storedId);
   const [userData, setUserData] = useState({});
+  
 
   useEffect(() => {
     axios
@@ -104,6 +105,7 @@ const Subcategory = () => {
   const stop =() => {
     subcategoryRef.current.style.position = 'static';
     videoToplayRef.current.style.display = 'none';
+    playvideo = ""
   }
 
   
@@ -120,14 +122,16 @@ const Subcategory = () => {
     .catch(error => {
       console.error('Error updating video status:', error);
     })
-
-    alert(videoId)
   };
-
   const handlePlay = (videoId) => {
-    const url = `http://localhost:5009/udemy/student/isWatched/${id}/${courseId}/${videoId}`;
+    console.log(videoId);
+    console.log(id);
+    console.log(courseId);
+  
+    const url = `http://localhost:5009/udemy/student/isWatched`;
     console.log('Requesting URL:', url);
-    axios.get(url)
+    
+    axios.post(url, { userId: id, courseId: courseId, videoId: videoId })
       .then(response => {
         alert(`Video watched: ${response.data.watched}`);
         console.log('Video Played Status:', response.data);
@@ -173,7 +177,7 @@ const Subcategory = () => {
             
                 {playvideo && (
                  <div className="videoPlayer">
-                 <video onPlay={()=> handlePlay(videos.find(video => video.url === playvideo)._id)} onEnded={() => handleVideoEnded(videos.find(video => video.url === playvideo)._id)} controls>
+                 <video onPlay={()=>handlePlay(videos.find(video => video.url === playvideo)._id)} onEnded={() => handleVideoEnded(videos.find(video => video.url === playvideo)._id)} controls>
                    <source src={playvideo} type="video/mp4" />
                    Your browser does not support the video tag.
                  </video>
