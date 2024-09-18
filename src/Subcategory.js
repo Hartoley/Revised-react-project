@@ -11,6 +11,7 @@ import Footer from "./Footer";
 import Subcat from "./Subcat";
 import { Cursor } from "mongoose";
 
+
 const Subcategory = () => {
   const { courseId } = useParams();
   const [course, setcourse] = useState([]);
@@ -19,7 +20,7 @@ const Subcategory = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const Naira = "$";
-  const sub = "Video Title:";
+  const sub = "Video Title:"
   const subcategoryRef = useRef(null);
   const headerRef = useRef(null);
   const videoToplayRef = useRef(null);
@@ -30,6 +31,7 @@ const Subcategory = () => {
   const id = JSON.parse(storedId);
   const [userData, setUserData] = useState({});
   let [statusText, setStatusText] = useState('');
+  let [certificationStatus, setcertification] = useState('')
     
 
 
@@ -128,8 +130,6 @@ const Subcategory = () => {
   };
 
   const handlePlay = (videoId) => {
-  
-
     const url = `http://localhost:5009/udemy/student/isWatched`;
     console.log('Requesting URL:', url);
     
@@ -144,6 +144,29 @@ const Subcategory = () => {
         console.error('Error checking video status:', error);
       });
   };
+
+  const certified = async (courseId) => {
+    try {
+      const response = await axios.post('http://localhost:5009/udemy/student/certification', {
+        userId: id,
+        courseId: courseId,
+      }); 
+  
+      if (response.data.success) {
+        alert(response.data.message);
+        setcertification(response.data.message);
+      } else {
+        alert(response.data.message); 
+        setcertification(response.data.message);
+      }
+    } catch (error) {
+      console.error('Error checking certification:', error);
+      alert('An error occurred while checking eligibility.');
+    }
+  };
+  
+  
+  // certified(courseId);
 
   const headerChange = () => {
     const header = headerRef.current;
@@ -365,6 +388,15 @@ const Subcategory = () => {
                 <p>Description</p>
                 <p id="subbP2">{course.description}</p>
               </div>
+            </div>
+            <div className="sub3">
+                  <div className="subb2">
+                    <p id="subbP2">{certificationStatus}</p>
+                    {/* <p >Yes</p> */}
+                    <button onClick={() => certified (course._id)}>
+                        Check 
+                    </button>
+                  </div>
             </div>
           </div>
         </div>
