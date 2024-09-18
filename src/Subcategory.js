@@ -29,7 +29,9 @@ const Subcategory = () => {
   const storedId = localStorage.getItem('id');
   const id = JSON.parse(storedId);
   const [userData, setUserData] = useState({});
-  
+  let [statusText, setStatusText] = useState('');
+    
+
 
   useEffect(() => {
     axios
@@ -105,7 +107,8 @@ const Subcategory = () => {
   const stop =() => {
     subcategoryRef.current.style.position = 'static';
     videoToplayRef.current.style.display = 'none';
-    playvideo = ""
+    setplayVideo(null)
+    
   }
 
   
@@ -123,17 +126,18 @@ const Subcategory = () => {
       console.error('Error updating video status:', error);
     })
   };
+
   const handlePlay = (videoId) => {
-    console.log(videoId);
-    console.log(id);
-    console.log(courseId);
   
+
     const url = `http://localhost:5009/udemy/student/isWatched`;
     console.log('Requesting URL:', url);
     
     axios.post(url, { userId: id, courseId: courseId, videoId: videoId })
       .then(response => {
-        alert(`Video watched: ${response.data.watched}`);
+        const watchedStatus = response.data.watched;
+        const newStatusText = watchedStatus ? 'Video has been watched' : 'Video has not been watched';
+        setStatusText(newStatusText);  
         console.log('Video Played Status:', response.data);
       })
       .catch(error => {
@@ -181,11 +185,13 @@ const Subcategory = () => {
                    <source src={playvideo} type="video/mp4" />
                    Your browser does not support the video tag.
                  </video>
+                 <p className="status">{statusText}</p>
+             
                 </div>
                 )}
                
               
-              
+               
                 <div className="buttonPay">
                 <span class="material-symbols-outlined">
                   skip_previous
