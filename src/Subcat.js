@@ -98,7 +98,7 @@ const Subcat = () => {
     },
   };
 
-  // Function to check if a video ID is in paidvideoId
+
   const isVideoPaid = (videoId) => {
     return paidvideoId.includes(videoId);
   };

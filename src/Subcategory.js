@@ -79,7 +79,7 @@ const Subcategory = () => {
   const playVideo = (videoId, index) => {
     if (isPaid) {
       const video = videos.find(v => v._id === videoId);
-      console.log(video.url);
+      console.log(video.watched);
       setplayVideo(video.url)
       if (video) {
         if (subcategoryRef.current) {
@@ -89,17 +89,7 @@ const Subcategory = () => {
           videoToplayRef.current.style.display = 'flex';
         }
        
-        axios.post('http://localhost:5009/udemy/student/updateProgress', {
-          userId: id,
-          courseId: courseId,
-          videoId: videoId,
-          index: index
-        }).then(response => {
-          toast.success("Progress updated successfully!");
-        }).catch(error => {
-          toast.error("Failed to update progress");
-          console.log(error);
-        });
+    
       }
        else {
         toast.error("Video not found!");
@@ -116,6 +106,36 @@ const Subcategory = () => {
     videoToplayRef.current.style.display = 'none';
   }
 
+  
+  const handleVideoEnded = (videoId) => {
+    axios.post(`http://localhost:5009/udemy/student/updateProgress`, {
+        userId: id,
+        courseId: courseId,
+        videoId: videoId,
+
+    })
+    .then(response => {
+      console.log('Video status updated:', response.data);
+    })
+    .catch(error => {
+      console.error('Error updating video status:', error);
+    })
+
+    alert(videoId)
+  };
+
+  const handlePlay = (videoId) => {
+    const url = `http://localhost:5009/udemy/student/isWatched/${id}/${courseId}/${videoId}`;
+    console.log('Requesting URL:', url);
+    axios.get(url)
+      .then(response => {
+        alert(`Video watched: ${response.data.watched}`);
+        console.log('Video Played Status:', response.data);
+      })
+      .catch(error => {
+        console.error('Error checking video status:', error);
+      });
+  };
 
   const headerChange = () => {
     const header = headerRef.current;
@@ -150,14 +170,18 @@ const Subcategory = () => {
           <Subcat />
           <div className="Mainvideos3" ref={videoToplayRef}>
             <div className="playvideo">
-                <div className="videoPlayer">
+            
                 {playvideo && (
-                  <video controls>
-                    <source src={playvideo} type="video/mp4" />
-                    Your browser does not support the video tag.
-                  </video>
-                )}
+                 <div className="videoPlayer">
+                 <video onPlay={()=> handlePlay(videos.find(video => video.url === playvideo)._id)} onEnded={() => handleVideoEnded(videos.find(video => video.url === playvideo)._id)} controls>
+                   <source src={playvideo} type="video/mp4" />
+                   Your browser does not support the video tag.
+                 </video>
                 </div>
+                )}
+               
+              
+              
                 <div className="buttonPay">
                 <span class="material-symbols-outlined">
                   skip_previous
