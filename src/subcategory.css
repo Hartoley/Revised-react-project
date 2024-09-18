@@ -4,7 +4,7 @@
 
 .subCategory{
     width: 100%;
-    height: 200vh;
+    height: 220vh;
 
 }
 
@@ -120,7 +120,7 @@
 
 .category3{
     width: 28%;
-    height: 150vh;
+    height: 60vh;
     background-color: white;
     color: black;
     box-shadow: 10px 10px 20px gray;
@@ -200,7 +200,7 @@
 
 .section1{
     width: 100%;
-    height: 95%;
+    height: 97%;
     padding: 2rem 5rem;
     /* background-color: palevioletred; */
    
@@ -240,6 +240,18 @@
 .sub3{
     width: 90%;
     height: 20vh;
+    display: flex;
+    flex-direction: column;
+    border: solid 1px grey;
+    gap: 1rem;
+    padding: 2vw 0 2vw 3vw;
+    /* background-color: red; */
+    /* border: solid 1px grey; */
+}
+
+.subDupli{
+    width: 90%;
+    height: 30vh;
     display: flex;
     flex-direction: column;
     border: solid 1px grey;
@@ -413,7 +425,7 @@
 
 .videocon3{
     width: 100%;
-    height: 20%;
+    height: 70%;
     display: flex;
     /* padding: 0 ; */
     gap: 0.5rem;

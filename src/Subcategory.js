@@ -153,10 +153,14 @@ const Subcategory = () => {
       }); 
   
       if (response.data.success) {
-        alert(response.data.message);
+        // alert(response.data.message);
         setcertification(response.data.message);
       } else {
-        alert(response.data.message); 
+        // alert(response.data.message); 
+        setcertification(response.data.message);
+      }
+      if (response.data.failed) {
+        // alert(response.data.message);
         setcertification(response.data.message);
       }
     } catch (error) {
@@ -389,7 +393,10 @@ const Subcategory = () => {
                 <p id="subbP2">{course.description}</p>
               </div>
             </div>
-            <div className="sub3">
+            <div className="subDupli">
+              <div className="subb2">
+                  <p>Requirements</p>
+                </div>
                   <div className="subb2">
                     <p id="subbP2">{certificationStatus}</p>
                     {/* <p >Yes</p> */}
