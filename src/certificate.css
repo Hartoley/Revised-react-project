@@ -13,7 +13,7 @@
 
 .showCertificate {
     color: black;
-    width: 70%;
+    width: 100%;
     background-image: url('https://i.pinimg.com/564x/0b/91/7d/0b917d63ae7cd4d5d144852cc1a0be76.jpg');
     background-repeat: no-repeat;
     background-size: cover;
@@ -125,3 +125,32 @@
     gap: 2rem;
 
 }
+
+@media print {
+   
+    .buttons {
+        display: none;
+    }
+
+
+    .Mainvideos4 {
+        display: block !important; 
+        width: 100%; 
+        height: auto;
+        background: rgb(117, 30, 87); 
+        padding: 20px; 
+        box-shadow: none;
+        background-image: url('https://i.pinimg.com/564x/0b/91/7d/0b917d63ae7cd4d5d144852cc1a0be76.jpg');
+        background-repeat: no-repeat;
+        background-size: cover; 
+        color: black; 
+        padding: 20px; 
+        border-radius: 10px; 
+    }
+
+  
+}
+
+
+
+

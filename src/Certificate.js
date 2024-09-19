@@ -59,7 +59,7 @@ const Certificate = () => {
     console.log(course);
     console.log(userData);
     
-    // const handleDownload = () => {
+
     //     const printContents = certificateRef.current.innerHTML;
     //     const originalContents = document.body.innerHTML; 
     
@@ -73,28 +73,12 @@ const Certificate = () => {
     //   };   
 
     const handleDownload = () => {
-        const printWindow = window.open('', '', 'height=600,width=800');
-        const printContents = certificateRef.current.innerHTML;
-    
-        printWindow.document.write(`
-            <html>
-                <head>
-                    <title>Print Certificate</title>
-                    <link rel="stylesheet" href="%PUBLIC_URL%/print.css" media="print">
-                </head>
-                <body>
-                    ${printContents}
-                </body>
-            </html>
-        `);
-    
-        printWindow.document.close();
-        printWindow.focus();
-        
-       
-        printWindow.print();
-       
+        window.print(); 
     };
+    
+    
+    
+    
     
 
     const certified = async (courseId) => {
