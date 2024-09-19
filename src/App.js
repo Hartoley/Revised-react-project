@@ -9,6 +9,7 @@ import Studentsdash from './Studentsdash';
 import Uploadvideo from './Uploadvideo';
 import Subcategory from './Subcategory';
 import Updatecourse from './Udatecourse';
+import Certificate from './Certificate';
 
 
 
@@ -26,6 +27,7 @@ function App() {
           <Route path='/uploadVideo/:courseId' element={<Uploadvideo />} /> 
           <Route path="/course/:courseId" element={<Subcategory/>} />
           <Route path="/editcourse/:courseId" element={<Updatecourse/>} />
+          <Route path="/download/certificate/:courseId/:id" element={<Certificate/>} />
          
         </Routes>
     </>

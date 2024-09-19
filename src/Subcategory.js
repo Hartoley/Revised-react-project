@@ -9,7 +9,8 @@ import Dashheader from "./Dashheader";
 import Star from "./Star";
 import Footer from "./Footer";
 import Subcat from "./Subcat";
-import { Cursor } from "mongoose";
+import { useNavigate } from "react-router-dom";
+
 
 
 const Subcategory = () => {
@@ -32,10 +33,14 @@ const Subcategory = () => {
   const [userData, setUserData] = useState({});
   let [statusText, setStatusText] = useState('');
   let [certificationStatus, setcertification] = useState('')
+  const navigate =useNavigate()
+  let [isEligibleForDownload, setIsEligibleForDownload] = useState(false); 
+  
     
 
 
   useEffect(() => {
+    // console.log('Is Eligible for Download:', isEligibleForDownload);
     axios
       .get(`http://localhost:5009/courses/course/${courseId}`)
       .then((res) => {
@@ -129,21 +134,39 @@ const Subcategory = () => {
     })
   };
 
+  const handleDownload = () => {
+    navigate(`/download/certificate/${courseId}/${id}`);
+    console.log('Download certificate');
+  };
+
   const handlePlay = (videoId) => {
     const url = `http://localhost:5009/udemy/student/isWatched`;
     console.log('Requesting URL:', url);
-    
+  
     axios.post(url, { userId: id, courseId: courseId, videoId: videoId })
       .then(response => {
-        const watchedStatus = response.data.watched;
-        const newStatusText = watchedStatus ? 'Video has been watched' : 'Video has not been watched';
-        setStatusText(newStatusText);  
+        const { success, message } = response.data;
+  
+        if (success) {
+          const watchedStatus = message === 'Student is eligible for certification.'; 
+          const newStatusText = watchedStatus ? 'Video has been watched' : 'Video has not been watched';
+          setStatusText(newStatusText);
+        } else {
+          console.warn('Failed to check watched status:', message);
+          setStatusText(message);
+        }
+  
         console.log('Video Played Status:', response.data);
       })
       .catch(error => {
         console.error('Error checking video status:', error);
+        setStatusText('An error occurred while checking video status.');
       });
   };
+  
+  useEffect(() => {
+    console.log('Is Eligible for Download:', isEligibleForDownload);
+  }, [isEligibleForDownload]);
 
   const certified = async (courseId) => {
     try {
@@ -153,14 +176,18 @@ const Subcategory = () => {
       }); 
   
       if (response.data.success) {
-        // alert(response.data.message);
+        alert(response.data.message);
         setcertification(response.data.message);
+        setIsEligibleForDownload(true);
+        
+        
       } else {
         // alert(response.data.message); 
         setcertification(response.data.message);
       }
       if (response.data.failed) {
         // alert(response.data.message);
+        console.log(response);
         setcertification(response.data.message);
       }
     } catch (error) {
@@ -170,7 +197,6 @@ const Subcategory = () => {
   };
   
   
-  // certified(courseId);
 
   const headerChange = () => {
     const header = headerRef.current;
@@ -237,13 +263,14 @@ const Subcategory = () => {
 
                 </div>
             </div>
-            {/* {videos.map((videoItem, index) => (
-              <div key={index} className="videoItem">
-                <video className="vidImage" src={videoItem.url} controls></video>
-                <h4 className="title">{sub} {videoItem.sub_title}</h4>
-              </div>
-            ))} */}
+           
           </div>
+
+                
+   
+
+
+
           <div className="category2">
             <p className="line1">
               TOTAL: Cloud Computing / CompTIA Cloud+ (CV0-003)
@@ -399,10 +426,16 @@ const Subcategory = () => {
                 </div>
                   <div className="subb2">
                     <p id="subbP2">{certificationStatus}</p>
-                    {/* <p >Yes</p> */}
-                    <button onClick={() => certified (course._id)}>
+                    {isEligibleForDownload && (
+                      <button className="btn-downloaded" onClick={handleDownload}>
+                        Download Certificate
+                      </button>
+                    )}
+                   {!isEligibleForDownload &&
+                    <button className="btn-downloaded1" onClick={() => certified (course._id)}>
                         Check 
                     </button>
+                  }
                   </div>
             </div>
           </div>
