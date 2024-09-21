@@ -45,7 +45,7 @@ const Videos = ({viewed, vspan, extra}) => {
   const showmore = (courses) =>{
     let courseId = (courses._id)
     // console.log(courseId);
-    navigate(`/course/${courseId}`); 
+    navigate(`/course/${id}/${courseId}`); 
     
 }
 

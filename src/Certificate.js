@@ -113,7 +113,7 @@ const Certificate = () => {
 
 
   const handleClose = () => {
-    navigate(`/course/${courseId}`);
+    navigate(`/students/dashboard/${id}`);
     console.log('Close certificate');
   };
 

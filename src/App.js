@@ -25,7 +25,7 @@ function App() {
           <Route path='/adminlogin' element={<Adminlogin />} /> 
           <Route path='/admindashboard/:id' element={<Admindas />} /> 
           <Route path='/uploadVideo/:courseId' element={<Uploadvideo />} /> 
-          <Route path="/course/:courseId" element={<Subcategory/>} />
+          <Route path="/course/:id/:courseId" element={<Subcategory/>} />
           <Route path="/editcourse/:courseId" element={<Updatecourse/>} />
           <Route path="/download/certificate/:courseId/:id" element={<Certificate/>} />
          
