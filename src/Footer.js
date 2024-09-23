@@ -11,11 +11,11 @@ const Footer = () => {
                     <p>Top companies choose <span>Udemy Business</span> to build in-demand career skills.</p>
                 </div>
                 <div className="companiesBox1">
-                    <img src="https://s.udemycdn.com/partner-logos/v4/nasdaq-light.svg" alt="" />
-                    <img src="https://s.udemycdn.com/partner-logos/v4/volkswagen-light.svg" alt="" />
-                    <img src="https://s.udemycdn.com/partner-logos/v4/box-light.svg" alt="" />
-                    <img src="https://s.udemycdn.com/partner-logos/v4/netapp-light.svg" alt="" />
-                    <img src="https://s.udemycdn.com/partner-logos/v4/eventbrite-light.svg" alt="" />
+                    <img className='logobox' src="https://s.udemycdn.com/partner-logos/v4/nasdaq-light.svg" alt="" />
+                    <img className='logobox' src="https://s.udemycdn.com/partner-logos/v4/volkswagen-light.svg" alt="" />
+                    <img className='logobox' src="https://s.udemycdn.com/partner-logos/v4/box-light.svg" alt="" />
+                    <img className='logobox' src="https://s.udemycdn.com/partner-logos/v4/netapp-light.svg" alt="" />
+                    <img className='logobox' src="https://s.udemycdn.com/partner-logos/v4/eventbrite-light.svg" alt="" />
                 </div>
                
             </div>
