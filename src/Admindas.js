@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect,useRef, useState } from 'react';
 import axios from 'axios';
 import { useFormik } from 'formik'
 import { ToastContainer, toast } from 'react-toastify';
@@ -12,7 +12,7 @@ import Videos from './Videos'
 const Admindas = () => {
   const navigate = useNavigate()
   const [studentsdata, setstudentsdata] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [realadmin, setrealadmin] = useState ({})
   const [video, setvideo] = useState([])
   const [learn, setlearn] = useState([])
@@ -20,11 +20,21 @@ const Admindas = () => {
   const { id } = useParams();
   const Naira = "$"
   const sub = "Video Title:"
+  const loadingToastRef = useRef(false);
   
 
 
 
-
+  useEffect(() => {
+    if (loading) {
+      if (!loadingToastRef.current) {
+        toast.info("Processing request...");
+        loadingToastRef.current = true; 
+      }
+    } else {
+      loadingToastRef.current = false; 
+    }
+  }, [loading]);
 
 
     useEffect (()=>{
@@ -33,7 +43,7 @@ const Admindas = () => {
         // console.log(res.data);
         setrealadmin(Object.values(res.data))
         // console.log(realadmin);
-        setLoading(false);
+        setLoading(true);
       }).catch ((error) =>{
         console.log(error);
         setLoading(false);
@@ -79,20 +89,24 @@ const Admindas = () => {
         Object.keys(values).forEach(key => {
           formData.append(key, values[key]);
         });
+        setLoading(true);
         axios.post("http://localhost:5009/courses/upload/course", formData, {
           headers: {
             'Content-Type': 'multipart/form-data'
           }
+          
         })
         .then((res)=>{
           toast.success("course updated successful")
           let courseId = `${res.data.course._id}`
-          // console.log(courseId); 
+          // console.log(courseId);
+          setLoading(true); 
           console.log(formData);
           navigate(`/uploadVideo/${courseId}`); 
         }).catch((err)=>{
           console.log(err);
-          toast.error("Failed to fetch students data");
+          setLoading(false); 
+          toast.error("Failed Upload course");
         })
       }})
   
@@ -135,11 +149,6 @@ const Admindas = () => {
 
 
 
-
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
   console.log(studentsdata);
 
 
@@ -179,7 +188,6 @@ const Admindas = () => {
             <input type="text" required placeholder='What to learn' name='learn' onChange={formik.handleChange}/>
             <p>Requirements</p>
             <input type="text" required placeholder='Requirement' name='requirements' onChange={formik.handleChange}/>
-            <button>Add more</button>
             <p>Descriptions</p>
             <textarea rows="10" cols="50" id='textarea'  required placeholder='Description' name='description' onChange={formik.handleChange}></textarea>
             <p>Author's name</p>

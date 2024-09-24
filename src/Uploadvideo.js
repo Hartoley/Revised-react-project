@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect,useRef, useState } from 'react';
 import axios from 'axios';
 import { useFormik } from 'formik';
 import { ToastContainer, toast } from 'react-toastify';
@@ -8,6 +8,19 @@ import './admidash.css';
 
 const Uploadvideo = () => {
   const { courseId } = useParams();
+  const [loading, setLoading] = useState(false);
+  const loadingToastRef = useRef(false);
+
+  useEffect(() => {
+    if (loading) {
+      if (!loadingToastRef.current) {
+        toast.info("Processing request...");
+        loadingToastRef.current = true; 
+      }
+    } else {
+      loadingToastRef.current = false; 
+    }
+  }, [loading]);
 
   useEffect(() => {
     console.log(courseId);
@@ -22,17 +35,19 @@ const Uploadvideo = () => {
       const formData = new FormData();
       formData.append('sub_title', values.sub_title);
       formData.append('video_url', values.video_url);
-
+      setLoading(true);
       axios.post(`http://localhost:5009/courses/upload/video/${courseId}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
       })
         .then((res) => {
+          setLoading(false);
           console.log("Video upload successful:", res.data);
           toast.success("Video uploaded successfully!");
         })
         .catch((err) => {
+          setLoading(false);
           console.error("Video upload failed:", err);
           toast.error("Failed to upload video!");
         });

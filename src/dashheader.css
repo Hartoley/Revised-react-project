@@ -160,4 +160,8 @@
     .menu {
       display: block;
     }
+
+    .headers{
+        height: 10vh;
+    }
   }

@@ -4,7 +4,7 @@
 
 .subCategory{
     width: 100%;
-    height: 220vh;
+    height: auto;
 
 }
 
@@ -150,6 +150,7 @@
     box-shadow: 10px 10px 20px gray;
     top: 5%;
     left: 66.8%;
+    border-radius: 10px;
     position: absolute;
     z-index: 2;
 }
@@ -175,6 +176,7 @@
 .category2{
     width: 65%;
     height: 70%;
+    padding-top: 1rem;
     /* background-color: red; */
 }
 
@@ -275,7 +277,7 @@
 
 .subDupli{
     width: 90%;
-    height: 30vh;
+    height: auto;
     display: flex;
     flex-direction: column;
     border: solid 1px grey;
@@ -447,11 +449,18 @@
     /* background-color: blue; */
 }
 
+.videocon3 p, h6{
+    padding-left: 1vw;
+}
+
+.ppp{
+    padding-left: 1vw;
+}
+
 .videocon3{
     width: 100%;
     height: 70%;
     display: flex;
-    /* padding: 0 ; */
     gap: 0.5rem;
     align-items: center;
     /* border: solid 1px rgb(226, 21, 21); */
@@ -482,4 +491,172 @@
     gap: 0.3rem;
     margin-left: 2rem;
 
+}
+
+@media (max-width: 768px) {
+    .line1{
+        Font-size: 12px;
+        Font-weight: 600;
+        Line-height: 18.4px;
+    
+    } 
+
+    .line3{
+        Font-size: 9px;
+        Font-weight: 400;
+        Line-height: 12.4px;
+        /* background-color: blue; */
+    
+    } 
+
+    #line2{
+        Font-size: 10px;
+        Font-weight: 400;
+        Line-height: 16.4px;
+    }
+
+    .category{
+        height: 15%;
+        padding: 0 5px 20px 30px;
+      
+    }
+
+    .category3 h6{
+       font-size: 10px;
+      
+    }
+
+    .time{
+        Font-size: 10px;
+        Font-weight: 400;
+        Line-height: 10.4px;
+    
+
+}
+
+.last{
+    flex-wrap: wrap;
+    gap: 2px;
+    
+}
+
+.videocon3{
+    width: 100%;
+    height: 60%;
+}
+
+.time span{
+    Font-size: 8px;
+    Font-weight: 400;
+    Line-height: 10.4px;
+    
+
+}
+
+.category3{
+    height: 30vh;
+   
+}
+
+.category3 p{
+    font-size: 10px;
+   
+ }
+
+ .subsection1{
+    width: 90%;
+    height: 100%;
+    padding:  3px 0;
+    /* background-color: blue; */
+    gap: 1rem;
+} 
+
+.section1{
+    width: 100%;
+    height: auto;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+   
+
+    /* background-color: aqua; */
+}
+
+.companiesBox1 img{
+    width: 18%;
+    height: auto;
+}
+
+.subtext1{
+    Font-size: 14px;
+    Font-weight: 500;
+    Line-height: 18.8px;
+}
+
+.sub1{
+    width: 95%;
+    padding: 10px 10px;
+    
+}
+
+.checkText{
+    width: 100%;
+    /* background-color: brown; */
+    Font-size: 8px;
+    Line-height: 10.8px;
+
+
+}
+
+.checkText1{
+    Font-size: 8px;
+    Line-height: 10.8px;
+    margin-left: 0.3rem;
+
+
+}
+
+.subb{
+    height: auto;
+}
+.subb1{
+    height: auto;
+}
+
+.subb2{
+    height: auto;
+}
+.sub2{
+    height: auto;
+}
+
+.sub3{
+    height: auto;
+}
+.sub4{
+    height: auto;
+}
+
+.sub2 span{
+    font-size: 10px;
+}
+
+.sub2 h4{
+    font-size: 13px;
+}
+
+#span1{
+    Font-size: 8px;
+    Font-weight: 400;
+    Line-height: 8.8px;   
+}
+
+.subDupli{
+    height: auto;
+}
+
+#subbP2{
+    Font-size: 10px;
+    Font-weight: 400;
+}
 }

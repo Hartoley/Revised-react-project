@@ -275,7 +275,7 @@ const Subcategory = () => {
             <p className="line1">
               TOTAL: Cloud Computing / CompTIA Cloud+ (CV0-003)
             </p>
-            <p className="line2">
+            <p className="line2" id="line2">
               Learn the basics of Cloud Computing and/or prepare for the CompTIA
               Cloud+ Certification Exam.
             </p>
@@ -422,7 +422,7 @@ const Subcategory = () => {
             </div>
             <div className="subDupli">
               <div className="subb2">
-                  <p>Requirements</p>
+                  <p>Certification</p>
                 </div>
                   <div className="subb2">
                     <p id="subbP2">{certificationStatus}</p>

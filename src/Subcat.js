@@ -124,7 +124,7 @@ const Subcat = () => {
         </div>
         <h6>{course.title || "Course Title"}</h6>
         {isVideoPaid(video._id) ? (
-          <p>This video is already paid for!</p>
+          <p className="ppp">Congratulations!!! You are all set for the course</p>
         ) : (
           <PaystackButton className="paystack-button" {...componentProps} />
         )}
