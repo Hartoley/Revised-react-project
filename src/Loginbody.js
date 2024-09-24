@@ -22,7 +22,7 @@ const Loginbody = () => {
     
 
     useEffect(() => {
-    axios.get(`https://react-node-project-1.onrender.com/student/getdata`)
+    axios.get(`https://react-node-project-1.onrender.com/udemy/student/getdata`)
     // axios.get(`${endpoint}/students/getdata`)
         .then((res) => {
             // console.log("students data from API:", res.data);
@@ -43,7 +43,7 @@ const Loginbody = () => {
         // console.log(loggedinstudents);
             if (loggedinstudents) {
                 
-                axios.post(`https://react-node-project-1.onrender.com/student/login`, value)
+                axios.post(`https://react-node-project-1.onrender.com/udemy/student/login`, value)
                 .then((res) => {  
                     let id = `${loggedinstudents._id}`
                     
@@ -58,7 +58,7 @@ const Loginbody = () => {
                 
             }else{
                 console.log("usernot found");
-                toast.error("user doesn't exist")
+                toast.error("usernot found")
             }
         }
     }) 
