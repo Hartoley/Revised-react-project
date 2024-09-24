@@ -64,9 +64,9 @@ const Loginbody = () => {
     }) 
 
   return (
-    <>    <form action="" className="body" onSubmit={formik.handleSubmit} >  
+    <>    <form action="" id='body' className="body" onSubmit={formik.handleSubmit} >  
          
-            <div className="inputBox">
+            <div id='inputBox' className="inputBox">
                 <p>Log in to your Udemy account</p>
                 <div className="others">
                 <img id='google' src={google} alt="" />
@@ -112,7 +112,7 @@ const Loginbody = () => {
                     <p>Or <span>Forgot Password</span></p>
                 </div>
 
-                <div className="loginBox">
+                <div className="loginBox" id='loginBox'>
                     <p>
                         Don't have an account?  <span>
                         <a href="/students/signup">

@@ -1,13 +1,24 @@
 import React from 'react'
 import './students.css'
-import logo from './Images/logo.png'
+import logo from './Images/new Udemy.png'
+import { useState } from 'react'
 
 const Header = () => {
+  const [isMenuVisible, setIsMenuVisible] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuVisible(prev => !prev);
+  };
+
+
   return (
     <>
         <div className='headers'>
-            <img className='logo' src={logo} alt="" />
-            <div className='dropdown'>
+           <div className="imageCon">
+              <img className='logo' src={logo} alt="" />
+           </div>
+           <div className="main">
+           <div className='dropdown'>
                 <p>Categories</p>
                 <div className='dropdownContent'>
                     <p>Hello World</p>
@@ -17,11 +28,11 @@ const Header = () => {
                 </div>
             </div>
             <div className='search'>
-            <span class="material-symbols-outlined" id='searchLogo'>
-                search
-              </span>
-              <input type="text"  placeholder='Search for anything' />
-              
+              <span class="material-symbols-outlined" id='searchLogo'>
+                  search
+                </span>
+                <input type="text"  placeholder='Search for anything' />
+                
             </div>
             <div className="dropdown">
               <p>Udemy Business</p>
@@ -45,6 +56,11 @@ const Header = () => {
               language
               </span>
             </div>
+           </div>
+            
+           <span className='menu material-symbols-outlined' onClick={toggleMenu}>
+              menu
+              </span>
             
         </div>
     </>

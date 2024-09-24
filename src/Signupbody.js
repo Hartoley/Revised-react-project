@@ -70,9 +70,9 @@ const Signupbody = () => {
 
   return (
     <>
-        <form className="body" action="" onSubmit={formik.handleSubmit} >
+        <form className="body" action="" id='body' onSubmit={formik.handleSubmit} >
        
-            <div className="inputBox">
+            <div className="inputBox" id='bodydiv'>
                 <p>Sign up and start learning</p>
                 <input onBlur={formik.handleBlur} onChange={formik.handleChange} name="username" type="text" placeholder='Full name'/>
                 <p>{formik.touched.username && formik.errors.username? formik.errors.username:''}</p>

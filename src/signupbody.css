@@ -120,3 +120,18 @@
     color: rgb(64, 27, 156);
     text-decoration: underline;
   }
+
+  @media (max-width: 768px) {
+    .body{
+      background-color: aqua;
+    }
+   
+    #bodydiv{
+      /* background-color: blue; */
+      width: 95vw;
+    }
+
+   #body{
+      height: 65vh;
+    }
+  }

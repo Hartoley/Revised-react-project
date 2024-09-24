@@ -28,3 +28,9 @@
     Font-weight: 500;   
     Line-height: 19.6px;
 }
+
+@media (max-width: 768px) {
+    .subheader {
+      display: none;
+    }
+  }

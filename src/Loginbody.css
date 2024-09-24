@@ -171,3 +171,18 @@
     text-decoration: underline;
    
   }
+
+  @media (max-width: 768px) {
+    #body{
+      height: 70vh;
+    }
+
+    #inputBox{
+      /* background-color: red; */
+      width: 90%;
+    }
+
+    #loginBox{
+      margin-top: 0.5rem;
+    }
+  }

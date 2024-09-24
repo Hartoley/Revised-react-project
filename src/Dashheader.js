@@ -1,12 +1,22 @@
-import React from 'react'
+import {React, useState} from 'react'
 import './dashheader.css'
-import logo from './Images/logo.png'
+import logo from './Images/new Udemy.png'
 
 const Dashheader = () => {
+  const [isMenuVisible, setIsMenuVisible] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuVisible(prev => !prev);
+  };
+
+
   return (
     <>
         <div className='headers'>
-            <img className='logo' src={logo} alt="" />
+        <div className="imageCon">
+              <img className='logo' src={logo} alt="" />
+           </div>
+            <div className="main">
             <div className='dropdown'>
                 <p>Categories</p>
                 <div className='dropdownContent'>
@@ -47,10 +57,11 @@ const Dashheader = () => {
                 notifications
                 </span>
             </div>
-            <div className='round'>
-              <p>JT</p>
-            </div>
-            
+
+          </div> 
+          <span className='menu material-symbols-outlined' onClick={toggleMenu}>
+              menu
+              </span> 
         </div>
     </>
   )
