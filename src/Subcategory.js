@@ -69,7 +69,7 @@ const Subcategory = () => {
           setPaidVideo(res.data);
           const ids = res.data.map(course => course._id);
           setPaidVideoId(ids);
-          toast.success("Course fetching successful!");
+          // toast.success("Course fetching successful!");
           
         } else {
           toast.error("Course fetching failed");

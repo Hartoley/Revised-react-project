@@ -659,4 +659,24 @@
     Font-size: 10px;
     Font-weight: 400;
 }
+
+.btn-downloaded{
+    width: 30%;
+    height: auto;
+    /* background-color: red; */
+    font-size: 3vw;
+   
+    
+    
+}
+
+.btn-downloaded1{
+    width: 30%;
+    height: auto;
+    /* background-color: red; */
+    font-size: 3vw;
+   
+    
+    
+}
 }
