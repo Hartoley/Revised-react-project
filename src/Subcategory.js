@@ -176,7 +176,7 @@ const Subcategory = () => {
       }); 
   
       if (response.data.success) {
-        alert(response.data.message);
+        // alert(response.data.message);
         setcertification(response.data.message);
         setIsEligibleForDownload(true);
         
@@ -192,7 +192,7 @@ const Subcategory = () => {
       }
     } catch (error) {
       console.error('Error checking certification:', error);
-      alert('An error occurred while checking eligibility.');
+      // alert('An error occurred while checking eligibility.');
     }
   };
   
