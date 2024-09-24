@@ -18,7 +18,7 @@ const Signupbody = () => {
 
 
     useEffect(() => {
-      axios.get(`http://localhost:5009/udemy/student/getdata`)
+      axios.get(`https://react-node-project-1.onrender.com/udemy/student/getdata`)
         .then((res) => {
           console.log("students data from API:", res.data);
           setstudents(res.data); 
