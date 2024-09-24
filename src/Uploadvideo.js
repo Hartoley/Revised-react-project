@@ -36,7 +36,7 @@ const Uploadvideo = () => {
       formData.append('sub_title', values.sub_title);
       formData.append('video_url', values.video_url);
       setLoading(true);
-      axios.post(`http://localhost:5009/courses/upload/video/${courseId}`, formData, {
+      axios.post(`https://react-node-project-1.onrender.com/courses/upload/video/${courseId}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }

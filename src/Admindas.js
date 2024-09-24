@@ -38,7 +38,7 @@ const Admindas = () => {
 
 
     useEffect (()=>{
-      axios.get(`http://localhost:5009/admin/getdata/id/${id}`)
+      axios.get(`https://react-node-project-1.onrender.com/admin/getdata/id/${id}`)
       .then((res) =>{
         // console.log(res.data);
         setrealadmin(Object.values(res.data))
@@ -54,7 +54,7 @@ const Admindas = () => {
     
 
     useEffect(()=>{
-      axios.get("http://localhost:5009/udemy/student/getallstudent")
+      axios.get("https://react-node-project-1.onrender.com/udemy/student/getallstudent")
       .then((res)=>{
           setstudentsdata(res.data)
       }).catch((err)=>{
@@ -90,7 +90,7 @@ const Admindas = () => {
           formData.append(key, values[key]);
         });
         setLoading(true);
-        axios.post("http://localhost:5009/courses/upload/course", formData, {
+        axios.post("https://react-node-project-1.onrender.com/courses/upload/course", formData, {
           headers: {
             'Content-Type': 'multipart/form-data'
           }
@@ -124,7 +124,7 @@ const Admindas = () => {
      
 
       useEffect(()=>{
-        axios.get("http://localhost:5009/courses/getallcourses")
+        axios.get("https://react-node-project-1.onrender.com/courses/getallcourses")
         .then((res)=>{
             setvideo(res.data)
         }).catch((err)=>{

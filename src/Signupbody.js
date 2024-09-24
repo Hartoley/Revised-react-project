@@ -52,7 +52,7 @@ const Signupbody = () => {
         if (existingstudents) {
           toast.error("user already exist")
         }else{
-          axios.post(`http://localhost:5009/udemy/student/register`, value)
+          axios.post(`https://react-node-project-1.onrender.com/udemy/student/register`, value)
           .then((res)=>{
               console.log("students signed up successful");
               toast.success("students signed up successful")

@@ -22,7 +22,7 @@ const Loginbody = () => {
     
 
     useEffect(() => {
-    axios.get(`http://localhost:5009/udemy/student/getdata`)
+    axios.get(`https://react-node-project-1.onrender.com/student/getdata`)
     // axios.get(`${endpoint}/students/getdata`)
         .then((res) => {
             // console.log("students data from API:", res.data);
@@ -43,7 +43,7 @@ const Loginbody = () => {
         // console.log(loggedinstudents);
             if (loggedinstudents) {
                 
-                axios.post(`http://localhost:5009/udemy/student/login`, value)
+                axios.post(`https://react-node-project-1.onrender.com/student/login`, value)
                 .then((res) => {  
                     let id = `${loggedinstudents._id}`
                     

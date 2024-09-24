@@ -21,7 +21,7 @@ const Subcat = () => {
   useEffect(() => {
     const fetchCourse = async () => {
       try {
-        const response = await axios.get(`http://localhost:5009/courses/course/${courseId}`);
+        const response = await axios.get(`https://react-node-project-1.onrender.com/courses/course/${courseId}`);
         setCourse(response.data);
         setVideo(response.data);
         setPreviewVideo(response.data.previewVideo);
@@ -34,7 +34,7 @@ const Subcat = () => {
       }
     };
 
-    axios.get(`http://localhost:5009/udemy/student/paidCourses/id/${id}`)
+    axios.get(`https://react-node-project-1.onrender.com/udemy/student/paidCourses/id/${id}`)
       .then((res) => {
         if (res.data) {
           setPaidVideo(res.data);
@@ -49,7 +49,7 @@ const Subcat = () => {
         toast.error("Failed to fetch paid courses. Please try again later.");
       });
 
-    axios.get(`http://localhost:5009/udemy/student/getdata/id/${id}`)
+    axios.get(`https://react-node-project-1.onrender.com/udemy/student/getdata/id/${id}`)
       .then((res) => {
         setUserData(res.data);
         setLoading(true);
@@ -76,7 +76,7 @@ const Subcat = () => {
     publicKey: 'pk_test_6dbb10e57606b65e31e7be9d5ab4e13b3e5f74e1',
     text: "Course payment",
     onSuccess: (reference) => {
-      axios.post('http://localhost:5009/udemy/student/payment', {
+      axios.post('https://react-node-project-1.onrender.com/udemy/student/payment', {
         reference: reference,
         courseTitle: course.title,
         courseId: course._id,

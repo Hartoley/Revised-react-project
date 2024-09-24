@@ -42,7 +42,7 @@ const Subcategory = () => {
   useEffect(() => {
     // console.log('Is Eligible for Download:', isEligibleForDownload);
     axios
-      .get(`http://localhost:5009/courses/course/${courseId}`)
+      .get(`https://react-node-project-1.onrender.com/courses/course/${courseId}`)
       .then((res) => {
         setcourse(res.data);
         setvideos(res.data.videos);
@@ -53,7 +53,7 @@ const Subcategory = () => {
         toast.error("Failed to fetch course data");
       });
 
-    axios.get(`http://localhost:5009/udemy/student/getdata/id/${id}`)
+    axios.get(`https://react-node-project-1.onrender.com/udemy/student/getdata/id/${id}`)
       .then((res) => {
         setUserData(res.data);
         setLoading(true);
@@ -63,7 +63,7 @@ const Subcategory = () => {
         toast.error("Failed to fetch user data");
       });
 
-    axios.get(`http://localhost:5009/udemy/student/paidCourses/id/${id}`)
+    axios.get(`https://react-node-project-1.onrender.com/udemy/student/paidCourses/id/${id}`)
       .then((res) => {
         if (res.data) {
           setPaidVideo(res.data);
@@ -120,7 +120,7 @@ const Subcategory = () => {
 
   
   const handleVideoEnded = (videoId) => {
-    axios.post(`http://localhost:5009/udemy/student/updateProgress`, {
+    axios.post(`https://react-node-project-1.onrender.com/udemy/student/updateProgress`, {
         userId: id,
         courseId: courseId,
         videoId: videoId,
@@ -140,7 +140,7 @@ const Subcategory = () => {
   };
 
   const handlePlay = (videoId) => {
-    const url = `http://localhost:5009/udemy/student/isWatched`;
+    const url = `https://react-node-project-1.onrender.com/udemy/student/isWatched`;
     console.log('Requesting URL:', url);
   
     axios.post(url, { userId: id, courseId: courseId, videoId: videoId })
@@ -170,7 +170,7 @@ const Subcategory = () => {
 
   const certified = async (courseId) => {
     try {
-      const response = await axios.post('http://localhost:5009/udemy/student/certification', {
+      const response = await axios.post('https://react-node-project-1.onrender.com/udemy/student/certification', {
         userId: id,
         courseId: courseId,
       }); 

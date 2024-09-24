@@ -11,7 +11,7 @@ const Bigvideobox = ({viewed, vspan, extra}) => {
   const [video, setvideo] = useState([])
 
   useEffect(()=>{
-    axios.get("http://localhost:5009/courses/getallcourses")
+    axios.get("https://react-node-project-1.onrender.com/courses/getallcourses")
     .then((res)=>{
         setvideo(res.data)
     }).catch((err)=>{

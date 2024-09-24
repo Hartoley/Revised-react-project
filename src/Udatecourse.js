@@ -10,7 +10,7 @@ const Updatecourse = () => {
   const { courseId } = useParams();
 
   useEffect(() => {
-    axios.get(`http://localhost:5009/courses/course/${courseId}`)
+    axios.get(`https://react-node-project-1.onrender.com/courses/course/${courseId}`)
       .then((res) => {
         
       })
@@ -29,7 +29,7 @@ const Updatecourse = () => {
     },
     onSubmit: (values) => {
         console.log(values);
-      axios.post(`http://localhost:5009/courses/update/course/${courseId}`, values)
+      axios.post(`https://react-node-project-1.onrender.com/courses/update/course/${courseId}`, values)
         .then((res) => {
             
           console.log("Course updated successfully:", res.data);

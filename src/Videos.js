@@ -15,7 +15,7 @@ const Videos = ({viewed, vspan, extra}) => {
   const id = JSON.parse(storedId);
 
   useEffect(()=>{
-    axios.get("http://localhost:5009/courses/getallcourses")
+    axios.get("https://react-node-project-1.onrender.com/courses/getallcourses")
     .then((res)=>{
         setvideo(res.data)
     }).catch((err)=>{
@@ -23,7 +23,7 @@ const Videos = ({viewed, vspan, extra}) => {
       toast.error("Failed to fetch course");
     })
 
-    axios.get(`http://localhost:5009/udemy/student/paidCourses/id/${id}`)
+    axios.get(`https://react-node-project-1.onrender.com/udemy/student/paidCourses/id/${id}`)
     .then((res) => {
       if (res.data) {
         setpaidvideo(res.data)
