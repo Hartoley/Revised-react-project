@@ -54,7 +54,7 @@ const Videos = ({viewed, vspan, extra}) => {
   return (
     <>
      <div className='bigContainerDiv' >
-     {paidvideo.length > 0 || video.length > 0 ? (
+     {paidvideo.length > 0 || paidvideo.length > 0 ? (
         <div className="learn">
           <p>Current programs you enrolled in</p>
         </div>
