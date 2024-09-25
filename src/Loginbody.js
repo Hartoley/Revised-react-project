@@ -122,7 +122,7 @@ const Loginbody = () => {
                     <div className="loginBox" id='loginBox'>
                         <p>
                             Don't have an account?  <span>
-                            <a href="/students/signup">
+                            <a href="/">
                                 Sign up
                                 Log in with your organization
                                 </a>

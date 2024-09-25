@@ -93,11 +93,11 @@ const Signupbody = () => {
                 </div>
                 <button type='submit' className='buttonSignin'>Sign up</button>
                 <ToastContainer/>
-                <div className="termsBox">
+                <div className="termsBox" id='termsBox'>
                     <p>By signing up, you agree to our <span>Terms of Use</span> and <span>Privacy Policy.</span></p>
                 </div>
 
-                <div className="loginBox">
+                <div id='loginBox' className="loginBox">
                     <p>
                         Already have an account? <span>
                         <a href="/students/login">

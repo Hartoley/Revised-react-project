@@ -125,6 +125,16 @@
     .body{
       background-color: aqua;
     }
+
+    #termsBox{
+      font-size: 10px;
+
+    }
+
+    #termsBox span{
+      font-size: 10px;
+
+    }
    
     #bodydiv{
       /* background-color: blue; */

@@ -178,6 +178,10 @@
     to { transform: scale(1.5); }
   }
 
+  .subCategory{
+    margin-top: 10vh;
+  }
+
 
 .category2{
     width: 65%;
@@ -508,6 +512,11 @@
       
     }
 
+    .showlight{
+        font-size: 10px;
+
+    }
+
     .btn-downloaded{
        margin-bottom: 3px;
   
@@ -756,5 +765,10 @@
    
     
     
+}
+
+.showlight{
+    font-size: 10px;
+
 }
 }

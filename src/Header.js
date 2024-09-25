@@ -13,7 +13,7 @@ const Header = () => {
 
   return (
     <>
-        <div className='headers'>
+        <div className='headers'id="header">
            <div className="imageCon">
               <img className='logo' src={logo} alt="" />
            </div>
