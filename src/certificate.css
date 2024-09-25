@@ -8,12 +8,13 @@
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    height: 120vh;
+    height: 140vh;
 }
 
 .showCertificate {
     color: black;
-    width: 70%;
+    width: 80%;
+    height: auto;
     background-image: url('https://i.pinimg.com/564x/0b/91/7d/0b917d63ae7cd4d5d144852cc1a0be76.jpg');
     background-repeat: no-repeat;
     background-size: cover;
@@ -50,11 +51,12 @@
 
 .certificate-course {
     font-size: 1.2rem;
+    margin: 8vh 60px;
 }
 
 .certificate-details {
     font-size: 0.9rem;
-    margin: 10px 0;
+    
 }
 
 .certificate-instructors {
@@ -80,7 +82,7 @@
 .certificate-buttons {
     display: flex;
     justify-content: space-around;
-    margin-top: 20px;
+    /* margin-top: 20px; */
     width: 100%;
 }
 
@@ -132,6 +134,7 @@
         display: none;
     }
 
+    
 
     .Mainvideos4 {
         display: block !important; 
@@ -149,6 +152,88 @@
     }
 
   
+}
+
+.carrier{
+    width: 100%;
+    height: auto;
+}
+
+@media (max-width: 380px) {
+    #showCertificate123{
+        height: 60%;
+        line-height: 15px;
+        gap: 0.4rem;
+        /* background-color: red; */
+        width: 95%;
+        padding-top: 15vh;
+    }
+}
+
+@media (max-width: 768px) {
+    .showCertificate{
+        height: 50%;
+        line-height: 15px;
+        gap: 0.4rem;
+        margin-top: -50vh;
+        width: 95%;
+        padding-top: 12vh;
+    }
+
+    .buttons{
+        margin-top: 10vh;
+    }
+    .Mainvideos4{
+        /* background-color: red; */
+        padding: 2px;
+    }
+    .certificate-title{
+        font-size: 12px;
+        font-weight: 700
+    }
+
+    .certificate-name{
+        font-size: 14px;
+        font-weight: 700;
+        margin-bottom:10px;
+    }
+    .certificate-course{
+        font-size: 10px;
+        font-weight: 500;
+        margin: 0;
+    }
+    .certificate-name{
+        font-size: 10px;
+        font-weight: 500;
+    }
+    .certificate-details{
+        font-size: 12px;
+        font-weight: 500;
+        margin-bottom: 0;
+        
+    }
+
+    .certificate-instructors{
+        font-size: 10px;
+        font-weight: 400;
+        margin-bottom: 0;
+        line-height: 3px;
+    }
+
+    .instructors-div{
+        margin-top: 5px;
+    }
+
+    
+
+    .signature {
+        width: 50px;
+        margin: 0 3px;
+    }
+
+    .certificate-signature{
+        font-size: 10px;
+    }
 }
 
 

@@ -74,7 +74,7 @@ const Subcat = () => {
       userId: id,
     },
     publicKey: 'pk_test_6dbb10e57606b65e31e7be9d5ab4e13b3e5f74e1',
-    text: "Course payment",
+    text: "Make payment",
     onSuccess: (reference) => {
       axios.post('https://react-node-project-1.onrender.com/udemy/student/payment', {
         reference: reference,

@@ -227,7 +227,7 @@ const Subcategory = () => {
       <Dashheader />
       <div onScroll={headerChange} ref={subcategoryRef} className="subCategory">
         <div ref={headerRef} className="category">
-          <div className="category1"></div>
+          {/* <div className="category1"></div> */}
           <Subcat />
           <div className="Mainvideos3" ref={videoToplayRef}>
             <div className="playvideo">
@@ -390,7 +390,11 @@ const Subcategory = () => {
                 <div key={index} className="videoItem">
                   <div onClick={() => playVideo(videoItem._id, index)} className="videocon">
                     <h4 className="title">
-                      <span className="material-symbols-outlined">star</span>
+                      <span className="material-symbols-outlined">
+                      
+                          movie_info
+                         
+                      </span>
                       {videoItem.sub_title}
                     </h4>
                     {videoItem.duration && (
@@ -423,6 +427,7 @@ const Subcategory = () => {
             <div className="subDupli">
               <div className="subb2">
                   <p>Certification</p>
+                  <p className="showlight">Check for certification Status and download</p>
                 </div>
                   <div className="subb2">
                     <p id="subbP2">{certificationStatus}</p>

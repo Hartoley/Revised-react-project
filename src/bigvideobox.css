@@ -92,6 +92,42 @@
     align-items: center;
 }
 
+@media (max-width: 380px) {
+    #videos{
+        width: 29.5%;
+        gap: 5px;
+        /* background-color: brown; */
+        margin-bottom: 3vh;
+        height: 30vh;
+    }
+
+
+    .title{
+        font-size: 8px;
+        font-weight: 500;
+        padding: 5px;
+    }
+
+    .authorName{
+        font-size: 7px;
+        line-height: 1.2px;
+        padding: 5px;
+        height: 3vw;        
+
+    }
+
+    .price{
+        font-size: 8px;
+        font-weight: 500;
+        padding: 5px;
+        height: 3vw; 
+        margin-top: -5px;
+        display: flex;
+        align-items: center; 
+    }
+
+}
+
 @media (max-width: 768px) {
     #Mainvideos2{
         display: flex;

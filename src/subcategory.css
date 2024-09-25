@@ -8,6 +8,12 @@
 
 }
 
+.showlight{
+    font-size: 18px;
+    font-weight: 500;
+    color: green;
+}
+
 .video{
     width: 100%;
     height: 100%;
@@ -493,6 +499,55 @@
 
 }
 
+@media (max-width: 380px) {
+    .category3{
+        height: 40vh;
+        width: auto;
+        padding: 0;
+      
+    }
+
+    .btn-downloaded{
+       margin-bottom: 3px;
+  
+    }
+
+    .sub2 span{
+        font-size: 10px;
+    }
+
+    .title{
+       font-size: 9px;
+       margin-top: 2px;
+        gap: 1rem;
+    }
+
+    .videocon{
+        height: auto;
+        margin-bottom: 0;
+        font-size: 8px;
+    }
+    .category3 p{
+        font-size: 6px;
+       
+     }
+    
+    .category3 h6{
+        font-size: 8px;
+       
+     }
+}
+
+.paystack-button{
+    background-color: black;
+    width: 65%;
+    height: 40px;
+    border-radius: 5px;
+    color: white;
+    margin-left: 10px;
+    font-size: 16px;
+}
+
 @media (max-width: 768px) {
     .line1{
         Font-size: 12px;
@@ -500,6 +555,21 @@
         Line-height: 18.4px;
     
     } 
+
+    .paystack-button{
+        background-color: black;
+        width: 65%;
+        height: 20px;
+        border-radius: 5px;
+        color: white;
+        margin-left: 10px;
+        font-size: 8px;
+    }
+
+    .btn-downloaded{
+        margin-bottom: 3px;
+   
+     }
 
     .line3{
         Font-size: 9px;
@@ -654,6 +724,8 @@
 .subDupli{
     height: auto;
 }
+
+
 
 #subbP2{
     Font-size: 10px;

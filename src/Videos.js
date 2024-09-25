@@ -56,7 +56,7 @@ const Videos = ({viewed, vspan, extra}) => {
      <div className='bigContainerDiv' >
      <div className='Mainvideos2' id='Mainvideos2'>
         {paidvideo.map((courses, index) => (
-          <div key={index} className="videos" onClick={(()=>showmore(courses))}>
+          <div key={index} className="videos" id='videos'  onClick={(()=>showmore(courses))}>
             <div className="videoImage">
               <video src={courses.previewVideo} controls></video>
             </div>
@@ -69,7 +69,7 @@ const Videos = ({viewed, vspan, extra}) => {
       <p className='videoHeadlines'>{viewed}<span>{vspan}</span>{extra} </p>
       <div className='Mainvideos2' id='Mainvideos3' >
         {video.map((courses, index) => (
-          <div key={index} className="videos" onClick={(()=>showmore(courses))}>
+          <div key={index} className="videos" id='videos' onClick={(()=>showmore(courses))}>
            <div className="videoImage">
               <video src={courses.previewVideo} controls></video>
             </div>
