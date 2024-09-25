@@ -124,7 +124,7 @@ const Certificate = () => {
         <div className="certificate-content">
           <p className="certificate-name">{name}</p>
           <p className="certificate-details">
-            {subcourseTitle}
+          {courseTitle}
           </p>
           <p className="certificate-course">Congratulations on completing the of <span>{courseTitle}</span> 
           Your dedication and hard work have truly paid off. 

@@ -7,6 +7,8 @@ const Dashheader = () => {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const storedId = localStorage.getItem('id');
   const id = JSON.parse(storedId);
+  const [showMenu, setshowMenu] = useState(false);
+
 
   const logout = () => {
     localStorage.removeItem('id'); 
@@ -16,6 +18,7 @@ const Dashheader = () => {
 
   const toggleMenu = () => {
     setIsMenuVisible(prev => !prev);
+    setshowMenu(prev => !prev);
   };
 
   return (
@@ -67,13 +70,20 @@ const Dashheader = () => {
         <span id='menu' className='menu material-symbols-outlined' onClick={toggleMenu}>
           menu
         </span>
-        <div className="menuitem">
-          <p>Hello you</p>
-          <div onClick={logout} className="cart1">
-            Logout
-            <span className="material-symbols-outlined">logout</span>
-          </div>
-        </div>
+        {showMenu && (
+                       <div className="menuitem">
+                       <p>Udemy Business</p>
+                       <p>Search</p>
+                       <p>My learning</p>
+                       <p>Favorite</p>
+                       <p>Shopping cart</p>
+                       <div onClick={logout} className="cart1">
+                         Logout
+                         <span className="material-symbols-outlined">logout</span>
+                       </div>
+                     </div>
+                    )}
+       
       </div>
       <ToastContainer />
     </>

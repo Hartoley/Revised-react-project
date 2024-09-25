@@ -58,9 +58,9 @@ const Header = () => {
             </div>
            </div>
             
-           <span className='menu material-symbols-outlined' onClick={toggleMenu}>
+           {/* <span className='menu material-symbols-outlined' onClick={toggleMenu}>
               menu
-              </span>
+              </span> */}
             
         </div>
     </>
