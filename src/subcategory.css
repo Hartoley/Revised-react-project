@@ -335,6 +335,7 @@
 
 .checkText{
     width: 100%;
+    width: 90%;
     /* background-color: brown; */
     Font-size: 14px;
     Font-weight: 400;
@@ -502,7 +503,7 @@
 @media (max-width: 380px) {
     .category3{
         height: 40vh;
-        width: auto;
+        width: 33%;
         padding: 0;
       
     }
@@ -555,6 +556,7 @@
         Line-height: 18.4px;
     
     } 
+   
 
     .paystack-button{
         background-color: black;
@@ -625,6 +627,8 @@
 
 .category3{
     height: 30vh;
+    width: 32%;
+    padding: 0;
    
 }
 
@@ -666,6 +670,7 @@
 .sub1{
     width: 95%;
     padding: 10px 10px;
+    margin-top: 2vw;
     
 }
 
@@ -682,6 +687,7 @@
     Font-size: 8px;
     Line-height: 10.8px;
     margin-left: 0.3rem;
+    width: 90%;
 
 
 }
