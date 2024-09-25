@@ -6,6 +6,20 @@
     
 }
 
+.learn{
+    width: 100%;
+    height: 15vh;
+    /* background-color: brown; */
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 40px;
+    color: rgb(45, 47, 49);
+    padding: 20px 30px;
+    display: flex;
+    justify-content: first baseline;
+    font-family: 'Times New Roman', Times, serif;
+  }
+
 .Mainvideos2{
     height: auto;
 }

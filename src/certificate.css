@@ -175,7 +175,7 @@
         height: 50%;
         line-height: 15px;
         gap: 0.4rem;
-        margin-top: -50vh;
+        /* margin-top: -20vh; */
         width: 95%;
         padding-top: 12vh;
     }

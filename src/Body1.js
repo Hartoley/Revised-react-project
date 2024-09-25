@@ -25,9 +25,7 @@ const Body1 = () => {
            
             
         </div>
-        <div className="learn">
-          <p>What to learn next</p> 
-        </div>
+        
        
     </>
   )
