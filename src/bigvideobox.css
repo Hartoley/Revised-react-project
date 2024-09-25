@@ -6,6 +6,10 @@
     
 }
 
+.learn p{
+    margin-left: -35px;
+}
+
 .learn{
     width: 100%;
     height: 15vh;
@@ -14,11 +18,12 @@
     font-weight: 700;
     line-height: 40px;
     color: rgb(45, 47, 49);
-    padding: 20px 0;
+    padding: 0;
     display: flex;
     justify-content: first baseline;
     font-family: 'Times New Roman', Times, serif;
   }
+
 
 .Mainvideos2{
     height: auto;
@@ -115,6 +120,11 @@
         height: 30vh;
     }
 
+    .learn p{
+        font-size: 10px;
+        margin-left: -15px;
+    }
+
 
     .title{
         font-size: 8px;
@@ -148,6 +158,11 @@
         flex-wrap: wrap;
         align-items: center;
         
+    }
+
+    .learn p{
+        font-size: 12px;
+        margin-left: -18px;
     }
 
     #Mainvideos3{
