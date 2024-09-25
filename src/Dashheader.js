@@ -64,9 +64,16 @@ const Dashheader = () => {
             <span className="material-symbols-outlined">logout</span>
           </div>
         </div>
-        <span className='menu material-symbols-outlined' onClick={toggleMenu}>
+        <span id='menu' className='menu material-symbols-outlined' onClick={toggleMenu}>
           menu
         </span>
+        <div className="menuitem">
+          <p>Hello you</p>
+          <div onClick={logout} className="cart1">
+            Logout
+            <span className="material-symbols-outlined">logout</span>
+          </div>
+        </div>
       </div>
       <ToastContainer />
     </>
