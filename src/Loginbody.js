@@ -89,11 +89,15 @@ const Loginbody = () => {
                         <p> Continue with Apple</p>
                     </div>
                 </div>
+
+                <div className="carrier">
+                    <input onBlur={formik.handleBlur} onChange={formik.handleChange} name='email' type="text" placeholder='Email'/>
+                    <p>{formik.touched.email && formik.errors.email? formik.errors.email:''}</p>
+                    <input onBlur={formik.handleBlur} onChange={formik.handleChange} name='password' type="text" placeholder='Password'/>
+                    <p>{formik.touched.password && formik.errors.password? formik.errors.password:''}</p>                  
+                </div>
                 
-                <input onBlur={formik.handleBlur} onChange={formik.handleChange} name='email' type="text" placeholder='Email'/>
-                <p>{formik.touched.email && formik.errors.email? formik.errors.email:''}</p>
-                <input onBlur={formik.handleBlur} onChange={formik.handleChange} name='password' type="text" placeholder='Password'/>
-                <p>{formik.touched.password && formik.errors.password? formik.errors.password:''}</p>
+
 
                 <div className="lineBox">
                     <div className="lines"></div>
@@ -106,22 +110,26 @@ const Loginbody = () => {
                     <input type="checkbox" />
                     <p>Send me special offers, personalized, recommendations, and learning tips</p>
                 </div>
-                <button type='submit' className='buttonSignin'>Sign in</button>
-                <ToastContainer/>
-                <div className="termsBox">
-                    <p>Or <span>Forgot Password</span></p>
+                <div className="carrier">
+                    <button type='submit' className='buttonSignin'>Sign in</button>
                 </div>
+                <ToastContainer/>
+                <div className="carrier1">
+                    <div className="termsBox">
+                        <p>Or <span>Forgot Password</span></p>
+                    </div>
 
-                <div className="loginBox" id='loginBox'>
-                    <p>
-                        Don't have an account?  <span>
-                        <a href="/students/signup">
-                            Sign up
-                            Log in with your organization
-                            </a>
-                           
-                        </span>
-                    </p>
+                    <div className="loginBox" id='loginBox'>
+                        <p>
+                            Don't have an account?  <span>
+                            <a href="/students/signup">
+                                Sign up
+                                Log in with your organization
+                                </a>
+                            
+                            </span>
+                        </p>
+                    </div>
                 </div>
             </div>
             

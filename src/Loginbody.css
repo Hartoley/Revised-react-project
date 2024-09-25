@@ -26,9 +26,9 @@
   background-color: rgb(225, 225, 237);
 }
 
-.inputBox input[type="text"]{
+.carrier input[type="text"]{
     width: 90%;
-    height: 15%;
+    height: 8vh;
     padding: 0 20px 0 20px;
     border: solid 1.1px black;
     Font-size: 14px;
@@ -101,7 +101,7 @@
 
   .buttonSignin{
     width: 90%;
-    height: 12%;
+    height: 8vh;
     background-color: rgb(164,53,240);
     border: none;
     color: white;
@@ -111,7 +111,8 @@
 
   .termsBox{
     width: 90%;
-    height: 8%;
+    height: 6vh;
+    margin-bottom: 5vh;
     /* background-color: aqua; */
     border-bottom: solid 2px rgb(236,239,241);
     display: flex;
@@ -172,9 +173,109 @@
    
   }
 
+  .carrier{
+    width: 100%;
+    height: auto;
+    /* background-color: red; */
+  }
+
+  .carrier1{
+    width: 100%;
+    height: auto;
+    /* background-color: red; */
+  }
+
+  @media (max-width: 380px) {
+      .body{
+        /* background-color: red; */
+        height: 130vh;
+      }
+
+      .checkContainer input{
+        width: 10px;
+        height: 10px;
+      }
+
+      .checkContainer{
+        Font-size: 7.5px;
+        Font-weight: 500;
+        Line-height: 9.6px;
+        height: 5%;
+        /* background-color: red; */
+        color: rgb(45, 47, 49);
+    }
+
+      .carrier1{
+        width: 100%;
+        height: 20vh;
+        margin-top: 2vh;
+      }
+
+      #google{
+        width: 15px;
+        height: auto;
+      }
+
+      .checkContainer{
+        margin-top: -5px;
+      }
+
+      #inputBox{
+        height: 100%;
+      }
+
+      .buttonSignin{
+        height: 5vh;
+      }
+
+      .termsBox{
+       display: none;
+      }
+
+     
+
+
+      .carrier input[type="text"]{
+        height: 6vh;
+        /* background-color: black; */
+        padding: 0 10px 0 10px;
+        Font-size: 10px;
+        Font-weight: 500;
+        Line-height: 10.2px;
+        
+     
+    }
+  }
+
   @media (max-width: 768px) {
     #body{
       height: 70vh;
+    }
+
+    .carrier input[type="text"]{
+      height: 6vh;
+      /* background-color: black; */
+      padding: 0 10px 0 10px;
+      Font-size: 12px;
+      Font-weight: 500;
+      Line-height: 10.2px;
+      
+   
+  }
+
+    .checkContainer{
+      Font-size: 8.5px;
+      Font-weight: 500;
+      Line-height: 9.6px;
+      height: 5%;
+      /* background-color: red; */
+      color: rgb(45, 47, 49);
+  }
+
+    .carrier1{
+      width: 100%;
+      height: 15vh;
+      margin-top: 2vh;
     }
 
     #inputBox{
@@ -184,5 +285,13 @@
 
     #loginBox{
       margin-top: 0.5rem;
+    }
+
+    .termsBox{
+      height: 3vh;
+    }
+
+    .buttonSignin{
+      height: 5vh;
     }
   }
