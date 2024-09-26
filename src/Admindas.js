@@ -215,19 +215,19 @@ const Admindas = () => {
           <div className='Mainvideo'>
             {video.map((courses, index) => (
               
-              <div key={index} className="videos">
+              <div key={index} id='videos' className="videos">
                 <p className="title">{courses.title}</p>
                 <p className="authorName">{courses.authors_name}</p>
                 <p className="price">{Naira} {courses.price}</p>
                 <button onClick={(()=>Addvideos(courses))}>Add more Videos</button>
                 {courses.videos.map((videoItem, videoIndex) => (
-                  <div key={index} className="videoItem">
+                  <div key={index} className="videoItem" id='videoItem'>
                     <video className="vidImage" src={videoItem.url} controls></video>
                     <h4 className="title">{sub} {videoItem.sub_title}</h4>
                   </div>
                 ))}
                
-                <button onClick={(()=>Editcourse(courses))}>Edit course</button>
+                <button id='edit' onClick={(()=>Editcourse(courses))}>Edit course</button>
               </div>
             ))}
           </div>
