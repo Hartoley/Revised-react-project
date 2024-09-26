@@ -28,10 +28,11 @@ const Admindas = () => {
   useEffect(() => {
     if (loading) {
       if (!loadingToastRef.current) {
-        toast.info("Processing request...");
+        toast.loading("Processing data...");
         loadingToastRef.current = true; 
       }
     } else {
+      
       loadingToastRef.current = false; 
     }
   }, [loading]);
@@ -44,6 +45,7 @@ const Admindas = () => {
         setrealadmin(Object.values(res.data))
         // console.log(realadmin);
         setLoading(true);
+        toast.dismiss();
       }).catch ((error) =>{
         console.log(error);
         setLoading(false);
@@ -65,6 +67,7 @@ const Admindas = () => {
 
    
     const formik = useFormik({
+      
       initialValues:{
         title:"",
         sub_title:"",
@@ -84,20 +87,22 @@ const Admindas = () => {
       
     
       onSubmit:(values)=>{
+        toast.loading("Uploading course...");
         const formData = new FormData();
         // console.log(values.video_preview);
         Object.keys(values).forEach(key => {
           formData.append(key, values[key]);
         });
         setLoading(true);
-        axios.post("https://react-node-project-1.onrender.com/courses/upload/course", formData, {
+        axios.post("https://react-node-project-1.onrender.com/udemy/courses/upload/course", formData, {
           headers: {
             'Content-Type': 'multipart/form-data'
           }
           
         })
         .then((res)=>{
-          toast.success("course updated successful")
+          toast.dismiss();
+          toast.success("Course uploaded successfully!");
           let courseId = `${res.data.course._id}`
           // console.log(courseId);
           setLoading(true); 
@@ -106,6 +111,7 @@ const Admindas = () => {
         }).catch((err)=>{
           console.log(err);
           setLoading(false); 
+          toast.dismiss();
           toast.error("Failed Upload course");
         })
       }})

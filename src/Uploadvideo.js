@@ -32,6 +32,7 @@ const Uploadvideo = () => {
       video_url: null,
     },
     onSubmit: (values) => {
+      toast.loading("Uploading video...");
       const formData = new FormData();
       formData.append('sub_title', values.sub_title);
       formData.append('video_url', values.video_url);
@@ -44,11 +45,13 @@ const Uploadvideo = () => {
         .then((res) => {
           setLoading(false);
           console.log("Video upload successful:", res.data);
-          toast.success("Video uploaded successfully!");
+          toast.dismiss();
+          toast.success("Course uploaded successfully!");
         })
         .catch((err) => {
           setLoading(false);
           console.error("Video upload failed:", err);
+          toast.dismiss();
           toast.error("Failed to upload video!");
         });
     }
