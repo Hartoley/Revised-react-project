@@ -74,12 +74,14 @@ const Signupbody = () => {
        
             <div className="inputBox" id='bodydiv'>
                 <p>Sign up and start learning</p>
-                <input onBlur={formik.handleBlur} onChange={formik.handleChange} name="username" type="text" placeholder='Full name'/>
-                <p>{formik.touched.username && formik.errors.username? formik.errors.username:''}</p>
-                <input onBlur={formik.handleBlur} onChange={formik.handleChange} name='email' type="text" placeholder='Email'/>
-                <p>{formik.touched.email && formik.errors.email? formik.errors.email:''}</p>
-                <input onBlur={formik.handleBlur} onChange={formik.handleChange} name='password' type="text" placeholder='Password'/>
-                <p>{formik.touched.password && formik.errors.password? formik.errors.password:''}</p>
+                <div id="inputMainBox">
+                    <input onBlur={formik.handleBlur} onChange={formik.handleChange} name="username" type="text" placeholder='Full name'/>
+                    <p>{formik.touched.username && formik.errors.username? formik.errors.username:''}</p>
+                    <input onBlur={formik.handleBlur} onChange={formik.handleChange} name='email' type="text" placeholder='Email'/>
+                    <p>{formik.touched.email && formik.errors.email? formik.errors.email:''}</p>
+                    <input onBlur={formik.handleBlur} onChange={formik.handleChange} name='password' type="text" placeholder='Password'/>
+                    <p>{formik.touched.password && formik.errors.password? formik.errors.password:''}</p>
+                </div>
                 <div className="lineBox">
                     <div className="lines"></div>
                     <div className="lines"></div>
@@ -87,10 +89,6 @@ const Signupbody = () => {
                     <div className="lines"></div>
                 </div>
 
-                <div className="checkContainer">
-                    <input type="checkbox" />
-                    <p>Send me special offers, personalized, recommendations, and learning tips</p>
-                </div>
                 <button type='submit' className='buttonSignin'>Sign up</button>
                 <ToastContainer/>
                 <div className="termsBox" id='termsBox'>

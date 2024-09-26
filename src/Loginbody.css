@@ -7,6 +7,11 @@
     justify-content: center;
     margin-top: 20vh;
 }
+
+*{
+  padding: 0;
+  margin: 0;
+}
 #body{
   margin-top: 15vh;
 }
@@ -44,16 +49,11 @@
 
 .others{
     width: 90%;
-    height: 15%;
+    height: 10%;
     padding: 0 20px 0 20px;
     border: solid 1.1px black;
     display: flex;
     align-items: center;
-    Font-size: 18px;
-    Font-weight: 700;
-    Line-height: 19.2px;
-    color: rgb(45, 47, 49);
-    gap: 0.5rem;
     /* background-color: red; */
 }
 
@@ -136,18 +136,26 @@
 
   }
 
-  .small{
-    width: 100%;
-    height: 50%;
+  .small1{
+    width: 80%;
+    height: 100%;
+    Font-size: 1rem;
+    Font-weight: 700;
+    Line-height: 0;
+    color: rgb(45, 47, 49);
     
-    display: flex;
-    /* background-color: aqua; */
   }
 
+ 
+
+  
+
   #google{
-    width: 12%;
-    height: 75%;
+    width: 4vw;
+    height: auto;
   }
+
+
 
   .loginBox{
     width: 90%;
@@ -164,9 +172,9 @@
     
   }
 
-  .loginBox p{
+  /* .loginBox p{
     width: 70%;
-  }
+  } */
 
   .loginBox span{
     Font-size: 15px;
@@ -205,6 +213,8 @@
         Font-weight: 500;
         Line-height: 9.6px;
         height: 5%;
+        display: flex;
+        align-items: center;
         /* background-color: red; */
         color: rgb(45, 47, 49);
     }
@@ -212,7 +222,6 @@
       .carrier1{
         width: 100%;
         height: 20vh;
-        margin-top: 2vh;
       }
 
       #google{
@@ -221,7 +230,7 @@
       }
 
       .checkContainer{
-        margin-top: -5px;
+        background-color: rgb(10, 82, 58);
       }
 
       #inputBox{
@@ -266,6 +275,12 @@
       Line-height: 10.2px;
       
    
+  }
+
+  .small1{
+    padding-top: 5px;
+    Font-size: 0.4rem;
+    
   }
 
     .checkContainer{

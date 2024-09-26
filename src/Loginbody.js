@@ -70,21 +70,20 @@ const Loginbody = () => {
                 <p>Log in to your Udemy account</p>
                 <div className="others">
                 <img id='google' src={google} alt="" />
-                    <div className="small">
-                     
-                        <p>Continue with Google</p>
-                    </div>
+                <div className="small1">
+                    <p>Continue with Google</p>
+                </div>
                 </div>
                 <div className="others">
                 <img src={facebook} id='google' alt="" />
-                <div className="small">
+                <div className="small1">
                   
                     <p>Continue with Facebook</p>
                 </div>
                 </div>
                 <div className="others">
                 <img src={apple} id='google' alt="" />
-                <div className="small">
+                <div className="small1">
                        
                         <p> Continue with Apple</p>
                     </div>
@@ -104,11 +103,6 @@ const Loginbody = () => {
                     <div className="lines"></div>
                     <div className="lines"></div>
                     <div className="lines"></div>
-                </div>
-
-                <div className="checkContainer">
-                    <input type="checkbox" />
-                    <p>Send me special offers, personalized, recommendations, and learning tips</p>
                 </div>
                 <div className="carrier">
                     <button type='submit' className='buttonSignin'>Sign in</button>

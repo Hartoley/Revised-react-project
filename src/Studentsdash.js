@@ -27,7 +27,7 @@ const Studentsdash = () => {
       }).catch ((error) =>{
         console.log(error);
         setLoading(false);
-        toast.error("Failed to fetch Students data");
+        // toast.error("Failed to fetch Students data");
       })
     }, [id])
     // console.log(realadmin);

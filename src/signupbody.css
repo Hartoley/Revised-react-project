@@ -7,6 +7,22 @@
     justify-content: center;
 }
 
+#inputMainBox input{
+  height: 10vh;
+  width: 90%;
+  padding: 0 20px 0 20px;
+  border: solid 1.1px black;
+  Font-size: 14px;
+  Font-weight: 700;
+  Line-height: 19.2px;
+}
+
+#inputMainBox{
+  /* background-color: red; */
+  width: 100%;
+  height: auto;
+}
+
 .inputBox{
     width: 35%;
     height: 100%;
@@ -19,20 +35,10 @@
     Font-weight: 700;
     Line-height: 19.2px;
     color: rgb(45, 47, 49);
-    gap: 0.5rem;
+    /* gap: 0.5rem; */
 }
 
-.inputBox input[type="text"]{
-    width: 90%;
-    height: 15%;
-    padding: 0 20px 0 20px;
-    border: solid 1.1px black;
-    Font-size: 14px;
-    Font-weight: 700;
-    Line-height: 19.2px;
-    
- 
-}
+
 
 .inputBox input[type="text"]::placeholder{
     color: rgb(45, 47, 49);
@@ -80,7 +86,7 @@
 
   .buttonSignin{
     width: 90%;
-    height: 12%;
+    height: 10vh;
     background-color: rgb(164,53,240);
     border: none;
     color: white;
@@ -143,5 +149,9 @@
 
    #body{
       height: 65vh;
+    }
+    #inputMainBox input{
+      height: 6vh;
+      
     }
   }
