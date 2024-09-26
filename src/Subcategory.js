@@ -50,7 +50,7 @@ const Subcategory = () => {
       })
       .catch((error) => {
         console.log(error);
-        toast.error("Failed to fetch course data");
+        // toast.error("Failed to fetch course data");
       });
 
     axios.get(`https://react-node-project-1.onrender.com/udemy/student/getdata/id/${id}`)
@@ -60,7 +60,7 @@ const Subcategory = () => {
       }).catch((error) => {
         console.log('Error:', error);
         setLoading(false);
-        toast.error("Failed to fetch user data");
+        // toast.error("Failed to fetch user data");
       });
 
     axios.get(`https://react-node-project-1.onrender.com/udemy/student/paidCourses/id/${id}`)
@@ -72,13 +72,13 @@ const Subcategory = () => {
           // toast.success("Course fetching successful!");
           
         } else {
-          toast.error("Course fetching failed");
+          // toast.error("Course fetching failed");
         }
       }).catch((err) => {
         console.error(err);
-        toast.error("Failed to fetch paid courses. Please try again later.");
+        // toast.error("Failed to fetch paid courses. Please try again later.");
       });
-  }, [courseId]);
+  }, [id]);
 
   const handleStarClick = () => {
     console.log("Star clicked!");
