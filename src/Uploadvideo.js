@@ -15,7 +15,7 @@ const Uploadvideo = () => {
     if (loading) {
       if (!loadingToastRef.current) {
         toast.info("Processing request...");
-        loadingToastRef.current = true; 
+        // loadingToastRef.current = true; 
       }
     } else {
       loadingToastRef.current = false; 
