@@ -94,7 +94,7 @@ const Admindas = () => {
           formData.append(key, values[key]);
         });
         setLoading(true);
-        axios.post("https://react-node-project-1.onrender.com/udemy/courses/upload/course", formData, {
+        axios.post("https://react-node-project-1.onrender.com/courses/upload/course", formData, {
           headers: {
             'Content-Type': 'multipart/form-data'
           }
