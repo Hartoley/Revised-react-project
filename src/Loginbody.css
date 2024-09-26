@@ -225,7 +225,7 @@
       }
 
       #google{
-        width: 15px;
+        width: 18px;
         height: auto;
       }
 
@@ -278,8 +278,9 @@
   }
 
   .small1{
-    padding-top: 5px;
-    Font-size: 0.4rem;
+    padding-top: 7px;
+    Font-size: 0.65rem;
+    margin-left: 8px;
     
   }
 
