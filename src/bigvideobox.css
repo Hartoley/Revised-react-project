@@ -122,6 +122,10 @@
 }
 
 @media (max-width: 380px) {
+    .videoBox1 {
+            padding: 5px 10px;
+        }
+        
     #videos{
         width: 29.5%;
         gap: 5px;
@@ -169,6 +173,10 @@
         align-items: center;
         
     }
+
+        .videoBox1 {
+            padding: 5px 10px;
+        }
 
     .learn p{
         font-size: 12px;
