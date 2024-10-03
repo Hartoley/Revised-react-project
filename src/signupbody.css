@@ -6,6 +6,21 @@
     align-items: center;
     justify-content: center;
 }
+.password-container {
+  position: relative;
+}
+
+.password-container input {
+  padding-right: 30px;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 50px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
 
 #inputMainBox input{
   height: 10vh;
