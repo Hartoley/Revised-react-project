@@ -142,7 +142,9 @@ const Loginbody = () => {
               <p>
                 Don't have an account?{" "}
                 <span>
-                  <a href="/">Sign up Log in with your organization</a>
+                  <a href="/students/signup">
+                    Sign up Log in with your organization
+                  </a>
                 </span>
               </p>
             </div>
