@@ -37,7 +37,7 @@
     top: 0;
     left: 0;
     right: 0;
-    z-index: 1000; /* Ensures the header is on top of other elements */
+    z-index: 1000; 
     background-color: white; /* Adjust this as needed */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: adds a shadow effect */
   }
@@ -170,7 +170,7 @@
   
   .mobile-menu .dropdown {
     padding: 10px;
-    border-bottom: 1px solid #e0e0e0; /* Optional: add separation between items */
+    border-bottom: 1px solid #e0e0e0; 
   }
   
   @media (max-width: 768px) {

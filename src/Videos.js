@@ -22,7 +22,6 @@ const Videos = ({ viewed, vspan, extra }) => {
       })
       .catch((err) => {
         console.log(err);
-        toast.error("Failed to fetch course");
       });
 
     axios
@@ -32,11 +31,8 @@ const Videos = ({ viewed, vspan, extra }) => {
       .then((res) => {
         if (res.data) {
           setpaidvideo(res.data);
-          // console.log(res.data);
-          // toast.success("course fetching successful!");
         } else {
           console.log("I do not have the data");
-          // toast.error("course fetching failed");
         }
       })
       .catch((err) => {

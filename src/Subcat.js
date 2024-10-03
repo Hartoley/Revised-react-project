@@ -31,7 +31,6 @@ const Subcat = () => {
       } catch (error) {
         console.error(error);
         setError("Failed to fetch course data");
-        toast.error("Failed to fetch course data");
         setLoading(false);
       }
     };
