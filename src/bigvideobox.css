@@ -78,7 +78,7 @@
 
 .videoImage {
     width: 100%;
-    height: 40vh; 
+    height: 35vh; 
     border: solid 1px rgb(37, 35, 35);
     margin-bottom: 2%;
     
@@ -87,13 +87,13 @@
 
 .title{
     display: flex;
-    font-size: 16px;
-    font-weight: 700;
+    font-size: 14px;
+    font-weight: 600;
     align-items: start;
     justify-content: flex-start;
     /* line-height: 19.2px; */
     color: rgb(45, 47, 49);
-    height: 5vw;
+    height: 7vw;
 
 }
 

@@ -18,7 +18,7 @@ const Landing = () => {
   const [realadmin, setrealadmin] = useState({});
   const [video, setvideo] = useState([]);
   const navigate = useNavigate();
-  let Naira = "N";
+  let Naira = "$";
   let viewed = "Because you viewed “";
   let vspan = "DevOps Beginners to Advanced with Projects";
   let extra = "”";
