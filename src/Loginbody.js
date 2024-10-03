@@ -54,7 +54,6 @@ const Loginbody = () => {
 
             // console.log(loggedinstudents._id);
             toast.success("students successfully logged in");
-            navigate(`/students/dashboard/${id}`);
           })
           .catch((err) => {
             console.log(err);
