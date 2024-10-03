@@ -18,7 +18,9 @@ const Studentsdash = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5009/udemy/student/getdata/id/${id}`)
+      .get(
+        `https://react-node-project-1.onrender.com/udemy/student/getdata/id/${id}`
+      )
       .then((res) => {
         // console.log(res.data);
         setrealadmin(Object.values(res.data));
