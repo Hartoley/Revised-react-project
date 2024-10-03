@@ -108,6 +108,7 @@ const Loginbody = () => {
             <input
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
+              id="input123"
               name="password"
               type="password"
               placeholder="Password"
