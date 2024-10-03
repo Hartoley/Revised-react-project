@@ -33,10 +33,10 @@ const Videos = ({ viewed, vspan, extra }) => {
         if (res.data) {
           setpaidvideo(res.data);
           // console.log(res.data);
-          toast.success("course fetching successful!");
+          // toast.success("course fetching successful!");
         } else {
           console.log("I do not have the data");
-          toast.error("course fetching failed");
+          // toast.error("course fetching failed");
         }
       })
       .catch((err) => {
