@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import axios from "axios";
@@ -15,6 +15,8 @@ const Signupbody = () => {
   const navigate = useNavigate();
   const [students, setStudents] = useState([]);
   const [showPassword, setShowPassword] = useState(false);
+  const loadingToastRef = useRef(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     axios
@@ -26,6 +28,15 @@ const Signupbody = () => {
       .catch((err) => {
         console.log(err);
       });
+
+    if (loading) {
+      if (!loadingToastRef.current) {
+        toast.loading("Processing data...");
+        loadingToastRef.current = true;
+      }
+    } else {
+      loadingToastRef.current = false;
+    }
   }, []);
 
   const formik = useFormik({
@@ -54,11 +65,15 @@ const Signupbody = () => {
     }),
     onSubmit: (value) => {
       console.log(value);
+      setLoading(true);
+      toast.loading("Saving data...");
       const existingStudent = students.find(
         (exist) =>
           exist.email === value.email || exist.password === value.password
       );
       if (existingStudent) {
+        setLoading(false);
+        toast.dismiss();
         toast.error("User already exists");
       } else {
         axios
@@ -70,13 +85,14 @@ const Signupbody = () => {
           })
           .catch((error) => {
             console.log(error);
+            setLoading(false);
+            toast.dismiss();
             toast.error("Signup failed");
           });
       }
     },
   });
 
-  // Function to toggle password visibility
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev);
   };
@@ -131,11 +147,11 @@ const Signupbody = () => {
                 )}
               </span>
             </div>
-            <p>
+            {/* <p>
               {formik.touched.password && formik.errors.password
                 ? formik.errors.password
                 : ""}
-            </p>
+            </p> */}
           </div>
           <div className="lineBox">
             <div className="lines"></div>
