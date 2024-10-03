@@ -1,5 +1,5 @@
 import Admin from "./Admin";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import "./App.css";
 import Adminlogin from "./Adminlogin";
 import Admindas from "./Admindas";
@@ -26,6 +26,7 @@ function App() {
         <Route path="/uploadVideo/:courseId" element={<Uploadvideo />} />
         <Route path="/course/:id/:courseId" element={<Subcategory />} />
         <Route path="/editcourse/:courseId" element={<Updatecourse />} />
+        <Route path="*" element={<Navigate to="/students/login" replace />} />
         <Route
           path="/download/certificate/:courseId/:id"
           element={<Certificate />}

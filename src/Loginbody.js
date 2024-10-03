@@ -54,6 +54,7 @@ const Loginbody = () => {
 
             // console.log(loggedinstudents._id);
             toast.success("students successfully logged in");
+            navigate(`/students/dashboard/${id}`);
           })
           .catch((err) => {
             console.log(err);
@@ -107,7 +108,7 @@ const Loginbody = () => {
             <input
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
-              id="input123"
+              id="input"
               name="password"
               type="password"
               placeholder="Password"
