@@ -74,7 +74,7 @@ const DitVideo = () => {
           videos.map((videoItem, index) => (
             <div key={index} className="video-item">
               <video src={videoItem.url} controls className="sub-video"></video>
-              <h4 className="subtitle">Subtitle: {videoItem.sub_title}</h4>
+              <h4 className="subtitle">Title: {videoItem.sub_title}</h4>
             </div>
           ))}
       </div>

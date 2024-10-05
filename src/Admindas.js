@@ -208,22 +208,6 @@ const Admindas = () => {
               {/* Form Title */}
               <h2>Upload a Course</h2>
 
-              {/* Title */}
-              <div className="form-group">
-                <label htmlFor="title" className="form-label">
-                  Title
-                </label>
-                <input
-                  type="text"
-                  id="title"
-                  name="title"
-                  className="form-control"
-                  placeholder="Enter course title"
-                  required
-                  onChange={formik.handleChange}
-                />
-              </div>
-
               {/* Sub-title */}
               <div className="form-group">
                 <label htmlFor="sub_title" className="form-label">
@@ -235,6 +219,22 @@ const Admindas = () => {
                   name="sub_title"
                   className="form-control"
                   placeholder="Enter course sub-title"
+                  required
+                  onChange={formik.handleChange}
+                />
+              </div>
+
+              {/* Title */}
+              <div className="form-group">
+                <label htmlFor="title" className="form-label">
+                  Title
+                </label>
+                <input
+                  type="text"
+                  id="title"
+                  name="title"
+                  className="form-control"
+                  placeholder="Enter course title"
                   required
                   onChange={formik.handleChange}
                 />
@@ -431,7 +431,7 @@ const Admindas = () => {
               <p className="title">{courses.title}</p>
               <p className="authorName">{courses.authors_name}</p>
               <p className="price">₦ {courses.price}</p>
-              <button id="edit" onClick={() => Editcourse(courses)}>
+              <button id="edit" onClick={() => Addvideos(courses)}>
                 Preview
               </button>
             </div>

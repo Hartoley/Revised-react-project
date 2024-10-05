@@ -1,37 +1,36 @@
-import React, { useState } from 'react';
-import './dashheader.css';
-import logo from './Images/new Udemy.png';
-import { ToastContainer, toast } from 'react-toastify';
+import React, { useState } from "react";
+import "./dashheader.css";
+import logo from "./Images/new Udemy.png";
+import { ToastContainer, toast } from "react-toastify";
 
 const Dashheader = () => {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
-  const storedId = localStorage.getItem('id');
+  const storedId = localStorage.getItem("id");
   const id = JSON.parse(storedId);
   const [showMenu, setshowMenu] = useState(false);
 
-
   const logout = () => {
-    localStorage.removeItem('id'); 
-    window.location.href = '/students/login'; 
-    toast.success("Log out successful!"); 
+    localStorage.removeItem("id");
+    window.location.href = "/students/login";
+    toast.success("Log out successful!");
   };
 
   const toggleMenu = () => {
-    setIsMenuVisible(prev => !prev);
-    setshowMenu(prev => !prev);
+    setIsMenuVisible((prev) => !prev);
+    setshowMenu((prev) => !prev);
   };
 
   return (
     <>
-      <div className='headers' id='header'>
+      <div className="headers" id="header">
         <div className="imageCon">
-          <img className='logo' src={logo} alt="Udemy Logo" />
+          <img className="logo" src={logo} alt="Udemy Logo" />
         </div>
         <div className="main">
-          <div className='dropdown'>
+          <div className="dropdown">
             <p>Categories</p>
             {isMenuVisible && (
-              <div className='dropdownContent'>
+              <div className="dropdownContent">
                 <p>Hello World</p>
                 <p>Hello World</p>
                 <p>Hello World</p>
@@ -39,11 +38,11 @@ const Dashheader = () => {
               </div>
             )}
           </div>
-          <div className='search'>
-            <span className="material-symbols-outlined" id='searchLogo'>
+          <div className="search">
+            <span className="material-symbols-outlined" id="searchLogo">
               search
             </span>
-            <input type="text" placeholder='Search for anything' />
+            <input type="text" placeholder="Search for anything" />
           </div>
           <div className="dropdown">
             <p>Udemy Business</p>
@@ -54,7 +53,7 @@ const Dashheader = () => {
           <div className="dropdown">
             <p>My learning</p>
           </div>
-          <div className='cart'>
+          <div className="cart">
             <span className="material-symbols-outlined">shopping_cart</span>
           </div>
           <div className="cart">
@@ -67,27 +66,30 @@ const Dashheader = () => {
             <span className="material-symbols-outlined">logout</span>
           </div>
         </div>
-        <span id='menu' className='menu material-symbols-outlined' onClick={toggleMenu}>
+        <span
+          id="menu"
+          className="menu material-symbols-outlined"
+          onClick={toggleMenu}
+        >
           menu
         </span>
         {showMenu && (
-                       <div className="menuitem">
-                       <p>Udemy Business</p>
-                       <p>Search</p>
-                       <p>My learning</p>
-                       <p>Favorite</p>
-                       <p>Shopping cart</p>
-                       <div onClick={logout} className="cart1">
-                         Logout
-                         <span className="material-symbols-outlined">logout</span>
-                       </div>
-                     </div>
-                    )}
-       
+          <div className="menuitem">
+            <p>Udemy Business</p>
+            <p>Search</p>
+            <p>My learning</p>
+            <p>Favorite</p>
+            <p>Shopping cart</p>
+            <div onClick={logout} className="cart1">
+              Logout
+              <span className="material-symbols-outlined">logout</span>
+            </div>
+          </div>
+        )}
       </div>
       <ToastContainer />
     </>
   );
-}
+};
 
 export default Dashheader;

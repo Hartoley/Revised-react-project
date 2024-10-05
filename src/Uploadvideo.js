@@ -1,10 +1,11 @@
-import React, { useEffect,useRef, useState } from 'react';
-import axios from 'axios';
-import { useFormik } from 'formik';
-import { ToastContainer, toast } from 'react-toastify';
-import { useParams } from 'react-router-dom';
-import 'react-toastify/dist/ReactToastify.css';
-import './admidash.css';
+import React, { useEffect, useRef, useState } from "react";
+import axios from "axios";
+import { useFormik } from "formik";
+import { ToastContainer, toast } from "react-toastify";
+import { useParams } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./admidash.css";
 
 const Uploadvideo = () => {
   const { courseId } = useParams();
@@ -15,10 +16,9 @@ const Uploadvideo = () => {
     if (loading) {
       if (!loadingToastRef.current) {
         toast.info("Processing request...");
-        // loadingToastRef.current = true; 
       }
     } else {
-      loadingToastRef.current = false; 
+      loadingToastRef.current = false;
     }
   }, [loading]);
 
@@ -34,14 +34,19 @@ const Uploadvideo = () => {
     onSubmit: (values) => {
       toast.loading("Uploading video...");
       const formData = new FormData();
-      formData.append('sub_title', values.sub_title);
-      formData.append('video_url', values.video_url);
+      formData.append("sub_title", values.sub_title);
+      formData.append("video_url", values.video_url);
       setLoading(true);
-      axios.post(`https://react-node-project-1.onrender.com/courses/upload/video/${courseId}`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      })
+      axios
+        .post(
+          `https://react-node-project-1.onrender.com/courses/upload/video/${courseId}`,
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        )
         .then((res) => {
           setLoading(false);
           console.log("Video upload successful:", res.data);
@@ -54,39 +59,60 @@ const Uploadvideo = () => {
           toast.dismiss();
           toast.error("Failed to upload video!");
         });
-    }
+    },
   });
 
   const handleFileChange = (event) => {
-    formik.setFieldValue('video_url', event.currentTarget.files[0]);
+    formik.setFieldValue("video_url", event.currentTarget.files[0]);
   };
 
   return (
     <>
-      <form onSubmit={formik.handleSubmit} encType="multipart/form-data">
-        <p>Video title</p>
-        <input 
-          name='sub_title' 
-          type="text" 
-          onChange={formik.handleChange} 
-          value={formik.values.sub_title} 
-        />
+      <div className="container mt-5">
+        <h1 className="text-center mb-4">Add New Course Video</h1>
+        <form
+          onSubmit={formik.handleSubmit}
+          encType="multipart/form-data"
+          className="border p-4 rounded bg-light shadow-sm"
+        >
+          <div className="mb-3">
+            <label htmlFor="sub_title" className="form-label">
+              Video Title
+            </label>
+            <input
+              className="form-control"
+              id="sub_title"
+              name="sub_title"
+              type="text"
+              onChange={formik.handleChange}
+              value={formik.values.sub_title}
+              placeholder="Enter video title"
+            />
+          </div>
 
-        <h4>Drop video</h4>
-        <input 
-          type="file" 
-          name="video_url" 
-          accept="video/*" 
-          onChange={handleFileChange} 
-        />
-    
-    
-        <button type="submit">
-          Add Video
-        </button>
-      </form>
+          <div className="mb-3">
+            <label className="form-label">Select Video File</label>
+            <input
+              className="form-control"
+              type="file"
+              name="video_url"
+              accept="video/*"
+              onChange={handleFileChange}
+            />
+          </div>
 
-     
+          <div className="d-flex justify-content-center">
+            <button
+              type="submit"
+              className="btn btn-primary w-auto"
+              disabled={loading}
+            >
+              {loading ? "Uploading..." : "Add Video"}
+            </button>
+          </div>
+        </form>
+      </div>
+
       <ToastContainer />
     </>
   );
