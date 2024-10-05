@@ -1,0 +1,125 @@
+.student-section {
+    padding: 20px;
+}
+
+.student-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-gap: 20px;
+    margin-top: 20px;
+}
+
+.student-card {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.student-card:hover {
+    transform: scale(1.05);
+}
+
+.student-image img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+.student-info h4 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.student-info p {
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #777;
+}
+
+/* Main container for the form */
+.form-container {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 900px;
+    margin: auto;
+}
+
+/* Use CSS Grid for layout */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+}
+
+/* Style for the form elements */
+.form-grid input,
+.form-grid textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+    color: #333;
+    box-sizing: border-box;
+}
+
+/* Full-width for textareas and file input */
+.form-grid textarea,
+.form-grid input[type="file"] {
+    grid-column: span 2;
+}
+
+/* Labels styling */
+.form-grid p {
+    margin-bottom: 6px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #555;
+}
+
+/* Button styling */
+.form-container button {
+    /* background-color: #007bff; */
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+    grid-column: span 2;
+    transition: background-color 0.3s ease;
+}
+
+.form-container button:hover {
+    background-color: #0056b3;
+}
+
+/* Heading for the video preview section */
+.form-container h4 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+    grid-column: span 2;
+}
+
+/* Responsive layout */
+@media (max-width: 768px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-container button {
+        width: 100%;
+    }
+}

@@ -8,6 +8,7 @@ import Dashheader from "./Dashheader";
 import Subheader from "./Subheader";
 import Body1 from "./Body1";
 import Footer from "./Footer";
+import "./subcategory.css";
 import Bigvideobox from "./Bigvideobox";
 
 const Studentsdash = () => {

@@ -6,9 +6,12 @@ import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { useParams } from "react-router-dom";
 import Header from "./Header";
+import Footer from "./Footer";
 import "./admidash.css";
 import Videos from "./Videos";
-import Dashheader from "./Dashheader";
+import "./dasboardAdmin.css";
+import DitVideo from "./DitVideo";
+import "./dit.css";
 
 const Admindas = () => {
   const navigate = useNavigate();
@@ -118,6 +121,20 @@ const Admindas = () => {
     },
   });
 
+  const getstudent = (id) => {
+    console.log("Student ID:", id);
+
+    axios
+      .get(`http://localhost:5009/udemy/student/data/id/${id}`)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+        // toast.error("Failed to fetch course");
+      });
+  };
+
   const handleFileChange = (event) => {
     try {
       formik.setFieldValue("video_preview", event.currentTarget.files[0]);
@@ -155,156 +172,266 @@ const Admindas = () => {
   return (
     <>
       <ToastContainer />
-      <Dashheader />
+      <Header />
 
       <div className="postVideos">
         <h3>Welcome on board admins {realadmin[1]}</h3>
+        <div className="student-section">
+          <h3>Students List</h3>
+          <div className="student-grid">
+            {studentsdata.map((student, index) => (
+              <div className="student-card" key={index}>
+                <div className="student-image">
+                  <img
+                    src={`https://api.dicebear.com/6.x/avataaars/svg?seed=${student.username}`}
+                    alt={student.username}
+                  />
+                </div>
+                <div
+                  onClick={() => getstudent(student._id)}
+                  className="student-info"
+                >
+                  <h4>{student.username}</h4>
+                  <p>Location: {student.location || "Unknown"}</p>
+                  <p>Email: {student.email || "No email provided"}</p>
+                  <p>Role: {student.role || "No phone number"}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="form-container container-fluid">
+          <form onSubmit={formik.handleSubmit} encType="multipart/form-data">
+            <div className="form-grid">
+              {/* Form Title */}
+              <h2>Upload a Course</h2>
 
-        <h3>Students list</h3>
-        {studentsdata.map((student, index) => (
-          <p key={index}>
-            {index + 1}. {student.username}
-          </p>
-        ))}
+              {/* Title */}
+              <div className="form-group">
+                <label htmlFor="title" className="form-label">
+                  Title
+                </label>
+                <input
+                  type="text"
+                  id="title"
+                  name="title"
+                  className="form-control"
+                  placeholder="Enter course title"
+                  required
+                  onChange={formik.handleChange}
+                />
+              </div>
 
-        <form
-          action=""
-          onSubmit={formik.handleSubmit}
-          encType="multipart/form-data"
-        >
-          <p>Title</p>
-          <input
-            type="text"
-            required
-            placeholder="title"
-            name="title"
-            onChange={formik.handleChange}
-          />
-          <p>Sub-Title</p>
-          <input
-            type="text"
-            required
-            placeholder="subtitle"
-            name="sub_title"
-            onChange={formik.handleChange}
-          />
-          <p>Language</p>
-          <input
-            type="text"
-            required
-            placeholder="Language"
-            name="language"
-            onChange={formik.handleChange}
-          />
-          <p>Sub-language</p>
-          <input
-            type="text"
-            required
-            placeholder="sub-language"
-            name="sub_language"
-            onChange={formik.handleChange}
-          />
-          <p>category</p>
-          <input
-            type="text"
-            required
-            placeholder="category"
-            name="category"
-            onChange={formik.handleChange}
-          />
-          <p>sub-category</p>
-          <input
-            type="text"
-            required
-            placeholder="sub-category"
-            name="sub_category"
-            onChange={formik.handleChange}
-          />
-          <p>created by</p>
-          <input
-            type="text"
-            required
-            placeholder="created by"
-            name="createdBy"
-            onChange={formik.handleChange}
-          />
-          <p>What you will learn</p>
-          <input
-            type="text"
-            required
-            placeholder="What to learn"
-            name="learn"
-            onChange={formik.handleChange}
-          />
-          <p>Requirements</p>
-          <input
-            type="text"
-            required
-            placeholder="Requirement"
-            name="requirements"
-            onChange={formik.handleChange}
-          />
-          <p>Descriptions</p>
-          <textarea
-            rows="10"
-            cols="50"
-            id="textarea"
-            required
-            placeholder="Description"
-            name="description"
-            onChange={formik.handleChange}
-          ></textarea>
-          <p>Author's name</p>
-          <input
-            type="text"
-            required
-            placeholder="Authors name"
-            name="authors_name"
-            onChange={formik.handleChange}
-          />
-          <p>Price</p>
-          <input
-            type="number"
-            required
-            placeholder="Price"
-            name="price"
-            onChange={formik.handleChange}
-          />
-          <h4>Video Preview</h4>
-          <input
-            type="file"
-            name="video_preview"
-            accept="video/*"
-            onChange={handleFileChange}
-          />
+              {/* Sub-title */}
+              <div className="form-group">
+                <label htmlFor="sub_title" className="form-label">
+                  Sub-Title
+                </label>
+                <input
+                  type="text"
+                  id="sub_title"
+                  name="sub_title"
+                  className="form-control"
+                  placeholder="Enter course sub-title"
+                  required
+                  onChange={formik.handleChange}
+                />
+              </div>
 
-          <button type="submit">Next</button>
-        </form>
+              {/* Language */}
+              <div className="form-group">
+                <label htmlFor="language" className="form-label">
+                  Language
+                </label>
+                <input
+                  type="text"
+                  id="language"
+                  name="language"
+                  className="form-control"
+                  placeholder="Enter course language"
+                  required
+                  onChange={formik.handleChange}
+                />
+              </div>
+
+              {/* Sub-language */}
+              <div className="form-group">
+                <label htmlFor="sub_language" className="form-label">
+                  Sub-language
+                </label>
+                <input
+                  type="text"
+                  id="sub_language"
+                  name="sub_language"
+                  className="form-control"
+                  placeholder="Enter course sub-language"
+                  required
+                  onChange={formik.handleChange}
+                />
+              </div>
+
+              {/* Category */}
+              <div className="form-group">
+                <label htmlFor="category" className="form-label">
+                  Category
+                </label>
+                <input
+                  type="text"
+                  id="category"
+                  name="category"
+                  className="form-control"
+                  placeholder="Enter course category"
+                  required
+                  onChange={formik.handleChange}
+                />
+              </div>
+
+              {/* Sub-category */}
+              <div className="form-group">
+                <label htmlFor="sub_category" className="form-label">
+                  Sub-category
+                </label>
+                <input
+                  type="text"
+                  id="sub_category"
+                  name="sub_category"
+                  className="form-control"
+                  placeholder="Enter course sub-category"
+                  required
+                  onChange={formik.handleChange}
+                />
+              </div>
+
+              {/* Created By */}
+              <div className="form-group">
+                <label htmlFor="createdBy" className="form-label">
+                  Created by
+                </label>
+                <input
+                  type="text"
+                  id="createdBy"
+                  name="createdBy"
+                  className="form-control"
+                  placeholder="Enter creator's name"
+                  required
+                  onChange={formik.handleChange}
+                />
+              </div>
+
+              {/* What you will learn */}
+              <div className="form-group">
+                <label htmlFor="learn" className="form-label">
+                  What you will learn
+                </label>
+                <input
+                  type="text"
+                  id="learn"
+                  name="learn"
+                  className="form-control"
+                  placeholder="Enter what students will learn"
+                  required
+                  onChange={formik.handleChange}
+                />
+              </div>
+
+              {/* Requirements */}
+              <div className="form-group">
+                <label htmlFor="requirements" className="form-label">
+                  Requirements
+                </label>
+                <input
+                  type="text"
+                  id="requirements"
+                  name="requirements"
+                  className="form-control"
+                  placeholder="Enter course requirements"
+                  required
+                  onChange={formik.handleChange}
+                />
+              </div>
+
+              {/* Description */}
+              <div className="form-group">
+                <label htmlFor="description" className="form-label">
+                  Description
+                </label>
+                <textarea
+                  id="description"
+                  name="description"
+                  rows="4"
+                  className="form-control"
+                  placeholder="Enter course description"
+                  required
+                  onChange={formik.handleChange}
+                ></textarea>
+              </div>
+
+              {/* Author's name */}
+              <div className="form-group">
+                <label htmlFor="authors_name" className="form-label">
+                  Author's name
+                </label>
+                <input
+                  type="text"
+                  id="authors_name"
+                  name="authors_name"
+                  className="form-control"
+                  placeholder="Enter author's name"
+                  required
+                  onChange={formik.handleChange}
+                />
+              </div>
+
+              {/* Price */}
+              <div className="form-group">
+                <label htmlFor="price" className="form-label">
+                  Price
+                </label>
+                <input
+                  type="number"
+                  id="price"
+                  name="price"
+                  className="form-control"
+                  placeholder="Enter course price"
+                  required
+                  onChange={formik.handleChange}
+                />
+              </div>
+
+              {/* Video Preview */}
+              <div className="form-group">
+                <label htmlFor="video_preview" className="form-label">
+                  Video Preview
+                </label>
+                <input
+                  type="file"
+                  id="video_preview"
+                  name="video_preview"
+                  accept="video/*"
+                  className="form-control"
+                  onChange={handleFileChange}
+                />
+              </div>
+
+              {/* Submit Button */}
+              <div className="form-group text-center">
+                <button type="submit" className="btn btn-primary">
+                  Next
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
 
         <div className="Mainvideo">
           {video.map((courses, index) => (
             <div key={index} id="videos" className="videos">
               <p className="title">{courses.title}</p>
               <p className="authorName">{courses.authors_name}</p>
-              <p className="price">
-                {Naira} {courses.price}
-              </p>
-              <button onClick={() => Addvideos(courses)}>
+              <p className="price">₦ {courses.price}</p>
+              <button id="edit" onClick={() => Addvideos(courses)}>
                 Add more Videos
               </button>
-              {courses.videos.map((videoItem, videoIndex) => (
-                <div key={index} className="videoItem" id="videoItem">
-                  <video
-                    className="vidImage"
-                    src={videoItem.url}
-                    controls
-                  ></video>
-                  <h4 className="title">
-                    {sub} {videoItem.sub_title}
-                  </h4>
-                </div>
-              ))}
-
               <button id="edit" onClick={() => Editcourse(courses)}>
                 Edit course
               </button>
@@ -312,6 +439,7 @@ const Admindas = () => {
           ))}
         </div>
       </div>
+      <Footer />
     </>
   );
 };

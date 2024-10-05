@@ -4,6 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { useParams } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { PaystackButton } from "react-paystack";
+import "./subcategory.css";
 
 const Subcat = () => {
   const { courseId } = useParams();
