@@ -133,6 +133,7 @@ const Admindas = () => {
         console.log(err);
         // toast.error("Failed to fetch course");
       });
+    navigate(`/studentlist/${id}`);
   };
 
   const handleFileChange = (event) => {

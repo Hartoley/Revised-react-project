@@ -11,9 +11,11 @@ import Footer from "./Footer";
 
 const DitVideo = () => {
   const [videos, setVideos] = useState([]);
+  const [boughtBy, setboughtBy] = useState([]);
   const [course, setCourse] = useState({});
   const { courseId } = useParams();
   const [preview, setPreview] = useState("");
+  const [count, setcount] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -25,6 +27,17 @@ const DitVideo = () => {
         setCourse(res.data);
         setPreview(res.data.previewVideo);
         setVideos(res.data.videos);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    axios
+      .get(`http://localhost:5009/udemy/student/getStudents/${courseId}`)
+      .then((res) => {
+        setcount(res.data.count);
+        setboughtBy(res.data.students);
+        console.log(res);
       })
       .catch((error) => {
         console.log(error);
@@ -52,6 +65,11 @@ const DitVideo = () => {
         <h3 className="course-title">{course.title}</h3>
         <p className="author-name">Author: {course.authors_name}</p>
         <p className="price">₦ {course.price}</p>
+        <h4 className="subtitle">Sections: {videos.length}</h4>
+        <h4 className="subtitle">
+          Registered By: {count}{" "}
+          <span>{count > 1 ? "Students" : "Student"}</span>
+        </h4>
 
         <button
           className="btn btn-custom"

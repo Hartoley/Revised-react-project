@@ -12,6 +12,7 @@ import Updatecourse from "./Udatecourse";
 import Certificate from "./Certificate";
 import Landing from "./Landing";
 import DitVideo from "./DitVideo";
+import StudentList from "./Studentlist";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route path="/course/:id/:courseId" element={<Subcategory />} />
         <Route path="/editcourse/:courseId" element={<Updatecourse />} />
         <Route path="/editOne/:courseId" element={<DitVideo />} />
+        <Route path="/studentlist/:id" element={<StudentList />} />
         <Route path="*" element={<Navigate to="/students/login" replace />} />
         <Route
           path="/download/certificate/:courseId/:id"
