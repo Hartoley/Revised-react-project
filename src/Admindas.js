@@ -159,7 +159,9 @@ const Admindas = () => {
 
   const Addvideos = (courses) => {
     let courseId = courses._id;
-    navigate(`/uploadVideo/${courseId}`);
+    navigate(`/editOne/${courseId}`);
+
+    // navigate(`/uploadVideo/${courseId}`);
   };
 
   const Editcourse = (courses) => {
@@ -429,16 +431,14 @@ const Admindas = () => {
               <p className="title">{courses.title}</p>
               <p className="authorName">{courses.authors_name}</p>
               <p className="price">₦ {courses.price}</p>
-              <button id="edit" onClick={() => Addvideos(courses)}>
-                Add more Videos
-              </button>
               <button id="edit" onClick={() => Editcourse(courses)}>
-                Edit course
+                Preview
               </button>
             </div>
           ))}
         </div>
       </div>
+
       <Footer />
     </>
   );

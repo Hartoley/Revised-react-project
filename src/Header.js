@@ -1,5 +1,5 @@
 import React from "react";
-import "./students.css";
+import styles from "./students.module.css";
 import logo from "./Images/new Udemy.png";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -21,49 +21,45 @@ const Header = () => {
 
   return (
     <>
-      <div className="headers" id="header">
-        <div className="imageCon">
-          <img className="logo" src={logo} alt="" />
+      <div className={styles.headers} id="header">
+        <div className={styles.imageCon}>
+          <img className={styles.logo} src={logo} alt="" />
         </div>
-        <div className="main">
-          <div className="dropdown">
+        <div className={styles.main}>
+          <div className={styles.dropdown}>
             <p>Categories</p>
-            <div className="dropdownContent">
+            <div className={styles.dropdownContent}>
               <p>Hello World</p>
               <p>Hello World</p>
               <p>Hello World</p>
               <p>Hello World</p>
             </div>
           </div>
-          <div className="search">
-            <span class="material-symbols-outlined" id="searchLogo">
+          <div className={styles.search}>
+            <span className="material-symbols-outlined" id="searchLogo">
               search
             </span>
             <input type="text" placeholder="Search for anything" />
           </div>
-          <div className="dropdown">
+          <div className={styles.dropdown}>
             <p>Udemy Business</p>
           </div>
-          <div className="dropdown">
+          <div className={styles.dropdown}>
             <p>Teach on Udemy</p>
           </div>
-          <div className="cart">
-            <span class="material-symbols-outlined">shopping_cart</span>
+          <div className={styles.cart}>
+            <span className="material-symbols-outlined">shopping_cart</span>
           </div>
-          <button onClick={login} className="buttonSignup">
+          <button onClick={login} className={styles.buttonSignup}>
             Log in
           </button>
-          <button onClick={signup} className="buttonLogin">
+          <button onClick={signup} className={styles.buttonLogin}>
             Sign up
           </button>
-          <div className="globeBox">
-            <span class="material-symbols-outlined">language</span>
+          <div className={styles.globeBox}>
+            <span className="material-symbols-outlined">language</span>
           </div>
         </div>
-
-        {/* <span className='menu material-symbols-outlined' onClick={toggleMenu}>
-              menu
-              </span> */}
       </div>
     </>
   );

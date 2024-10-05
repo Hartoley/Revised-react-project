@@ -2,26 +2,34 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import { useParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-toastify/dist/ReactToastify.css";
 import "./dit.css";
-import "./App.css";
+import Dashheader from "./Dashheader";
+import Footer from "./Footer";
 
-const App = () => {
+const DitVideo = () => {
   const [videos, setVideos] = useState([]);
+  const [course, setCourse] = useState({});
+  const { courseId } = useParams();
+  const [preview, setPreview] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
     axios
-      .get("https://react-node-project-1.onrender.com/courses/getallcourses")
+      .get(
+        `https://react-node-project-1.onrender.com/courses/course/${courseId}`
+      )
       .then((res) => {
-        setVideos(res.data);
+        setCourse(res.data);
+        setPreview(res.data.previewVideo);
+        setVideos(res.data.videos);
       })
-      .catch((err) => {
-        console.error(err);
-        toast.error("Failed to fetch courses");
+      .catch((error) => {
+        console.log(error);
       });
-  }, []);
+  }, [courseId]);
 
   const AddVideos = (courseId) => {
     navigate(`/uploadVideo/${courseId}`);
@@ -32,46 +40,49 @@ const App = () => {
   };
 
   return (
-    <div className="container">
-      <div className="header-section">
-        <h1 className="header-title">Course Video Management</h1>
-        <p>Manage all your uploaded courses and videos here</p>
+    <div className="family-div">
+      <Dashheader />
+      {/* Preview Section */}
+      <div className="video-preview">
+        <video src={preview} controls className="preview-video"></video>
       </div>
-      <div className="row">
-        {videos.map((course, index) => (
-          <div className="col-lg-4 col-md-6 col-sm-12" key={index}>
-            <div className="video-card">
-              <p className="title">{course.title}</p>
-              <p className="authorName">Author: {course.authors_name}</p>
-              <p className="price">₦ {course.price}</p>
-              <button
-                className="btn btn-custom mb-3"
-                onClick={() => AddVideos(course._id)}
-              >
-                Add More Videos
-              </button>
 
-              {course.videos &&
-                course.videos.map((videoItem, videoIndex) => (
-                  <div key={videoIndex} className="videoItem">
-                    <video src={videoItem.url} controls></video>
-                    <h4 className="title">Subtitle: {videoItem.sub_title}</h4>
-                  </div>
-                ))}
+      {/* Course Info */}
+      <div className="course-info text-center">
+        <h3 className="course-title">{course.title}</h3>
+        <p className="author-name">Author: {course.authors_name}</p>
+        <p className="price">₦ {course.price}</p>
 
-              <button
-                className="btn btn-custom"
-                onClick={() => EditCourse(course._id)}
-              >
-                Edit Course
-              </button>
+        <button
+          className="btn btn-custom"
+          onClick={() => AddVideos(course._id)}
+        >
+          Add More Videos
+        </button>
+
+        <button
+          className="btn btn-custom"
+          onClick={() => EditCourse(course._id)}
+        >
+          Edit Course
+        </button>
+      </div>
+
+      {/* Video Grid Section */}
+      <div className="video-grid">
+        {videos &&
+          videos.map((videoItem, index) => (
+            <div key={index} className="video-item">
+              <video src={videoItem.url} controls className="sub-video"></video>
+              <h4 className="subtitle">Subtitle: {videoItem.sub_title}</h4>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
+
       <ToastContainer />
+      <Footer />
     </div>
   );
 };
 
-export default App;
+export default DitVideo;
