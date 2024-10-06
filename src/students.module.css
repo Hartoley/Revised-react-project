@@ -191,17 +191,42 @@
 
 
 @media (max-width: 768px) {
+    .headers {
+        /* Just for testing, change color */
+        height: 10vh;
+        /* Reduce header height for smaller screens */
+        padding: 0 10px;
+    }
+
     .main {
         display: none;
+        /* Hide the main content for smaller screens */
     }
 
     .imageCon {
-        /* background-color: red; */
         width: 30%;
     }
 
-
     .menu {
         display: block;
+        /* Make the mobile menu button visible */
+    }
+
+    .mobile-menu {
+        display: flex;
+        /* Show the mobile menu */
+        flex-direction: column;
+        background-color: white;
+        position: absolute;
+        top: 10vh;
+        left: 0;
+        width: 100%;
+        box-shadow: 0px 0.5px 10px 1px rgb(142, 139, 139);
+        z-index: 1000;
+    }
+
+    .mobile-menu .dropDown {
+        padding: 10px;
+        border-bottom: 1px solid #e0e0e0;
     }
 }

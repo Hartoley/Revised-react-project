@@ -1,12 +1,13 @@
-import React, { useState } from "react";
-// import "./dashheader.css";
+import React, { useState, useEffect } from "react";
+import "./dashheader.css";
 import logo from "./Images/new Udemy.png";
 
 const Dashheader = () => {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const storedId = localStorage.getItem("id");
   const id = JSON.parse(storedId);
-  const [showMenu, setshowMenu] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
+  const [headerMargin, setHeaderMargin] = useState("0");
 
   const logout = () => {
     localStorage.removeItem("id");
@@ -16,12 +17,37 @@ const Dashheader = () => {
 
   const toggleMenu = () => {
     setIsMenuVisible((prev) => !prev);
-    setshowMenu((prev) => !prev);
+    setShowMenu((prev) => !prev);
   };
+
+  // Media query logic for screen width <= 760px
+  useEffect(() => {
+    const updateHeaderMargin = () => {
+      if (window.innerWidth <= 760) {
+        setHeaderMargin("5vh");
+      } else {
+        setHeaderMargin("0");
+      }
+    };
+
+    // Update margin when the component mounts
+    updateHeaderMargin();
+
+    // Update margin when the window is resized
+    window.addEventListener("resize", updateHeaderMargin);
+
+    return () => {
+      window.removeEventListener("resize", updateHeaderMargin);
+    };
+  }, []);
 
   return (
     <>
-      <div className="headers" id="header">
+      <div
+        className="headers"
+        id="header"
+        style={{ marginBottom: headerMargin }}
+      >
         <div className="imageCon">
           <img className="logo" src={logo} alt="Udemy Logo" />
         </div>
@@ -42,7 +68,6 @@ const Dashheader = () => {
               gap: "1rem",
               left: "0%",
               fontSize: "14px",
-              // backgroundColor: "red",
             }}
           >
             <p>Udemy Business</p>
@@ -78,28 +103,28 @@ const Dashheader = () => {
               left: "60vw",
               width: "40vw",
               height: "auto",
-              fontSize: "14px", // Increased font size
-              lineHeight: "20px", // Increased line height
-              padding: "10px 15px", // Increased padding
-              border: "solid 0.5px rgb(135, 137, 138)", // Thicker border for visibility
+              fontSize: "14px",
+              lineHeight: "20px",
+              padding: "10px 15px",
+              border: "solid 0.5px rgb(135, 137, 138)",
               top: "10vh",
-              boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Added shadow for depth
-              transition: "all 0.3s ease", // Smooth transition for hover effects
+              boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+              transition: "all 0.3s ease",
             }}
           >
             <p
               style={{
-                margin: "10px 0", // Spacing between menu items
+                margin: "10px 0",
                 cursor: "pointer",
-                transition: "color 0.3s, transform 0.3s", // Smooth transition for hover effects
+                transition: "color 0.3s, transform 0.3s",
               }}
               onMouseEnter={(e) => {
-                e.target.style.color = "#007BFF"; // Hover color
-                e.target.style.transform = "scale(1.05)"; // Slight zoom
+                e.target.style.color = "#007BFF";
+                e.target.style.transform = "scale(1.05)";
               }}
               onMouseLeave={(e) => {
-                e.target.style.color = ""; // Reset hover color
-                e.target.style.transform = "scale(1)"; // Reset zoom
+                e.target.style.color = "";
+                e.target.style.transform = "scale(1)";
               }}
             >
               Udemy Business
@@ -175,17 +200,17 @@ const Dashheader = () => {
             <div
               onClick={logout}
               style={{
-                marginTop: "15px", // Space above logout
+                marginTop: "15px",
                 cursor: "pointer",
                 transition: "color 0.3s, transform 0.3s",
               }}
               onMouseEnter={(e) => {
-                e.target.style.color = "#ff4d4d"; // Hover color for logout
-                e.target.style.transform = "scale(1.1)"; // Slight zoom on hover
+                e.target.style.color = "#ff4d4d";
+                e.target.style.transform = "scale(1.1)";
               }}
               onMouseLeave={(e) => {
-                e.target.style.color = ""; // Reset hover color
-                e.target.style.transform = "scale(1)"; // Reset zoom
+                e.target.style.color = "";
+                e.target.style.transform = "scale(1)";
               }}
             >
               Logout

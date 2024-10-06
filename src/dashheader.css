@@ -203,6 +203,14 @@
       display: none;
     }
 
+           .headers{
+               /* Just for testing, change color */
+               height: 10vh;
+               /* Reduce header height for smaller screens */
+               padding: 0 10px;
+               
+           }
+
     .imageCon{
         /* background-color: red; */
         width: 30%;

@@ -77,7 +77,7 @@ const Header = () => {
             style={{
               position: "absolute",
               backgroundColor: "white",
-              left: "10vw",
+              left: "10%",
               width: "20vw",
               height: "auto",
               fontSize: "14px",
@@ -89,8 +89,8 @@ const Header = () => {
               transition: "all 0.3s ease",
               zIndex: "999", // Ensures it's above other elements
               ...(window.innerWidth <= 600 && {
-                left: "10vw", // Shifted more center on smaller screens
-                width: "80vw", // Take up more space on smaller screens
+                left: "50vw", // Shifted more center on smaller screens
+                width: "50vw", // Take up more space on smaller screens
                 fontSize: "12px", // Reduce font size for better fit
                 padding: "8px 12px",
               }),
