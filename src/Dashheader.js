@@ -71,15 +71,132 @@ const Dashheader = () => {
           menu
         </span>
         {showMenu && (
-          <div className="menuitem">
-            <p>Udemy Business</p>
-            <p>Search</p>
-            <p>My learning</p>
-            <p>Favorite</p>
-            <p>Shopping cart</p>
-            <div onClick={logout} className="cart1">
+          <div
+            style={{
+              position: "absolute",
+              backgroundColor: "white",
+              left: "60vw",
+              width: "40vw",
+              height: "auto",
+              fontSize: "14px", // Increased font size
+              lineHeight: "20px", // Increased line height
+              padding: "10px 15px", // Increased padding
+              border: "solid 0.5px rgb(135, 137, 138)", // Thicker border for visibility
+              top: "10vh",
+              boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Added shadow for depth
+              transition: "all 0.3s ease", // Smooth transition for hover effects
+            }}
+          >
+            <p
+              style={{
+                margin: "10px 0", // Spacing between menu items
+                cursor: "pointer",
+                transition: "color 0.3s, transform 0.3s", // Smooth transition for hover effects
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.color = "#007BFF"; // Hover color
+                e.target.style.transform = "scale(1.05)"; // Slight zoom
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.color = ""; // Reset hover color
+                e.target.style.transform = "scale(1)"; // Reset zoom
+              }}
+            >
+              Udemy Business
+            </p>
+            <p
+              style={{
+                margin: "10px 0",
+                cursor: "pointer",
+                transition: "color 0.3s, transform 0.3s",
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.color = "#007BFF";
+                e.target.style.transform = "scale(1.05)";
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.color = "";
+                e.target.style.transform = "scale(1)";
+              }}
+            >
+              Search
+            </p>
+            <p
+              style={{
+                margin: "10px 0",
+                cursor: "pointer",
+                transition: "color 0.3s, transform 0.3s",
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.color = "#007BFF";
+                e.target.style.transform = "scale(1.05)";
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.color = "";
+                e.target.style.transform = "scale(1)";
+              }}
+            >
+              My learning
+            </p>
+            <p
+              style={{
+                margin: "10px 0",
+                cursor: "pointer",
+                transition: "color 0.3s, transform 0.3s",
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.color = "#007BFF";
+                e.target.style.transform = "scale(1.05)";
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.color = "";
+                e.target.style.transform = "scale(1)";
+              }}
+            >
+              Favorite
+            </p>
+            <p
+              style={{
+                margin: "10px 0",
+                cursor: "pointer",
+                transition: "color 0.3s, transform 0.3s",
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.color = "#007BFF";
+                e.target.style.transform = "scale(1.05)";
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.color = "";
+                e.target.style.transform = "scale(1)";
+              }}
+            >
+              Shopping cart
+            </p>
+            <div
+              onClick={logout}
+              style={{
+                marginTop: "15px", // Space above logout
+                cursor: "pointer",
+                transition: "color 0.3s, transform 0.3s",
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.color = "#ff4d4d"; // Hover color for logout
+                e.target.style.transform = "scale(1.1)"; // Slight zoom on hover
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.color = ""; // Reset hover color
+                e.target.style.transform = "scale(1)"; // Reset zoom
+              }}
+            >
               Logout
-              <span className="material-symbols-outlined">logout</span>
+              <span
+                style={{
+                  fontSize: "14px",
+                }}
+                className="material-symbols-outlined"
+              >
+                logout
+              </span>
             </div>
           </div>
         )}
