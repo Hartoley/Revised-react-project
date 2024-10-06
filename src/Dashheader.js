@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import "./dashheader.css";
+// import "./dashheader.css";
 import logo from "./Images/new Udemy.png";
-import { ToastContainer, toast } from "react-toastify";
 
 const Dashheader = () => {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
@@ -12,7 +11,7 @@ const Dashheader = () => {
   const logout = () => {
     localStorage.removeItem("id");
     window.location.href = "/students/login";
-    toast.success("Log out successful!");
+    // Removed the toast notification
   };
 
   const toggleMenu = () => {
@@ -27,32 +26,30 @@ const Dashheader = () => {
           <img className="logo" src={logo} alt="Udemy Logo" />
         </div>
         <div className="main">
-          <div className="dropdown">
-            <p>Categories</p>
-            {isMenuVisible && (
-              <div className="dropdownContent">
-                <p>Hello World</p>
-                <p>Hello World</p>
-                <p>Hello World</p>
-                <p>Hello World</p>
-              </div>
-            )}
-          </div>
           <div className="search">
             <span className="material-symbols-outlined" id="searchLogo">
               search
             </span>
             <input type="text" placeholder="Search for anything" />
           </div>
-          <div className="dropdown">
+          <div
+            className="carried"
+            style={{
+              height: "100%",
+              display: "flex",
+              alignItems: "center",
+              width: "28%",
+              gap: "1rem",
+              left: "0%",
+              fontSize: "14px",
+              // backgroundColor: "red",
+            }}
+          >
             <p>Udemy Business</p>
-          </div>
-          <div className="dropdown">
             <p>Teach on Udemy</p>
-          </div>
-          <div className="dropdown">
             <p>My learning</p>
           </div>
+
           <div className="cart">
             <span className="material-symbols-outlined">shopping_cart</span>
           </div>
@@ -87,7 +84,6 @@ const Dashheader = () => {
           </div>
         )}
       </div>
-      <ToastContainer />
     </>
   );
 };

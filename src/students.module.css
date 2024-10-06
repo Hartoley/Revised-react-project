@@ -31,6 +31,18 @@
     display: none;
 }
 
+.carier{
+    height: 100%;
+    display: flex ;
+    align-items: center;
+    position:relative;
+    width: 25%;
+    gap: 1rem;
+    left: 0%;
+    /* background-color: red; */
+    
+}
+
 /* students.css */
 #header {
     position: fixed;
@@ -62,18 +74,17 @@
     height: 45%;
 }
 
-.dropdown {
+.dropDown {
     /* background-color: aqua; */
     height: 50%;
     margin-top: 15px;
-    position: absolute;
     Font-size: 14px;
     Font-weight: 400;
     Line-height: 19.6px;
 }
 
-.dropdownContent {
-    background-color: red;
+.dropDownContent {
+    background-color: white;
     margin-top: 30px;
     display: none;
     Font-size: 14px;
@@ -173,7 +184,7 @@
     /* Ensure it's on top of other elements */
 }
 
-.mobile-menu .dropdown {
+.mobile-menu .dropDown {
     padding: 10px;
     border-bottom: 1px solid #e0e0e0;
 }

@@ -13,6 +13,7 @@ import "./dasboardAdmin.css";
 import DitVideo from "./DitVideo";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import "./dit.css";
+import Dashheader from "./Dashheader";
 
 const Admindas = () => {
   const navigate = useNavigate();
@@ -166,7 +167,7 @@ const Admindas = () => {
   return (
     <>
       <ToastContainer />
-      <Header />
+      <Dashheader />
 
       <div className="postVideos">
         <h3>Welcome on board admins {realadmin[1]}</h3>

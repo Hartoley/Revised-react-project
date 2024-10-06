@@ -26,29 +26,31 @@ const Header = () => {
           <img className={styles.logo} src={logo} alt="" />
         </div>
         <div className={styles.main}>
-          <div className={styles.dropdown}>
+          {/* <div className={styles.dropDown}>
             <p>Categories</p>
-            <div className={styles.dropdownContent}>
+            <div className={styles.dropDownContent}>
               <p>Hello World</p>
               <p>Hello World</p>
               <p>Hello World</p>
               <p>Hello World</p>
             </div>
-          </div>
+          </div> */}
           <div className={styles.search}>
             <span className="material-symbols-outlined" id="searchLogo">
               search
             </span>
             <input type="text" placeholder="Search for anything" />
           </div>
-          <div className={styles.dropdown}>
-            <p>Udemy Business</p>
-          </div>
-          <div className={styles.dropdown}>
-            <p>Teach on Udemy</p>
-          </div>
-          <div className={styles.cart}>
-            <span className="material-symbols-outlined">shopping_cart</span>
+          <div className={styles.carier}>
+            <div className={styles.dropDown}>
+              <p>Udemy Business</p>
+            </div>
+            <div className={styles.dropDown}>
+              <p>Teach on Udemy</p>
+            </div>
+            <div className={styles.cart}>
+              <span className="material-symbols-outlined">shopping_cart</span>
+            </div>
           </div>
           <button onClick={login} className={styles.buttonSignup}>
             Log in
