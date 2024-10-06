@@ -123,16 +123,6 @@ const Admindas = () => {
 
   const getstudent = (id) => {
     console.log("Student ID:", id);
-
-    axios
-      .get(`http://localhost:5009/udemy/student/data/id/${id}`)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-        // toast.error("Failed to fetch course");
-      });
     navigate(`/studentlist/${id}`);
   };
 
@@ -170,7 +160,7 @@ const Admindas = () => {
     navigate(`/editcourse/${courseId}`);
   };
 
-  console.log(studentsdata);
+  // console.log(studentsdata);
 
   return (
     <>

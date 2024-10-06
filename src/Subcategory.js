@@ -31,6 +31,9 @@ const Subcategory = () => {
   const [userData, setUserData] = useState({});
   let [statusText, setStatusText] = useState("");
   let [certificationStatus, setcertification] = useState("");
+  const [currentIndex, setCurrentIndex] = useState(0); // To track the current video index
+  const [playVideoUrl, setPlayVideoUrl] = useState(null); // To store the video URL
+
   const navigate = useNavigate();
   let [isEligibleForDownload, setIsEligibleForDownload] = useState(false);
 
@@ -172,12 +175,20 @@ const Subcategory = () => {
 
   useEffect(() => {
     console.log("Is Eligible for Download:", isEligibleForDownload);
+    axios
+      .post("http://localhost:5009/udemy/student/certification", {
+        userId: id,
+        courseId: courseId,
+      })
+      .then((res) => {
+        // console.log(res);
+      });
   }, [isEligibleForDownload]);
 
   const certified = async (courseId) => {
     try {
       const response = await axios.post(
-        "https://react-node-project-1.onrender.com/udemy/student/certification",
+        "http://localhost:5009/udemy/student/certification",
         {
           userId: id,
           courseId: courseId,
@@ -186,6 +197,8 @@ const Subcategory = () => {
 
       if (response.data.success) {
         // alert(response.data.message);
+        console.log(response);
+
         setcertification(response.data.message);
         setIsEligibleForDownload(true);
       } else {
