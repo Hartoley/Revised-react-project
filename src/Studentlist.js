@@ -12,7 +12,9 @@ const StudentList = () => {
   // Fetch student data
   useEffect(() => {
     axios
-      .get(`http://localhost:5009/udemy/student/data/id/${id}`)
+      .get(
+        `https://react-node-project-1.onrender.com/udemy/student/data/id/${id}`
+      )
       .then((res) => {
         console.log(res.data);
         setstudentsdata(res.data.studentDetails);

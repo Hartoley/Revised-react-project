@@ -33,7 +33,9 @@ const DitVideo = () => {
       });
 
     axios
-      .get(`http://localhost:5009/udemy/student/getStudents/${courseId}`)
+      .get(
+        `https://react-node-project-1.onrender.com/student/getStudents/${courseId}`
+      )
       .then((res) => {
         setcount(res.data.count);
         setboughtBy(res.data.students);

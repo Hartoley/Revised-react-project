@@ -11,6 +11,7 @@ import "./admidash.css";
 import Videos from "./Videos";
 import "./dasboardAdmin.css";
 import DitVideo from "./DitVideo";
+import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import "./dit.css";
 
 const Admindas = () => {
@@ -415,19 +416,34 @@ const Admindas = () => {
             </div>
           </form>
         </div>
-
-        <div className="Mainvideo">
-          {video.map((courses, index) => (
-            <div key={index} id="videos" className="videos">
-              <p className="title">{courses.title}</p>
-              <p className="authorName">{courses.authors_name}</p>
-              <p className="price">₦ {courses.price}</p>
-              <button id="edit" onClick={() => Addvideos(courses)}>
-                Preview
-              </button>
-            </div>
-          ))}
-        </div>
+        <Container className="mt-5">
+          <h2 className="text-center mb-4">Course Section</h2>
+          <Row>
+            {video.map((courses, index) => (
+              <Col key={index} md={4} sm={6} className="mb-4">
+                <Card className="h-100">
+                  <Card.Body>
+                    <Card.Title className="title">{courses.title}</Card.Title>
+                    <Card.Text className="authorName">
+                      <strong>Author:</strong> {courses.authors_name}
+                    </Card.Text>
+                    <Card.Text className="price">
+                      <strong>Price:</strong> ₦ {courses.price}
+                    </Card.Text>
+                    <Button
+                      id="edit"
+                      variant="primary"
+                      onClick={() => Addvideos(courses)}
+                      className="w-100"
+                    >
+                      Preview
+                    </Button>
+                  </Card.Body>
+                </Card>
+              </Col>
+            ))}
+          </Row>
+        </Container>
       </div>
 
       <Footer />
