@@ -275,6 +275,7 @@ const Subcategory = () => {
               {playvideo && (
                 <div className="videoPlayer">
                   <video
+                    controls
                     ref={videoElementRef}
                     onPlay={() =>
                       handlePlay(
