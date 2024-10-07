@@ -214,10 +214,13 @@ const Subcategory = () => {
   useEffect(() => {
     console.log("Is Eligible for Download:", isEligibleForDownload);
     axios
-      .post("http://localhost:5009/udemy/student/certification", {
-        userId: id,
-        courseId: courseId,
-      })
+      .post(
+        "https://react-node-project-1.onrender.com/udemy/student/certification",
+        {
+          userId: id,
+          courseId: courseId,
+        }
+      )
       .then((res) => {
         // console.log(res);
       });
@@ -226,7 +229,7 @@ const Subcategory = () => {
   const certified = async (courseId) => {
     try {
       const response = await axios.post(
-        "http://localhost:5009/udemy/student/certification",
+        "https://react-node-project-1.onrender.com/udemy/student/certification",
         {
           userId: id,
           courseId: courseId,
