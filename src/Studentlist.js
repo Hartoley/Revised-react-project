@@ -34,11 +34,11 @@ const StudentList = () => {
   return (
     <>
       <Adminheader />
-      <div className="h-50"></div>
+      <div style={{ height: "11vh" }}></div>
       <Container className="mt-5">
-        <h2 className="mb-4 text-center">
+        <h4 className="mb-4 text-center">
           Student: {studentsdata ? studentsdata.username : "Loading..."}
-        </h2>
+        </h4>
 
         {noProgressCourses.length === 0 && (
           <Alert variant="info" className="text-center">
