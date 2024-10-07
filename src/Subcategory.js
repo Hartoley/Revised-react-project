@@ -33,11 +33,12 @@ const Subcategory = () => {
   let [videosID, setvideosID] = useState(null);
   let [certificationStatus, setcertification] = useState("");
   let [isPlaying, setIsPlaying] = useState(false);
-  const [currentIndex, setCurrentIndex] = useState(0); // To track the current video index
-  const [playVideoUrl, setPlayVideoUrl] = useState(null); // To store the video URL
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [playVideoUrl, setPlayVideoUrl] = useState(null);
 
   const navigate = useNavigate();
   let [isEligibleForDownload, setIsEligibleForDownload] = useState(false);
+  let [isPaused, setIsPaused] = useState(true);
 
   useEffect(() => {
     // console.log('Is Eligible for Download:', isEligibleForDownload);
@@ -113,6 +114,18 @@ const Subcategory = () => {
     } else {
       toast.info("You have reached the first video.");
       console.log("You have reached the first video.");
+    }
+  };
+
+  const playPauseVideo = () => {
+    const videoElement = document.querySelector("video");
+
+    if (isPaused && videoElement) {
+      videoElement.play();
+      setIsPaused(false);
+    } else if (videoElement) {
+      videoElement.pause();
+      setIsPaused(true);
     }
   };
 
@@ -288,7 +301,12 @@ const Subcategory = () => {
                 <span onClick={stop} class="material-symbols-outlined">
                   stop_circle
                 </span>
-                <span class="material-symbols-outlined">play_arrow</span>
+                <span
+                  onClick={playPauseVideo}
+                  className="material-symbols-outlined"
+                >
+                  {isPaused ? "play_circle" : "pause_circle"}
+                </span>
                 <span class="material-symbols-outlined">
                   <span onClick={next} class="material-symbols-outlined">
                     skip_next
