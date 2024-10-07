@@ -18,7 +18,7 @@ import Dashheader from "./Dashheader";
 const Admindas = () => {
   const navigate = useNavigate();
   const [studentsdata, setstudentsdata] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [realadmin, setrealadmin] = useState({});
   const [video, setvideo] = useState([]);
   const [learn, setlearn] = useState([]);
@@ -46,7 +46,7 @@ const Admindas = () => {
         // console.log(res.data);
         setrealadmin(Object.values(res.data));
         // console.log(realadmin);
-        setLoading(true);
+        setLoading(false);
         toast.dismiss();
       })
       .catch((error) => {
