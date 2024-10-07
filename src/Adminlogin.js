@@ -19,8 +19,7 @@ const Adminlogin = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5009/admin/getdata`)
-      // axios.get(`${endpoint}/admin/getdata`)
+      .get(`${endpoint}/admin/getdata`)
       .then((res) => {
         // console.log("Admin data from API:", res.data);
         setloggedin(res.data);
@@ -41,7 +40,7 @@ const Adminlogin = () => {
 
       if (loggedinadmin) {
         axios
-          .post(`http://localhost:5009/admin/login`, value)
+          .post(`https://react-node-project-1.onrender.com/admin/login`, value)
           .then((res) => {
             let id = `${loggedinadmin._id}`;
 

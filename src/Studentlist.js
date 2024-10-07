@@ -26,8 +26,8 @@ const StudentList = () => {
       });
   }, [id]);
 
-  console.log("Student ID:", id);
-  console.log(studentsdata);
+  // console.log("Student ID:", id);
+  // console.log(studentsdata);
 
   return (
     <Container className="mt-5">

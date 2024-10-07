@@ -124,7 +124,7 @@ const Admindas = () => {
   });
 
   const getstudent = (id) => {
-    console.log("Student ID:", id);
+    // console.log("Student ID:", id);
     navigate(`/studentlist/${id}`);
   };
 
