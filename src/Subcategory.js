@@ -393,10 +393,11 @@ const Subcategory = () => {
             <div className="subb1">
               <p className="subbtext" id="subtext">
                 {videos.length}
-                <span>Sections</span>
+                <span>{videos.length > 1 ? "Sections" : "Section"}</span>
               </p>
             </div>
-            <div className="sub2">
+
+            <div className="sub2" id="sub2">
               {videos.map((videoItem, index) => (
                 <div key={index} className="videoItem">
                   <div
@@ -409,12 +410,6 @@ const Subcategory = () => {
                       </span>
                       {videoItem.sub_title}
                     </h4>
-                    {videoItem.duration && (
-                      <span className="duration">
-                        {" "}
-                        ({Math.floor(videoItem.duration / 60)} min){" "}
-                      </span>
-                    )}
                   </div>
                 </div>
               ))}

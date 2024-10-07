@@ -109,56 +109,56 @@ const Certificate = () => {
   };
 
   return (
-    <div className="Mainvideos4">
-      <div
-        ref={certificateRef}
-        className="showCertificate"
-        id="showCertificate123"
-      >
-        <h3 className="certificate-title">CERTIFICATE OF COMPLETION</h3>
-        <div className="certificate-content">
-          <p className="certificate-name">{name}</p>
-          <p className="certificate-details">{courseTitle}</p>
-          <p className="certificate-course">
-            Congratulations on completing the of <span>{courseTitle}</span>
-            Your dedication and hard work have truly paid off. We are proud of
-            your achievement and excited to see how you'll apply your new
-            skills!
-          </p>
+    <>
+      <div className="Mainvideos4">
+        <div
+          ref={certificateRef}
+          className="showCertificate"
+          id="showCertificate123"
+        >
+          <h3 className="certificate-title">CERTIFICATE OF COMPLETION</h3>
+          <div className="certificate-content">
+            <p className="certificate-name">{name}</p>
+            <p className="certificate-details">{courseTitle}</p>
+            <p className="certificate-course">
+              Congratulations on completing the <span>{courseTitle}</span>. Your
+              dedication and hard work have truly paid off. We are proud of your
+              achievement and excited to see how you'll apply your new skills!
+            </p>
 
-          <div className="instructors-div">
-            <div className="certificate-instructors">
-              <p>{course.createdBy}</p>
-              <p>Virtual Teacher</p>
+            <div className="instructors-div">
+              <div className="certificate-instructors">
+                <p>{course.createdBy}</p>
+                <p>Virtual Teacher</p>
+              </div>
+              <div className="certificate-instructors">
+                <p>{course.authors_name}</p>
+                <p>Virtual Instructor</p>
+              </div>
             </div>
             <div className="certificate-instructors">
-              <p>{course.authors_name}</p>
-              <p>Virtual Instructor</p>
+              <p>{currentDate}</p>
+              <p>Date</p>
             </div>
           </div>
-          <div className="certificate-instructors">
-            <p>{currentDate}</p>
-            <p>Date</p>
-          </div>
-        </div>
-        <div className="carrier">
-          <div className="certificate-signature">
-            <img className="signature" src={signature} alt="Signature" />
-            <p>Instructor Signature</p>
-          </div>
-          <div className="certificate-buttons"></div>
-        </div>
 
-        <div className="buttons">
-          <button className="btn-download" onClick={handleDownload}>
-            Download Certificate
-          </button>
-          <button className="btn-closed" onClick={handleClose}>
-            Close
-          </button>
+          <div className="carrier">
+            <div className="certificate-signature">
+              <img className="signature" src={signature} alt="Signature" />
+              <p>Instructor Signature</p>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+      <div className="buttons">
+        <button className="btn-download" onClick={handleDownload}>
+          Download Certificate
+        </button>
+        <button className="btn-closed" onClick={handleClose}>
+          Close
+        </button>
+      </div>
+    </>
   );
 };
 

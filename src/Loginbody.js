@@ -16,14 +16,14 @@ import apple from "./Images/apple.png";
 const Loginbody = () => {
   const disptach = useDispatch();
   const navigate = useNavigate();
-  const endpoint = "https://react-node-project-3.onrender.com";
+  const endpoint = "https://react-node-project-1.onrender.com";
   const [loggedin1, setloggedin1] = useState([]);
 
   useEffect(() => {
     // axios
     //   .get(`https://react-node-project-1.onrender.com/udemy/student/getdata`)
     axios
-      .get(`${endpoint}/students/getdata`)
+      .get(`${endpoint}/udemy/student/getdata`)
       .then((res) => {
         // console.log("students data from API:", res.data);
         setloggedin1(res.data);
