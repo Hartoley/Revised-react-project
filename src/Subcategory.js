@@ -30,7 +30,9 @@ const Subcategory = () => {
   const id = JSON.parse(storedId);
   const [userData, setUserData] = useState({});
   let [statusText, setStatusText] = useState("");
+  let [videosID, setvideosID] = useState(null);
   let [certificationStatus, setcertification] = useState("");
+  let [isPlaying, setIsPlaying] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0); // To track the current video index
   const [playVideoUrl, setPlayVideoUrl] = useState(null); // To store the video URL
 
@@ -93,9 +95,32 @@ const Subcategory = () => {
 
   const isPaid = paidvideoId.includes(courseId);
 
+  const next = () => {
+    const nextIndex = videosID + 1;
+    if (nextIndex < videos.length) {
+      playVideo(videos[nextIndex]._id, nextIndex);
+    } else {
+      toast.info("You have reached the last video.");
+      console.log("You have reached the last video.");
+    }
+  };
+
+  const prev = () => {
+    const prevIndex = videosID - 1;
+
+    if (prevIndex >= 0) {
+      playVideo(videos[prevIndex]._id, prevIndex);
+    } else {
+      toast.info("You have reached the first video.");
+      console.log("You have reached the first video.");
+    }
+  };
+
   const playVideo = (videoId, index) => {
     if (isPaid) {
-      const video = videos.find((v) => v._id === videoId);
+      setvideosID(index);
+      const video = videos[index];
+      // const video = videos.find((v) => v._id === videoId);
       console.log(video.watched);
       setplayVideo(video.url);
       if (video) {
@@ -257,13 +282,17 @@ const Subcategory = () => {
               )}
 
               <div className="buttonPay">
-                <span class="material-symbols-outlined">skip_previous</span>
+                <span onClick={prev} class="material-symbols-outlined">
+                  skip_previous
+                </span>
                 <span onClick={stop} class="material-symbols-outlined">
                   stop_circle
                 </span>
                 <span class="material-symbols-outlined">play_arrow</span>
                 <span class="material-symbols-outlined">
-                  <span class="material-symbols-outlined">skip_next</span>
+                  <span onClick={next} class="material-symbols-outlined">
+                    skip_next
+                  </span>
                 </span>
               </div>
             </div>
