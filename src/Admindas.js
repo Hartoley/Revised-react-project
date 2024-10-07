@@ -424,11 +424,11 @@ const Admindas = () => {
               <Col key={index} md={4} sm={6} className="mb-4">
                 <Card className="h-100">
                   <Card.Body>
-                    <Card.Title className="title">{courses.title}</Card.Title>
-                    <Card.Text className="authorName">
+                    <Card.Text>{courses.title}</Card.Text>
+                    <Card.Text>
                       <strong>Author:</strong> {courses.authors_name}
                     </Card.Text>
-                    <Card.Text className="price">
+                    <Card.Text>
                       <strong>Price:</strong> ₦ {courses.price}
                     </Card.Text>
                     <Button

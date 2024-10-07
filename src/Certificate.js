@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import signature from "./Images/0385f5b95a6f4cedacc84c0bd9fccff7-removebg-preview.png";
 import background from "./Images/certi.jpg";
+
 const Certificate = () => {
   const [name, setname] = useState("Brock Woodley");
   const navigate = useNavigate();
@@ -37,8 +38,6 @@ const Certificate = () => {
       )
       .then((res) => {
         setUserData(res.data);
-        // console.log(res.data);
-
         setname(res.data.studentDetails.username);
         setLoading(true);
       })
@@ -63,12 +62,11 @@ const Certificate = () => {
     >
       <div
         ref={certificateRef}
-        className="container text-center bg-maroon text-gold p-4 rounded shadow-lg"
+        className="certificate-container text-center bg-maroon text-gold p-4 rounded shadow-lg"
         style={{ maxWidth: "85%" }}
       >
         <p className="h4 mb-2 mt-3">CERTIFICATE OF COMPLETION</p>
         <p className="h4 mb-2">{name}</p>
-        {/* <p className="h5 mb-2">{courseTitle}</p> */}
         <p className="w-75 mx-auto text-center">
           Congratulations on completing the <span>{courseTitle}</span>. Your
           dedication and hard work have truly paid off. We are proud of your

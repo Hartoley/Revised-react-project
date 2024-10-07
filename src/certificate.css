@@ -7,7 +7,7 @@
     color: gold;
 }
 
-.container {
+.certificate-container {
     max-width: 800px;
     border: 3px solid gold;
 }
@@ -23,7 +23,7 @@ img {
 }
 
 @media (max-width: 768px) {
-    .container {
+    .certificate-container {
         padding: 20px;
     }
 
@@ -44,7 +44,7 @@ img {
     }
 
     /* Only show the certificate container and its children */
-    .container {
+    .certificate-container {
         visibility: visible;
         position: absolute;
         left: 0;
@@ -53,7 +53,6 @@ img {
         padding: 20px;
         margin: 0;
         border: 2px solid gold;
-        /* Ensure the gold border appears */
         background-color: #A52A2A;
         /* Your maroon background color */
         color: #FFD700;
@@ -61,7 +60,7 @@ img {
     }
 
     /* Ensure text and layout are properly formatted for print */
-    .container * {
+    .certificate-container * {
         visibility: visible;
     }
 
