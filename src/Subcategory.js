@@ -35,6 +35,7 @@ const Subcategory = () => {
   let [isPlaying, setIsPlaying] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [playVideoUrl, setPlayVideoUrl] = useState(null);
+  const videoElementRef = useRef(null);
 
   const navigate = useNavigate();
   let [isEligibleForDownload, setIsEligibleForDownload] = useState(false);
@@ -118,14 +119,14 @@ const Subcategory = () => {
   };
 
   const playPauseVideo = () => {
-    const videoElement = document.querySelector("video");
-
-    if (isPaused && videoElement) {
-      videoElement.play();
-      setIsPaused(false);
-    } else if (videoElement) {
-      videoElement.pause();
-      setIsPaused(true);
+    if (videoElementRef.current) {
+      if (isPaused) {
+        videoElementRef.current.play();
+        setIsPaused(false);
+      } else {
+        videoElementRef.current.pause();
+        setIsPaused(true);
+      }
     }
   };
 
@@ -275,6 +276,7 @@ const Subcategory = () => {
               {playvideo && (
                 <div className="videoPlayer">
                   <video
+                    ref={videoElementRef}
                     onPlay={() =>
                       handlePlay(
                         videos.find((video) => video.url === playvideo)._id
@@ -285,7 +287,6 @@ const Subcategory = () => {
                         videos.find((video) => video.url === playvideo)._id
                       )
                     }
-                    controls
                   >
                     <source src={playvideo} type="video/mp4" />
                     Your browser does not support the video tag.
