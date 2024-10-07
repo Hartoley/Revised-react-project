@@ -154,7 +154,7 @@
     background-color: white;
     color: black;
     box-shadow: 10px 10px 20px gray;
-    top: 5%;
+    top: 15%;
     left: 66.8%;
     border-radius: 10px;
     position: absolute;
@@ -512,6 +512,10 @@
         /* background-color: red; */
       
     }
+        .category3 {
+            top: 5%;
+            
+        }
 
         .videocon {
             padding: 5px 0;

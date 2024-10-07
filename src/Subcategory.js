@@ -218,19 +218,6 @@ const Subcategory = () => {
 
   const headerChange = () => {
     const header = headerRef.current;
-    // if (header && subcategoryRef.current) {
-    //   const windowScrollY = window.scrollY;
-    //   const subCategoryHeight = subcategoryRef.current.clientHeight;
-
-    //   if (windowScrollY >= subCategoryHeight - window.innerHeight) {
-    //     header.style.position = "fixed";
-    //     header.style.backgroundColor = "black";
-    //     header.style.top = "-50vh";
-    //   } else {
-    //     header.style.position = "absolute";
-    //     header.style.top = "0";
-    //   }
-    // }
   };
 
   useEffect(() => {
@@ -242,7 +229,7 @@ const Subcategory = () => {
     <>
       <Dashheader />
       <div onScroll={headerChange} ref={subcategoryRef} className="subCategory">
-        <div ref={headerRef} className="category">
+        <div className="category">
           {/* <div className="category1"></div> */}
           <Subcat />
           <div className="Mainvideos3" ref={videoToplayRef}>
