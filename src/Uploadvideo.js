@@ -19,7 +19,6 @@ const Uploadvideo = () => {
   useEffect(() => {
     if (loading) {
       if (!loadingToastRef.current) {
-        toast.info("Processing request...");
       }
     } else {
       loadingToastRef.current = false;
