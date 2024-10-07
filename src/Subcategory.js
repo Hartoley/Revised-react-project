@@ -391,7 +391,7 @@ const Subcategory = () => {
               <p>Course content</p>
             </div>
             <div className="subb1">
-              <p className="subbtext">
+              <p className="subbtext" id="subtext">
                 {videos.length}
                 <span>Sections</span>
               </p>

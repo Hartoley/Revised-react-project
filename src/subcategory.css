@@ -506,11 +506,16 @@
 
 @media (max-width: 380px) {
     .category3{
-        height: 40vh;
+        height: 50vh;
         width: 33%;
         padding: 0;
+        /* background-color: red; */
       
     }
+        #subbtext {
+            font-size: 10px;
+        }
+
 
     .showlight{
         font-size: 10px;
@@ -526,8 +531,12 @@
         font-size: 10px;
     }
 
+         .subb1 span {
+             font-size: 10px;
+         }
+
     .title{
-       font-size: 9px;
+       font-size: 6px;
        margin-top: 2px;
         gap: 1rem;
     }
@@ -545,6 +554,10 @@
     .category3 h6{
         font-size: 8px;
        
+     }
+
+     .subCategory{
+        margin-top: 13vh;
      }
 }
 
@@ -565,6 +578,10 @@
         Line-height: 18.4px;
     
     } 
+
+        .subCategory {
+            margin-top: 13vh;
+        }
    
 
     .paystack-button{
@@ -686,7 +703,7 @@
 .checkText{
     width: 100%;
     /* background-color: brown; */
-    Font-size: 8px;
+    Font-size: 10px;
     Line-height: 10.8px;
 
 

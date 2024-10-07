@@ -130,6 +130,23 @@ const Header = () => {
             >
               <a href="/students/login">Sign in</a>
             </p>
+            <p
+              style={{
+                margin: "10px 0",
+                cursor: "pointer",
+                transition: "color 0.3s, transform 0.3s",
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.color = "#007BFF";
+                e.target.style.transform = "scale(1.05)";
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.color = "";
+                e.target.style.transform = "scale(1)";
+              }}
+            >
+              <a href="/adminlogin">Admin?</a>
+            </p>
           </div>
         )}
       </div>
