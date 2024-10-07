@@ -63,7 +63,7 @@ const Adminlogin = () => {
       <div
         className="d-flex justify-content-center align-items-center"
         style={{
-          backgroundColor: "#f8f9fa", // Light background for contrast
+          backgroundColor: "#f8f9fa",
           height: "100vh",
         }}
       >
