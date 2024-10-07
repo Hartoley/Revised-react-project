@@ -11,6 +11,7 @@ const Certificate = () => {
   const navigate = useNavigate();
   const [courseTitle, settitle] = useState("Digital Marketing Course");
   const { courseId } = useParams();
+  const { id } = useParams();
   const [userData, setUserData] = useState({});
   const [course, setcourse] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -20,7 +21,7 @@ const Certificate = () => {
   useEffect(() => {
     axios
       .get(
-        `https://react-node-project-1.onrender.com/courses/course/${courseId}`
+        ` https://react-node-project-1.onrender.com/courses/course/${courseId}`
       )
       .then((res) => {
         setcourse(res.data);
@@ -32,11 +33,13 @@ const Certificate = () => {
 
     axios
       .get(
-        `https://react-node-project-1.onrender.com/udemy/student/getdata/id/${courseId}`
+        `https://react-node-project-1.onrender.com/udemy/student/data/id/${id}`
       )
       .then((res) => {
         setUserData(res.data);
-        setname(res.data.username);
+        // console.log(res.data);
+
+        setname(res.data.studentDetails.username);
         setLoading(true);
       })
       .catch((error) => {
@@ -65,7 +68,7 @@ const Certificate = () => {
       >
         <p className="h4 mb-2 mt-3">CERTIFICATE OF COMPLETION</p>
         <p className="h4 mb-2">{name}</p>
-        <p className="h5 mb-2">{courseTitle}</p>
+        {/* <p className="h5 mb-2">{courseTitle}</p> */}
         <p className="w-75 mx-auto text-center">
           Congratulations on completing the <span>{courseTitle}</span>. Your
           dedication and hard work have truly paid off. We are proud of your

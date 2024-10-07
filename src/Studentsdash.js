@@ -25,7 +25,7 @@ const Studentsdash = () => {
       .then((res) => {
         // console.log(res.data);
         setrealadmin(Object.values(res.data));
-        console.log(realadmin);
+        // console.log(realadmin);
         setLoading(false);
       })
       .catch((error) => {

@@ -34,7 +34,7 @@ const Loginbody = () => {
       });
   }, []);
 
-  console.log(loggedin1);
+  // console.log(loggedin1);
   const formik = useFormik({
     initialValues: {
       email: "",
