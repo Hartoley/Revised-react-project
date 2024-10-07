@@ -43,7 +43,7 @@ const Adminlogin = () => {
           .post(`https://react-node-project-1.onrender.com/admin/login`, value)
           .then((res) => {
             let id = `${loggedinadmin._id}`;
-
+            localStorage.setItem("adminId", JSON.stringify(id));
             toast.success("Admin successfully logged in");
             navigate(`/admindashboard/${id}`);
           })

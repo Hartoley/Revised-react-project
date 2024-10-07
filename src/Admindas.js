@@ -14,6 +14,7 @@ import DitVideo from "./DitVideo";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import "./dit.css";
 import Dashheader from "./Dashheader";
+import Adminheader from "./AdminHeader";
 
 const Admindas = () => {
   const navigate = useNavigate();
@@ -167,10 +168,10 @@ const Admindas = () => {
   return (
     <>
       <ToastContainer />
-      <Dashheader />
+      <Adminheader />
 
       <div className="postVideos">
-        <h3>Welcome on board admins {realadmin[1]}</h3>
+        <h3>Welcome on board {realadmin[1]}</h3>
         <div className="student-section">
           <h3>Students List</h3>
           <div className="student-grid">

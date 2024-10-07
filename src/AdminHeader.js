@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import logo from "./Images/new Udemy.png";
 import { useNavigate } from "react-router-dom";
 
-const Dashheader = () => {
+const Adminheader = () => {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const storedId = localStorage.getItem("id");
   const storedadminId = localStorage.getItem("adminId");
@@ -13,8 +13,8 @@ const Dashheader = () => {
   const [showMenu, setshowMenu] = useState(false);
 
   const logout = () => {
-    localStorage.removeItem("id");
-    window.location.href = "/students/login";
+    localStorage.removeItem("adminId");
+    window.location.href = "/adminlogin";
     // Removed the toast notification
   };
 
@@ -22,6 +22,8 @@ const Dashheader = () => {
     setIsMenuVisible((prev) => !prev);
     setshowMenu((prev) => !prev);
   };
+
+  //   console.log(adminId);
 
   return (
     <>
@@ -213,4 +215,4 @@ const Dashheader = () => {
   );
 };
 
-export default Dashheader;
+export default Adminheader;
