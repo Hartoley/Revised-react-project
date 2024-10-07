@@ -1,111 +1,89 @@
-/* Main container styles */
-.Mainvideos4 {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 90vh;
+/* Custom Styles */
+.bg-maroon {
     background-color: #800000;
-    /* background: url("./Images/certi.jpg") no-repeat center center/cover; */
 }
 
-/* Certificate container */
-.showCertificate {
-    text-align: center;
+.text-gold {
     color: gold;
-    /* Matching the gold color theme */
-    border: 4px solid gold;
-    padding: 40px;
-    width: 95%;
-    height: 90%;
+}
+
+.container {
     max-width: 800px;
-    background-color: rgba(0, 0, 0, 0.6);
-    /* Dark background with opacity for readability */
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.8);
-    font-family: 'Times New Roman', serif;
-    border-radius: 20px;
+    border: 3px solid gold;
 }
 
-/* Certificate Title */
-.certificate-title {
-    font-size: 2.5rem;
-    font-weight: bold;
-    margin-bottom: 20px;
+.shadow-lg {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
 }
 
-/* Certificate Name */
-.certificate-name {
-    font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 10px;
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-/* Course Details */
-.certificate-details,
-.certificate-course {
-    font-size: 1.5rem;
-    margin: 10px 0;
-}
-
-/* Instructor and Date Section */
-.certificate-instructors {
-    font-size: 1.2rem;
-    margin: 15px;
-}
-
-/* Signature Section */
-.certificate-signature img {
-    width: 150px;
-    margin-bottom: 10px;
-}
-
-/* Buttons section */
-.buttons {
-    margin-top: 30px;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-}
-
-.btn-download,
-.btn-closed {
-    background-color: gold;
-    color: #800000;
-    /* Dark red text */
-    border: none;
-    padding: 12px 24px;
-    font-size: 1.2rem;
-    font-weight: bold;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
-
-.btn-download:hover,
-.btn-closed:hover {
-    transform: scale(1.1);
-    background-color: #ffd700;
-}
-
-/* Responsive styles */
 @media (max-width: 768px) {
-    .showCertificate {
+    .container {
         padding: 20px;
-        width: 90%;
     }
 
-    .certificate-title {
-        font-size: 2rem;
+    h2 {
+        font-size: 0.5rem;
     }
 
-    .certificate-name,
-    .certificate-details,
-    .certificate-course {
-        font-size: 1.2rem;
+    p {
+        font-size: 0.5rem;
+    }
+}
+
+@media print {
+
+    /* Hide everything except the certificate container */
+    body * {
+        visibility: hidden;
     }
 
-    .btn-download,
-    .btn-closed {
-        font-size: 1rem;
-        padding: 10px 20px;
+    /* Only show the certificate container and its children */
+    .container {
+        visibility: visible;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        padding: 20px;
+        margin: 0;
+        border: 2px solid gold;
+        /* Ensure the gold border appears */
+        background-color: #A52A2A;
+        /* Your maroon background color */
+        color: #FFD700;
+        /* Gold text color */
+    }
+
+    /* Ensure text and layout are properly formatted for print */
+    .container * {
+        visibility: visible;
+    }
+
+    /* Adjust the layout for print to avoid page breaks */
+    .row {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    /* Hide buttons to prevent them from showing up in the print */
+    .btn {
+        display: none;
+    }
+
+    /* Full page styling */
+    html,
+    body {
+        height: auto;
+        margin: 0;
+        padding: 0;
+        background-color: white;
+        font-size: 16px;
+        /* Adjust font size for better readability */
     }
 }

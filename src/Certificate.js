@@ -1,26 +1,19 @@
 import React, { useEffect, useRef, useState } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./certificate.css";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import signature from "./Images/0385f5b95a6f4cedacc84c0bd9fccff7-removebg-preview.png";
-
+import background from "./Images/certi.jpg";
 const Certificate = () => {
   const [name, setname] = useState("Brock Woodley");
   const navigate = useNavigate();
   const [courseTitle, settitle] = useState("Digital Marketing Course");
-  const [subcourseTitle, setsubtitle] = useState("Digital Marketing Course");
   const { courseId } = useParams();
   const [userData, setUserData] = useState({});
   const [course, setcourse] = useState([]);
-  const [videos, setvideos] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [learn, setlearn] = useState([]);
-  const { id } = useParams();
-  let [certificationStatus, setcertification] = useState("");
-  let [isEligibleForDownload, setIsEligibleForDownload] = useState(false);
   const currentDate = new Date().toLocaleDateString();
   const certificateRef = useRef(null);
 
@@ -31,19 +24,15 @@ const Certificate = () => {
       )
       .then((res) => {
         setcourse(res.data);
-        setvideos(res.data.videos);
-        setlearn(res.data.learn);
         settitle(res.data.title);
-        setsubtitle(res.data.subtitle);
       })
       .catch((error) => {
         console.log(error);
-        toast.error("Failed to fetch course data");
       });
 
     axios
       .get(
-        `https://react-node-project-1.onrender.com/udemy/student/getdata/id/${id}`
+        `https://react-node-project-1.onrender.com/udemy/student/getdata/id/${courseId}`
       )
       .then((res) => {
         setUserData(res.data);
@@ -53,112 +42,70 @@ const Certificate = () => {
       .catch((error) => {
         console.log("Error:", error);
         setLoading(false);
-        toast.error("Failed to fetch user data");
       });
-  });
-
-  console.log(course);
-  console.log(userData);
-
-  //     const printContents = certificateRef.current.innerHTML;
-  //     const originalContents = document.body.innerHTML;
-
-  //     document.body.innerHTML = printContents;
-
-  //     window.print();
-
-  //     document.body.innerHTML = originalContents;
-  //   };
+  }, [courseId]);
 
   const handleDownload = () => {
     window.print();
   };
 
-  const certified = async (courseId) => {
-    try {
-      const response = await axios.post(
-        "http://localhost:5009/udemy/student/certification",
-        {
-          userId: id,
-          courseId: courseId,
-        }
-      );
-
-      if (response.data.success) {
-        alert(response.data.message);
-        setcertification(response.data.message);
-        setIsEligibleForDownload(true);
-      } else {
-        // alert(response.data.message);
-        setcertification(response.data.message);
-      }
-      if (response.data.failed) {
-        // alert(response.data.message);
-        console.log(response);
-        setcertification(response.data.message);
-      }
-    } catch (error) {
-      console.error("Error checking certification:", error);
-      alert("An error occurred while checking eligibility.");
-    }
-  };
-
   const handleClose = () => {
-    navigate(`/students/dashboard/${id}`);
-    console.log("Close certificate");
+    navigate(`/students/dashboard/${courseId}`);
   };
 
   return (
-    <>
-      <div className="Mainvideos4">
-        <div
-          ref={certificateRef}
-          className="showCertificate"
-          id="showCertificate123"
-        >
-          <h3 className="certificate-title">CERTIFICATE OF COMPLETION</h3>
-          <div className="certificate-content">
-            <p className="certificate-name">{name}</p>
-            <p className="certificate-details">{courseTitle}</p>
-            <p className="certificate-course">
-              Congratulations on completing the <span>{courseTitle}</span>. Your
-              dedication and hard work have truly paid off. We are proud of your
-              achievement and excited to see how you'll apply your new skills!
-            </p>
+    <div
+      className="d-flex justify-content-center flex-column align-items-center bg-dark text-light"
+      style={{ height: "100vh" }}
+    >
+      <div
+        ref={certificateRef}
+        className="container text-center bg-maroon text-gold p-4 rounded shadow-lg"
+        style={{ maxWidth: "85%" }}
+      >
+        <p className="h4 mb-2 mt-3">CERTIFICATE OF COMPLETION</p>
+        <p className="h4 mb-2">{name}</p>
+        <p className="h5 mb-2">{courseTitle}</p>
+        <p className="w-75 mx-auto text-center">
+          Congratulations on completing the <span>{courseTitle}</span>. Your
+          dedication and hard work have truly paid off. We are proud of your
+          achievement and excited to see how you'll apply your new skills!
+        </p>
 
-            <div className="instructors-div">
-              <div className="certificate-instructors">
-                <p>{course.createdBy}</p>
-                <p>Virtual Teacher</p>
-              </div>
-              <div className="certificate-instructors">
-                <p>{course.authors_name}</p>
-                <p>Virtual Instructor</p>
-              </div>
-            </div>
-            <div className="certificate-instructors">
-              <p>{currentDate}</p>
-              <p>Date</p>
-            </div>
+        <div className="row my-2">
+          <div className="col">
+            <p>{course.createdBy || "Darren Ko"}</p>
+            <p>Virtual Teacher</p>
           </div>
-
-          <div className="carrier">
-            <div className="certificate-signature">
-              <img className="signature" src={signature} alt="Signature" />
-              <p>Instructor Signature</p>
-            </div>
+          <div className="col">
+            <p>{course.authors_name || "Josh Walter"}</p>
+            <p>Virtual Instructor</p>
           </div>
         </div>
+
+        <p>{currentDate}</p>
+        <p>Date</p>
+
+        <div className="mt-1">
+          <img
+            src={signature}
+            alt="Signature"
+            className="mb-2"
+            style={{ width: "80px" }}
+          />
+          <p>Instructor Signature</p>
+        </div>
       </div>
-      <div className="buttons">
-        <button className="btn-download" onClick={handleDownload}>
+
+      <div className="d-flex justify-content-center mt-1 gap-3">
+        <button className="btn btn-warning" onClick={handleDownload}>
           Download Certificate
         </button>
-        <button className="btn-closed" onClick={handleClose}>
+        <button className="btn btn-secondary" onClick={handleClose}>
           Close
         </button>
       </div>
-    </>
+    </div>
   );
 };
 
