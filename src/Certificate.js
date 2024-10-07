@@ -53,7 +53,7 @@ const Certificate = () => {
   };
 
   const handleClose = () => {
-    navigate(`/students/dashboard/${courseId}`);
+    navigate(`/students/dashboard/${id}`);
   };
 
   return (
