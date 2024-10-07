@@ -63,7 +63,6 @@ const Subcategory = () => {
       )
       .then((res) => {
         setUserData(res.data);
-        setLoading(true);
       })
       .catch((error) => {
         console.log("Error:", error);

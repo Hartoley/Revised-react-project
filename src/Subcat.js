@@ -61,7 +61,7 @@ const Subcat = () => {
       )
       .then((res) => {
         setUserData(res.data);
-        setLoading(true);
+        setLoading(false);
       })
       .catch((error) => {
         console.log("Error:", error);
