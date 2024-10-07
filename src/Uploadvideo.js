@@ -3,6 +3,7 @@ import axios from "axios";
 import { useFormik } from "formik";
 import { ToastContainer, toast } from "react-toastify";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./admidash.css";
@@ -11,6 +12,9 @@ const Uploadvideo = () => {
   const { courseId } = useParams();
   const [loading, setLoading] = useState(false);
   const loadingToastRef = useRef(false);
+  const storedadminId = localStorage.getItem("adminId");
+  const navigate = useNavigate();
+  const adminId = JSON.parse(storedadminId);
 
   useEffect(() => {
     if (loading) {
@@ -52,6 +56,9 @@ const Uploadvideo = () => {
           console.log("Video upload successful:", res.data);
           toast.dismiss();
           toast.success("Course uploaded successfully!");
+          setTimeout(() => {
+            navigate(`/admindashboard/${adminId}`);
+          }, 5000);
         })
         .catch((err) => {
           setLoading(false);
