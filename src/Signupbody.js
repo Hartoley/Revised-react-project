@@ -147,11 +147,11 @@ const Signupbody = () => {
                 )}
               </span>
             </div>
-            {/* <p>
+            <p>
               {formik.touched.password && formik.errors.password
                 ? formik.errors.password
                 : ""}
-            </p> */}
+            </p>
           </div>
           <div className="lineBox">
             <div className="lines"></div>
@@ -163,7 +163,7 @@ const Signupbody = () => {
           <button type="submit" className="buttonSignin">
             Sign up
           </button>
-          <ToastContainer />
+
           <div className="termsBox" id="termsBox">
             <p>
               By signing up, you agree to our <span>Terms of Use</span> and{" "}
@@ -181,6 +181,7 @@ const Signupbody = () => {
           </div>
         </div>
       </form>
+      <ToastContainer />
     </>
   );
 };
