@@ -55,7 +55,13 @@ const Videos = ({ viewed, vspan, extra }) => {
             <p>Current programs you enrolled in</p>
           </div>
         ) : null}
-        <div className="Mainvideos2" id="Mainvideos2">
+        <div
+          className="Mainvideos2"
+          id="Mainvideos2"
+          style={{
+            flexWrap: "wrap",
+          }}
+        >
           {paidvideo.map((courses, index) => (
             <div
               key={index}
@@ -74,12 +80,18 @@ const Videos = ({ viewed, vspan, extra }) => {
             </div>
           ))}
         </div>
-        <p className="videoHeadlines">
+        <p className="learn">
           {viewed}
           <span>{vspan}</span>
           {extra}{" "}
         </p>
-        <div className="Mainvideos2" id="Mainvideos3">
+        <div
+          className="Mainvideos2"
+          id="Mainvideos3"
+          style={{
+            flexWrap: "wrap",
+          }}
+        >
           {video.map((courses, index) => (
             <div
               key={index}

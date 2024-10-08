@@ -43,7 +43,7 @@ const Dashheader = () => {
               display: "flex",
               alignItems: "center",
               width: "28%",
-              gap: "1rem",
+              gap: "0.5rem",
               left: "0%",
               fontSize: "14px",
               // backgroundColor: "red",

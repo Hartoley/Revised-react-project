@@ -47,12 +47,23 @@ const Landing = () => {
       <Body1></Body1>
       <div className="videoBox1">
         <div className="bigContainerDiv">
-          <p className="videoHeadlines">
+          <p
+            className="learn"
+            style={{
+              marginLeft: "-50px",
+            }}
+          >
             {viewed}
             <span>{vspan}</span>
             {extra}{" "}
           </p>
-          <div className="Mainvideos2" id="Mainvideos3">
+          <div
+            className="Mainvideos2"
+            id="Mainvideos3"
+            style={{
+              flexWrap: "wrap",
+            }}
+          >
             {video.map((courses, index) => (
               <div
                 key={index}
