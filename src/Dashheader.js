@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // import "./dashheader.css";
 import logo from "./Images/new Udemy.png";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Dashheader = () => {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
@@ -11,7 +12,22 @@ const Dashheader = () => {
   const id = JSON.parse(storedId);
   const adminId = JSON.parse(storedadminId);
   const [showMenu, setshowMenu] = useState(false);
+  const [userData, setUserData] = useState({});
 
+  useEffect(() => {
+    axios
+      .get(
+        `https://react-node-project-1.onrender.com/udemy/student/getdata/id/${id}`
+      )
+      .then((res) => {
+        setUserData(res.data);
+        console.log(res.data.username);
+      })
+      .catch((error) => {
+        console.log("Error:", error);
+        // toast.error("Failed to fetch user data");
+      });
+  });
   const logout = () => {
     localStorage.removeItem("id");
     window.location.href = "/students/login";
@@ -63,6 +79,24 @@ const Dashheader = () => {
           <div className="cart">
             <span className="material-symbols-outlined">notifications</span>
           </div>
+          <p
+            style={{
+              width: "2.5rem",
+              height: "2.5rem",
+              color: "white",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              backgroundColor: "black",
+              borderRadius: "50%",
+              marginTop: "5px",
+              fontSize: "18px",
+              fontWeight: "700",
+            }}
+          >
+            {userData.username && userData.username.charAt(0).toUpperCase()}
+          </p>
+
           <div onClick={logout} className="cart">
             <span className="material-symbols-outlined">logout</span>
           </div>
@@ -175,6 +209,34 @@ const Dashheader = () => {
               }}
             >
               Shopping cart
+            </p>
+            <p
+              style={{
+                margin: "10px 0",
+                cursor: "pointer",
+                transition: "color 0.3s, transform 0.3s",
+                display: "flex",
+                gap: "5px",
+                alignItems: "center",
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.color = "#007BFF";
+                e.target.style.transform = "scale(1.05)";
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.color = "";
+                e.target.style.transform = "scale(1)";
+              }}
+            >
+              {userData.username}
+              <span
+                class="material-symbols-outlined"
+                style={{
+                  fontSize: "10px",
+                }}
+              >
+                account_circle
+              </span>
             </p>
             <div
               onClick={logout}
