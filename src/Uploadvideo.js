@@ -17,6 +17,11 @@ const Uploadvideo = () => {
   const adminId = JSON.parse(storedadminId);
 
   useEffect(() => {
+    const container = document.querySelector(".container");
+    container?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, []);
+
+  useEffect(() => {
     if (loading) {
       if (!loadingToastRef.current) {
       }

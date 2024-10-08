@@ -1,5 +1,6 @@
 *{margin: 0;
     padding: 0;
+    margin: 0;
 }
 
 .subCategory{
@@ -741,10 +742,11 @@
 .subb2{
     height: auto;
 }
-.sub2{
+/* .sub2{
     padding: 5px 0;
     height: auto;
-}
+    gap: 0;
+} */
 
 .sub3{
     height: auto;

@@ -44,6 +44,10 @@ const Admindas = () => {
   }, [loading]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     axios
       .get(`https://react-node-project-1.onrender.com/admin/getdata/id/${id}`)
       .then((res) => {
@@ -167,7 +171,7 @@ const Admindas = () => {
   };
 
   const scrollToCourses = () => {
-    coursesSectionRef.current.scrollIntoView({ behavior: "smooth" });
+    coursesSectionRef.current.scrollIntoView({ behavior: "instant" });
   };
   const scrollToUploadCourses = () => {
     uploadSectionRef.current.scrollIntoView({ behavior: "smooth" });

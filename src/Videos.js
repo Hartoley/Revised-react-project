@@ -70,7 +70,7 @@ const Videos = ({ viewed, vspan, extra }) => {
               onClick={() => showmore(courses)}
             >
               <div className="videoImage">
-                <video src={courses.previewVideo} controls></video>
+                <video src={courses.previewVideo}></video>
               </div>
               <p className="title">{courses.title}</p>
               <p className="authorName">{courses.authors_name}</p>
@@ -100,7 +100,7 @@ const Videos = ({ viewed, vspan, extra }) => {
               onClick={() => showmore(courses)}
             >
               <div className="videoImage">
-                <video src={courses.previewVideo} controls></video>
+                <video src={courses.previewVideo}></video>
               </div>
               <p className="title">{courses.title}</p>
               <p className="authorName">{courses.authors_name}</p>
