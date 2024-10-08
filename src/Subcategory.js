@@ -129,6 +129,14 @@ const Subcategory = () => {
     }
   };
 
+  const stopVideo = () => {
+    if (videoElementRef.current) {
+      videoElementRef.current.pause();
+      videoElementRef.current.currentTime = 0;
+      setIsPaused(true);
+    }
+  };
+
   const playVideo = (videoId, index) => {
     if (isPaid) {
       setvideosID(index);
@@ -156,6 +164,8 @@ const Subcategory = () => {
   const stop = () => {
     subcategoryRef.current.style.position = "static";
     videoToplayRef.current.style.display = "none";
+    setStatusText("");
+    setIsPaused(true);
     setplayVideo(null);
   };
 
@@ -189,18 +199,12 @@ const Subcategory = () => {
     axios
       .post(url, { userId: id, courseId: courseId, videoId: videoId })
       .then((response) => {
-        const { success, message } = response.data;
+        console.log("API Response:", response.data);
 
-        if (success) {
-          const watchedStatus =
-            message === "Student is eligible for certification.";
-          const newStatusText = watchedStatus
-            ? "Video has been watched"
-            : "Video has not been watched";
-          setStatusText(newStatusText);
+        if (response.data.watched) {
+          setStatusText("Video has been watched");
         } else {
-          console.warn("Failed to check watched status:", message);
-          setStatusText(message);
+          setStatusText("Video has not been watched");
         }
 
         console.log("Video Played Status:", response.data);
@@ -278,7 +282,7 @@ const Subcategory = () => {
               {playvideo && (
                 <div className="videoPlayer">
                   <video
-                    controls
+                    // controls
                     ref={videoElementRef}
                     onPlay={() =>
                       handlePlay(
@@ -299,10 +303,13 @@ const Subcategory = () => {
               )}
 
               <div className="buttonPay">
+                <span onClick={stop} class="material-symbols-outlined">
+                  close
+                </span>
                 <span onClick={prev} class="material-symbols-outlined">
                   skip_previous
                 </span>
-                <span onClick={stop} class="material-symbols-outlined">
+                <span onClick={stopVideo} class="material-symbols-outlined">
                   stop_circle
                 </span>
                 <span

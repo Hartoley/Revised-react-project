@@ -127,7 +127,11 @@ const Subcat = () => {
 
   return (
     <div>
-      <ToastContainer />
+      <ToastContainer
+        className="custom-toast-container"
+        style={{ position: "fixed", zIndex: 9999 }}
+      />
+
       <div className="category3">
         <div className="videocon3">
           {previewVideo ? (
