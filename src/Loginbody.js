@@ -10,10 +10,14 @@ import Studentlogin, { saving, successful, failed } from "./Studentlogin";
 import { useSelector, useDispatch } from "react-redux";
 import "./Loginbody.css";
 import google from "./Images/google1.png";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+
 import facebook from "./Images/facebook.png";
 import apple from "./Images/apple.png";
 
 const Loginbody = () => {
+  const [showPassword, setShowPassword] = useState(false);
+
   const disptach = useDispatch();
   const navigate = useNavigate();
   const endpoint = "https://react-node-project-1.onrender.com";
@@ -21,7 +25,7 @@ const Loginbody = () => {
 
   useEffect(() => {
     // axios
-    //   .get(`https://react-node-project-1.onrender.com/udemy/student/getdata`)
+    //   .get(https://react-node-project-1.onrender.com/udemy/student/getdata)
     axios
       .get(`${endpoint}/udemy/student/getdata`)
       .then((res) => {
@@ -69,6 +73,10 @@ const Loginbody = () => {
     },
   });
 
+  const togglePasswordVisibility = () => {
+    setShowPassword((prev) => !prev);
+  };
+
   return (
     <>
       {" "}
@@ -94,7 +102,12 @@ const Loginbody = () => {
             </div>
           </div>
 
-          <div className="carrier">
+          <div
+            className="carrier"
+            style={{
+              height: "auto",
+            }}
+          >
             <input
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
@@ -107,14 +120,28 @@ const Loginbody = () => {
                 ? formik.errors.email
                 : ""}
             </p>
-            <input
-              onBlur={formik.handleBlur}
-              onChange={formik.handleChange}
-              id="input"
-              name="password"
-              type="password"
-              placeholder="Password"
-            />
+
+            <div className="password-container">
+              <input
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
+                id="input"
+                name="password"
+                type={showPassword ? "text" : "password"}
+                placeholder="Password"
+              />
+              <span
+                onClick={togglePasswordVisibility}
+                className="password-toggle"
+                style={{ cursor: "pointer" }}
+              >
+                {showPassword ? (
+                  <AiFillEyeInvisible size={20} />
+                ) : (
+                  <AiFillEye size={20} />
+                )}
+              </span>
+            </div>
             <p>
               {formik.touched.password && formik.errors.password
                 ? formik.errors.password
@@ -145,9 +172,7 @@ const Loginbody = () => {
               <p>
                 Don't have an account?{" "}
                 <span>
-                  <a href="/students/signup">
-                    Sign up Log in with your organization
-                  </a>
+                  <a href="/students/signup">Sign up with our organization</a>
                 </span>
               </p>
             </div>
