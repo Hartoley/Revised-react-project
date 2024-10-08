@@ -96,13 +96,48 @@ const Subcategory = () => {
 
   const isPaid = paidvideoId.includes(courseId);
 
+  const playVideo = (videoId, index) => {
+    if (isPaid) {
+      const video = videos[index];
+
+      if (video) {
+        setvideosID(index);
+        setplayVideo(video.url);
+        console.log(video.url);
+
+        console.log("Video watched status:", video.watched);
+
+        // Adjust styles as necessary
+        if (subcategoryRef.current) {
+          subcategoryRef.current.style.position = "fixed";
+        }
+        if (videoToplayRef.current) {
+          videoToplayRef.current.style.display = "flex";
+        }
+      } else {
+        toast.error("Video not found!");
+        console.error("Video not found!");
+      }
+    } else {
+      toast.info("This video is not paid.");
+      console.log("This video is not paid.");
+    }
+  };
+
   const next = () => {
     const nextIndex = videosID + 1;
+    console.log(nextIndex);
+
     if (nextIndex < videos.length) {
-      playVideo(videos[nextIndex]._id, nextIndex);
+      const video = videos[nextIndex];
+
+      if (video) {
+        setvideosID(nextIndex);
+        setplayVideo(video.url);
+        console.log(video.url);
+      }
     } else {
-      toast.info("You have reached the last video.");
-      console.log("You have reached the last video.");
+      setStatusText("You have reached the last video.");
     }
   };
 
@@ -110,10 +145,12 @@ const Subcategory = () => {
     const prevIndex = videosID - 1;
 
     if (prevIndex >= 0) {
+      setIsPaused(false);
       playVideo(videos[prevIndex]._id, prevIndex);
     } else {
-      toast.info("You have reached the first video.");
-      console.log("You have reached the first video.");
+      setStatusText("You have reached the first video.");
+      // toast.info("You have reached the first video.");
+      // console.log("You have reached the first video.");
     }
   };
 
@@ -134,30 +171,6 @@ const Subcategory = () => {
       videoElementRef.current.pause();
       videoElementRef.current.currentTime = 0;
       setIsPaused(true);
-    }
-  };
-
-  const playVideo = (videoId, index) => {
-    if (isPaid) {
-      setvideosID(index);
-      const video = videos[index];
-      // const video = videos.find((v) => v._id === videoId);
-      console.log(video.watched);
-      setplayVideo(video.url);
-      if (video) {
-        if (subcategoryRef.current) {
-          subcategoryRef.current.style.position = "fixed";
-        }
-        if (videoToplayRef.current) {
-          videoToplayRef.current.style.display = "flex";
-        }
-      } else {
-        toast.error("Video not found!");
-        console.error("Video not found!");
-      }
-    } else {
-      toast.info("This video is not paid.");
-      console.log("This video is not paid.");
     }
   };
 
@@ -295,6 +308,7 @@ const Subcategory = () => {
                       )
                     }
                   >
+                    key={playVideo}
                     <source src={playvideo} type="video/mp4" />
                     Your browser does not support the video tag.
                   </video>
