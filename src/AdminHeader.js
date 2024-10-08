@@ -119,6 +119,7 @@ const Adminheader = ({
             }}
           >
             <p
+              onClick={scrollToUploadCourses}
               style={{
                 margin: "10px 0", // Spacing between menu items
                 cursor: "pointer",
@@ -133,7 +134,7 @@ const Adminheader = ({
                 e.target.style.transform = "scale(1)"; // Reset zoom
               }}
             >
-              Udemy Business
+              Upload a course
             </p>
             <p
               style={{
@@ -149,8 +150,9 @@ const Adminheader = ({
                 e.target.style.color = "";
                 e.target.style.transform = "scale(1)";
               }}
+              onClick={scrollToStudents}
             >
-              Search
+              Students
             </p>
             <p
               onClick={scrollToCourses}
