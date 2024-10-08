@@ -18,6 +18,9 @@ import Adminheader from "./AdminHeader";
 
 const Admindas = () => {
   const navigate = useNavigate();
+  const coursesSectionRef = useRef(null);
+  const studentsSectionRef = useRef(null);
+  const uploadSectionRef = useRef(null);
   const [studentsdata, setstudentsdata] = useState([]);
   const [loading, setLoading] = useState(true);
   const [realadmin, setrealadmin] = useState({});
@@ -163,16 +166,29 @@ const Admindas = () => {
     navigate(`/editcourse/${courseId}`);
   };
 
-  // console.log(studentsdata);
+  const scrollToCourses = () => {
+    coursesSectionRef.current.scrollIntoView({ behavior: "smooth" });
+  };
+  const scrollToUploadCourses = () => {
+    uploadSectionRef.current.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const scrollToStudents = () => {
+    studentsSectionRef.current.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <>
       <ToastContainer />
-      <Adminheader />
+      <Adminheader
+        scrollToCourses={scrollToCourses}
+        scrollToStudents={scrollToStudents}
+        scrollToUploadCourses={scrollToUploadCourses}
+      />
 
       <div className="postVideos">
         <h3>Welcome on board {realadmin[1]}</h3>
-        <div className="student-section">
+        <div className="student-section mt-5" ref={studentsSectionRef}>
           <h3>Students List</h3>
           <div className="student-grid">
             {studentsdata.map((student, index) => (
@@ -196,8 +212,12 @@ const Admindas = () => {
             ))}
           </div>
         </div>
-        <div className="form-container container-fluid">
-          <form onSubmit={formik.handleSubmit} encType="multipart/form-data">
+        <div className="form-container container-fluid mt-5">
+          <form
+            onSubmit={formik.handleSubmit}
+            encType="multipart/form-data"
+            ref={uploadSectionRef}
+          >
             <div className="form-grid">
               {/* Form Title */}
               <h2>Upload a Course</h2>
@@ -418,7 +438,13 @@ const Admindas = () => {
             </div>
           </form>
         </div>
-        <Container className="mt-5">
+        <Container
+          className="mt-5"
+          ref={coursesSectionRef}
+          style={{
+            cursor: "pointer",
+          }}
+        >
           <h2 className="text-center mb-4">Course Section</h2>
           <Row>
             {video.map((courses, index) => (

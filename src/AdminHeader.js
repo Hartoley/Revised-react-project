@@ -3,7 +3,11 @@ import React, { useState } from "react";
 import logo from "./Images/new Udemy.png";
 import { useNavigate } from "react-router-dom";
 
-const Adminheader = () => {
+const Adminheader = ({
+  scrollToCourses,
+  scrollToUploadCourses,
+  scrollToStudents,
+}) => {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const storedId = localStorage.getItem("id");
   const storedadminId = localStorage.getItem("adminId");
@@ -51,9 +55,30 @@ const Adminheader = () => {
               // backgroundColor: "red",
             }}
           >
-            <p>Udemy Business</p>
-            <p>Teach on Udemy</p>
-            <p>My learning</p>
+            <p
+              onClick={scrollToStudents}
+              style={{
+                cursor: "pointer",
+              }}
+            >
+              Students
+            </p>
+            <p
+              onClick={scrollToUploadCourses}
+              style={{
+                cursor: "pointer",
+              }}
+            >
+              Upload course
+            </p>
+            <p
+              onClick={scrollToCourses}
+              style={{
+                cursor: "pointer",
+              }}
+            >
+              Manage Courses
+            </p>
           </div>
 
           <div className="cart">
@@ -128,6 +153,7 @@ const Adminheader = () => {
               Search
             </p>
             <p
+              onClick={scrollToCourses}
               style={{
                 margin: "10px 0",
                 cursor: "pointer",
@@ -142,7 +168,7 @@ const Adminheader = () => {
                 e.target.style.transform = "scale(1)";
               }}
             >
-              My learning
+              Manage Courses
             </p>
             <p
               style={{
