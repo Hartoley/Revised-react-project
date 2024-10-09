@@ -1,0 +1,13 @@
+@media (max-width: 768px) {
+    #d-flex {
+        height: 70vh;
+        /* Change height to 70vh for smaller screens */
+    }
+
+    form {
+        margin-top: 0;
+        /* No margin on smaller screens */
+        height: auto;
+        /* Allow height to adjust based on content */
+    }
+}

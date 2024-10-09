@@ -61,7 +61,7 @@ const Dashheader = () => {
               width: "28%",
               gap: "0.5rem",
               left: "0%",
-              fontSize: "14px",
+              fontSize: "12px",
               // backgroundColor: "red",
             }}
           >
@@ -116,7 +116,7 @@ const Dashheader = () => {
               left: "60vw",
               width: "40vw",
               height: "auto",
-              fontSize: "14px", // Increased font size
+              fontSize: "12px", // Increased font size
               lineHeight: "20px", // Increased line height
               padding: "10px 15px", // Increased padding
               border: "solid 0.5px rgb(135, 137, 138)", // Thicker border for visibility
@@ -244,7 +244,7 @@ const Dashheader = () => {
                 marginTop: "15px", // Space above logout
                 cursor: "pointer",
                 transition: "color 0.3s, transform 0.3s",
-                fontSize: "10px",
+                fontSize: "12px",
                 display: "flex",
                 gap: "5px",
                 alignItems: "center",
@@ -261,7 +261,7 @@ const Dashheader = () => {
               Log out
               <span
                 style={{
-                  fontSize: "10px",
+                  fontSize: "12px",
                 }}
                 className="material-symbols-outlined"
               >

@@ -84,7 +84,14 @@ const AdminSignup = () => {
     <>
       <Header />
       <div
-        className="d-flex mt-5 justify-content-center align-items-center"
+        style={{
+          backgroundColor: "red", // Light background for contrast
+          height: "10vh",
+        }}
+      ></div>
+      <div
+        id="#d-flex"
+        className="d-flex justify-content-center align-items-center"
         style={{
           backgroundColor: "#f8f9fa", // Light background for contrast
           height: "100vh",

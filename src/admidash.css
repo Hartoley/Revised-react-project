@@ -53,26 +53,7 @@ form p{
         height: 30px;
     }
 
-    .videoItem{
-        /* background-color: red; */
-        margin-bottom: 3vh;
-        display: flex;
-        flex-direction: column;
-        margin-top: 1vh;
-        width: 100%;
-    }
 
-    #videoItem{
-        height: 35vh;
-        gap: 0.5rem;
-        /* background-color: blueviolet; */
-        border: solid 0.5px black;
-    }
-
-    .videoItem video{
-        height: 60%;
-        margin-bottom: 0.5rem;
-    }
     #edit{
         margin-top: 1vh;
         background-color: hotpink;

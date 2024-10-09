@@ -3,6 +3,22 @@
     background-color: #800000;
 }
 
+#downloadBtn {
+    background-color: #ffc107;
+    padding: 10px 20px;
+    border: none;
+    color: white;
+    border-radius: 5px;
+}
+
+#closeBtn {
+    background-color: #6c757d;
+    padding: 10px 20px;
+    border: none;
+    color: white;
+    border-radius: 5px;
+}
+
 .text-gold {
     color: gold;
 }
@@ -31,7 +47,7 @@ img {
         font-size: 0.5rem;
     }
 
-    p {
+    #myP {
         font-size: 0.5rem;
     }
 }
@@ -59,6 +75,16 @@ img {
         /* Gold text color */
     }
 
+          #downloadBtn,
+          #closeBtn {
+              padding: 3px 5px;
+              height: 4vh;
+              font-size: 14px;
+              background-color: reds;
+          }
+#d-flex{
+    height: auto;
+}
     /* Ensure text and layout are properly formatted for print */
     .certificate-container * {
         visibility: visible;
@@ -84,5 +110,9 @@ img {
         background-color: white;
         font-size: 16px;
         /* Adjust font size for better readability */
+    }
+
+    #btn{
+        height: 2vh;
     }
 }

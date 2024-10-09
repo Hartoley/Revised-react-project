@@ -31,12 +31,12 @@ const Loginbody = () => {
       .then((res) => {
         // console.log("students data from API:", res.data);
         setloggedin1(res.data);
-        console.log(loggedin1);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
+  // console.log(loggedin1);
 
   // console.log(loggedin1);
   const formik = useFormik({

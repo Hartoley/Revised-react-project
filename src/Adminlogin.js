@@ -1,33 +1,32 @@
 import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
-import * as yup from "yup";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
-import { Provider } from "react-redux";
-import Adminlogins, { saving, successful, failed } from "./Redux/Adminlogins";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import Header from "./Header";
 import Footer from "./Footer";
+import "./admin2.css";
 
 const Adminlogin = () => {
-  const disptach = useDispatch();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const endpoint = "https://react-node-project-3.onrender.com";
   const [loggedin, setloggedin] = useState(null);
+  const [showPassword, setShowPassword] = useState(false); // State for toggling password visibility
 
   useEffect(() => {
     axios
       .get(`${endpoint}/admin/getdata`)
       .then((res) => {
-        // console.log("Admin data from API:", res.data);
         setloggedin(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -35,7 +34,7 @@ const Adminlogin = () => {
     },
     onSubmit: (value) => {
       const loggedinadmin = loggedin.find(
-        (exist) => exist.email == value.email
+        (exist) => exist.email === value.email
       );
 
       if (loggedinadmin) {
@@ -52,11 +51,11 @@ const Adminlogin = () => {
             toast.error("Failed to log in. Please try again.");
           });
       } else {
-        console.log("usernot found");
-        toast.error("user doesn't exist");
+        toast.error("User doesn't exist");
       }
     },
   });
+
   return (
     <>
       <Header />
@@ -65,16 +64,17 @@ const Adminlogin = () => {
         style={{
           backgroundColor: "#f8f9fa",
           height: "100vh",
+          marginTop: "10vh",
         }}
       >
         <form
           onSubmit={formik.handleSubmit}
-          className="shadow-lg p-4 rounded w-50"
+          className="shadow-lg p-5 rounded"
           style={{
-            backgroundColor: "white",
-            borderRadius: "15px",
-            maxWidth: "400px",
-            width: "100%",
+            backgroundColor: "#ffffff",
+            maxWidth: "450px", // Adjust form width for medium screens
+            width: "100%", // Ensure the form is responsive
+            // Margin for large screens
           }}
         >
           <h3 className="text-center mb-4" style={{ color: "#343a40" }}>
@@ -89,14 +89,16 @@ const Adminlogin = () => {
             <input
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
-              className="form-control"
+              className={`form-control ${
+                formik.touched.email && formik.errors.email ? "is-invalid" : ""
+              }`}
               type="email"
               name="email"
               placeholder="Enter your email"
               style={{ borderRadius: "5px" }}
             />
             {formik.touched.email && formik.errors.email ? (
-              <p className="text-danger">{formik.errors.email}</p>
+              <div className="invalid-feedback">{formik.errors.email}</div>
             ) : null}
           </div>
 
@@ -105,28 +107,42 @@ const Adminlogin = () => {
             <label htmlFor="password" className="form-label">
               Password
             </label>
-            <input
-              onBlur={formik.handleBlur}
-              onChange={formik.handleChange}
-              className="form-control"
-              type="password"
-              name="password"
-              placeholder="Enter your password"
-              style={{ borderRadius: "5px" }}
-            />
+            <div className="input-group">
+              <input
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
+                className={`form-control ${
+                  formik.touched.password && formik.errors.password
+                    ? "is-invalid"
+                    : ""
+                }`}
+                type={showPassword ? "text" : "password"} // Toggle between text and password
+                name="password"
+                placeholder="Enter your password"
+                style={{ borderRadius: "5px" }}
+              />
+              <button
+                type="button"
+                className="btn btn-outline-secondary"
+                onClick={() => setShowPassword(!showPassword)} // Toggle the password visibility
+                style={{ borderRadius: "0 5px 5px 0" }}
+              >
+                {showPassword ? "Hide" : "Show"}
+              </button>
+            </div>
             {formik.touched.password && formik.errors.password ? (
-              <p className="text-danger">{formik.errors.password}</p>
+              <div className="invalid-feedback">{formik.errors.password}</div>
             ) : null}
           </div>
 
           {/* Submit Button */}
-          <div className="d-grid gap-2">
+          <div className="d-grid">
             <button
               type="submit"
               className="btn btn-dark"
               style={{
-                borderRadius: "20px",
-                padding: "10px",
+                borderRadius: "25px",
+                padding: "10px 0",
               }}
             >
               Log in
@@ -137,13 +153,7 @@ const Adminlogin = () => {
           <div className="text-center mt-3">
             <p>
               Don't have an account?{" "}
-              <a
-                href="/admin/signup"
-                style={{
-                  color: "#007bff",
-                  textDecoration: "underline",
-                }}
-              >
+              <a href="/admin/signup" className="text-decoration-underline">
                 Register here
               </a>
             </p>
