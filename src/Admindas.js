@@ -118,7 +118,7 @@ const Admindas = () => {
           toast.success("Course uploaded successfully!");
           let courseId = `${res.data.course._id}`;
           // console.log(courseId);
-          setLoading(true);
+          setLoading(false);
           console.log(formData);
           navigate(`/uploadVideo/${courseId}`);
         })
