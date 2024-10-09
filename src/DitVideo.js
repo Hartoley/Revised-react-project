@@ -59,12 +59,12 @@ const DitVideo = () => {
       <Dashheader />
       <div className="family-div">
         {/* Preview Section */}
-        <div className="video-preview">
+        <div id="video-preview" className="video-preview bg-white">
           <video src={preview} controls className="preview-video"></video>
         </div>
 
         {/* Course Info */}
-        <div className="course-info text-start ps-5">
+        <div className="course-info w-75 m-auto text-start bg-white ps-5 ">
           <h3 className="course-title">{course.title}</h3>
           <p className="subtitle">Author: {course.authors_name}</p>
           <p className="subtitle">Price: ${course.price}</p>
@@ -96,7 +96,7 @@ const DitVideo = () => {
         </div>
 
         {/* Video Grid Section */}
-        <div className="video-grid">
+        <div className="video-grid item-center mt-5">
           {videos &&
             videos.map((videoItem, index) => (
               <div key={index} className="video-item">
