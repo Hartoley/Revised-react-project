@@ -126,7 +126,7 @@ const Admindas = () => {
           console.log(err);
           setLoading(false);
           toast.dismiss();
-          toast.error("Failed Upload course");
+          toast.error(err?.response?.data?.message);
         });
     },
   });
