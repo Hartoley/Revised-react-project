@@ -45,14 +45,14 @@ const Landing = () => {
       <Header></Header>
       <Subheader></Subheader>
       <Body1></Body1>
-      <div className="videoBox1">
+      <div
+        className="videoBox1"
+        style={{
+          padding: "20px",
+        }}
+      >
         <div className="bigContainerDiv">
-          <p
-            className="learn"
-            style={{
-              marginLeft: "-50px",
-            }}
-          >
+          <p className="videoHeadlines">
             {viewed}
             <span>{vspan}</span>
             {extra}{" "}

@@ -2,7 +2,7 @@
     width: 100%;
     height: auto;
     /* background-color: red; */
-    padding: 0 30px;
+    padding:0 50px;
     
 }
 
@@ -54,6 +54,8 @@
     line-height: 28.8px;
     color: black;
     font-family: Arial, Helvetica, sans-serif;
+    margin-top: 2rem;
+    margin-left: -30vw;
 }
 
 .videoHeadlines span{
@@ -78,6 +80,7 @@
 
 .videoImage {
     width: 100%;
+    /* background-color: blue; */
     height: 35vh; 
     border: solid 1px rgb(37, 35, 35);
     margin-bottom: 2%;
@@ -164,6 +167,12 @@
         align-items: center; 
     }
 
+        .bigBox {
+    
+            padding: 0 30px;
+    
+        }
+
 }
 
 @media (max-width: 768px) {
@@ -195,8 +204,9 @@
     }
     
     .videoImage {
-        height: 50%; 
+        height: 30; 
         margin-bottom: 15px;
+        /* background-color: red; */
         
        
       }
@@ -204,7 +214,6 @@
 
     .videos{
         width: 30%;
-        height: 23vh;
         display: flex;
         flex-direction: column;
         justify-content: start;
@@ -238,6 +247,13 @@
         font-size: 12px;
         font-weight: 500;
         line-height: 16.8px;
+        margin-left: 0;
     }
+
+        .bigBox {
+          
+            padding: 0 30px;
+    
+        }
 }
 

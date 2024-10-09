@@ -80,7 +80,7 @@ const Videos = ({ viewed, vspan, extra }) => {
             </div>
           ))}
         </div>
-        <p className="learn">
+        <p className="videoHeadlines">
           {viewed}
           <span>{vspan}</span>
           {extra}{" "}

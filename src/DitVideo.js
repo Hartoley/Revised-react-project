@@ -64,7 +64,7 @@ const DitVideo = () => {
         </div>
 
         {/* Course Info */}
-        <div className="course-info text-center">
+        <div className="course-info text-start ps-5">
           <h3 className="course-title">{course.title}</h3>
           <p className="subtitle">Author: {course.authors_name}</p>
           <p className="subtitle">Price: ${course.price}</p>
