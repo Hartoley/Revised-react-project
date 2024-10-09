@@ -130,7 +130,6 @@ const Subcategory = () => {
 
     if (nextIndex < videos.length) {
       const video = videos[nextIndex];
-
       if (video) {
         setvideosID(nextIndex);
         setplayVideo(video.url);
@@ -145,12 +144,14 @@ const Subcategory = () => {
     const prevIndex = videosID - 1;
 
     if (prevIndex >= 0) {
-      setIsPaused(false);
-      playVideo(videos[prevIndex]._id, prevIndex);
+      const video = videos[prevIndex];
+      if (video) {
+        setvideosID(prevIndex);
+        setplayVideo(video.url);
+        console.log(video.url);
+      }
     } else {
       setStatusText("You have reached the first video.");
-      // toast.info("You have reached the first video.");
-      // console.log("You have reached the first video.");
     }
   };
 
@@ -308,8 +309,7 @@ const Subcategory = () => {
                       )
                     }
                   >
-                    key={playVideo}
-                    <source src={playvideo} type="video/mp4" />
+                    <source src={playvideo} key={playvideo} type="video/mp4" />
                     Your browser does not support the video tag.
                   </video>
                   <p className="status">{statusText}</p>
