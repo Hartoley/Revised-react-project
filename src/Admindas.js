@@ -192,7 +192,7 @@ const Admindas = () => {
 
       <div className="postVideos">
         <h3>Welcome on board {realadmin[1]}</h3>
-        <div className="student-section mt-5" ref={studentsSectionRef}>
+        <div className="student-section " ref={studentsSectionRef}>
           <h3>Students List</h3>
           <div className="student-grid">
             {studentsdata.map((student, index) => (
