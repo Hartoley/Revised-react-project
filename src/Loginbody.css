@@ -61,10 +61,12 @@
 .others {
   width: 90%;
   height: 10%;
-  padding: 0 20px 0 20px;
+  /* padding: 0 20px 0 20px; */
   border: solid 1.1px black;
   display: flex;
   align-items: center;
+  gap: 1rem;
+  padding-left: 1rem;
   /* background-color: red; */
 }
 
@@ -155,6 +157,9 @@
 
 #google {
   width: 4vw;
+  margin: 0;
+  padding: 0;
+  /* background-color: blue; */
   height: auto;
 }
 

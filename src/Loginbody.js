@@ -85,21 +85,16 @@ const Loginbody = () => {
           <p>Log in to your Udemy account</p>
           <div className="others">
             <img id="google" src={google} alt="" />
-            <div className="small1">
-              <p>Continue with Google</p>
-            </div>
+            <span>Continue with Google</span>
           </div>
           <div className="others">
             <img src={facebook} id="google" alt="" />
-            <div className="small1">
-              <p>Continue with Facebook</p>
-            </div>
+            <span>Continue with Facebook</span>
           </div>
           <div className="others">
             <img src={apple} id="google" alt="" />
-            <div className="small1">
-              <p> Continue with Apple</p>
-            </div>
+
+            <span> Continue with Apple</span>
           </div>
 
           <div
