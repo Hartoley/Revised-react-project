@@ -18,6 +18,10 @@ const Header = () => {
     navigate("/students/login");
   };
 
+  const Admin = (courses) => {
+    navigate("/adminlogin");
+  };
+
   const signup = (courses) => {
     navigate("/students/signup");
   };
@@ -60,6 +64,9 @@ const Header = () => {
           </button>
           <button onClick={signup} className={styles.buttonLogin}>
             Sign up
+          </button>
+          <button onClick={Admin} className={styles.buttonSignup}>
+            Admin?
           </button>
           <div className={styles.globeBox}>
             <span className="material-symbols-outlined">language</span>
