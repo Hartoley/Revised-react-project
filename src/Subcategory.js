@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { useFormik } from "formik";
 import { ToastContainer, toast } from "react-toastify";
@@ -124,7 +124,7 @@ const Subcategory = () => {
     }
   };
 
-  const next = () => {
+  const next = useCallback(() => {
     const nextIndex = videosID + 1;
     console.log(nextIndex);
 
@@ -134,11 +134,13 @@ const Subcategory = () => {
         setvideosID(nextIndex);
         setplayVideo(video.url);
         console.log(video.url);
+        videoElementRef.current.pause();
+        setIsPaused(true);
       }
     } else {
       setStatusText("You have reached the last video.");
     }
-  };
+  }, [playVideo]);
 
   const prev = () => {
     const prevIndex = videosID - 1;
@@ -195,6 +197,7 @@ const Subcategory = () => {
       )
       .then((response) => {
         console.log("Video status updated:", response.data);
+        setIsPaused(true);
       })
       .catch((error) => {
         console.error("Error updating video status:", error);
@@ -308,8 +311,14 @@ const Subcategory = () => {
                         videos.find((video) => video.url === playvideo)._id
                       )
                     }
+                    onloadstart={() => console.log("Video loading started")}
+                    controls
                   >
-                    <source src={playvideo} key={playvideo} type="video/mp4" />
+                    <source
+                      src={`${playvideo}?${new Date().getTime()}`}
+                      key={playvideo}
+                      type="video/mp4"
+                    />
                     Your browser does not support the video tag.
                   </video>
                   <p className="status">{statusText}</p>
