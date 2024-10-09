@@ -507,7 +507,6 @@
 
 @media (max-width: 380px) {
     .category3{
-        height: 50vh;
         width: 33%;
         padding: 0;
         /* background-color: red; */
@@ -519,10 +518,14 @@
         }
 
         .videocon {
-            padding: 0;
+            padding: 0 10px;
             margin: 0;
-            height: auto;
+            height: 60px;
             /* background-color: aqua; */
+        }
+
+        .sub2 h4{
+            font-size: 10px;
         }
         #subbtext {
             font-size: 10px;
@@ -667,7 +670,7 @@
 }
 
 .category3{
-    height: 25vh;
+    height: 35vh;
     width: 32%;
     padding: 0;
     top: 5%;
@@ -755,6 +758,7 @@
 }
 .sub4{
     height: auto;
+    padding-right: 10px;
 }
 
 .sub2 span{
@@ -762,7 +766,9 @@
 }
 
 .sub2 h4{
-    font-size: 12px;
+    font-size: 10px;
+    font-weight: 400;
+    padding: 0 10px;
 }
 
 #span1{
@@ -780,6 +786,7 @@
 #subbP2{
     Font-size: 10px;
     Font-weight: 400;
+ 
 }
 
 .btn-downloaded{

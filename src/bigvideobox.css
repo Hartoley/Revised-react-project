@@ -134,7 +134,7 @@
         gap: 5px;
         /* background-color: brown; */
         margin-bottom: 3vh;
-        height: 30vh;
+        height: auto;
     }
 
     .learn p{
