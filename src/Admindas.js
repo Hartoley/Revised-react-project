@@ -60,7 +60,7 @@ const Admindas = () => {
       .catch((error) => {
         console.log(error);
         setLoading(false);
-        toast.error("Failed to fetch admin data");
+        // toast.error("Failed to fetch admin data");
       });
   }, [id]);
 
