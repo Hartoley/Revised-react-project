@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { successful } from "./Redux/Adminlogins";
 import Header from "./Header";
 import Footer from "./Footer";
+import "./admin2.css";
 
 const AdminSignup = () => {
   const dispatch = useDispatch();
@@ -90,11 +91,11 @@ const AdminSignup = () => {
         }}
       ></div>
       <div
-        id="#d-flex"
         className="d-flex justify-content-center align-items-center"
         style={{
-          backgroundColor: "#f8f9fa", // Light background for contrast
+          backgroundColor: "#f8f9fa",
           height: "100vh",
+          width: "100%",
         }}
       >
         <form
@@ -103,7 +104,7 @@ const AdminSignup = () => {
           style={{
             backgroundColor: "white",
             borderRadius: "15px",
-            maxWidth: "400px",
+            // maxWidth: "400px",
             width: "100%",
           }}
         >
@@ -178,10 +179,11 @@ const AdminSignup = () => {
           <div className="d-grid gap-2">
             <button
               type="submit"
-              className="btn btn-dark"
+              className="btn btn-dark w-50"
               style={{
                 borderRadius: "20px",
                 padding: "10px",
+                margin: "auto",
               }}
             >
               Register
