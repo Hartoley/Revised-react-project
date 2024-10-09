@@ -303,7 +303,7 @@
   }
 
   .termsBox {
-    height: 3vh;
+    height: auto;
   }
 
   .buttonSignin {
