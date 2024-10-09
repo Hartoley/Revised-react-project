@@ -119,8 +119,12 @@ const Subcategory = () => {
         console.error("Video not found!");
       }
     } else {
-      toast.info("This video is not paid.");
-      console.log("This video is not paid.");
+      toast.info(
+        "Preview available. Please purchase the course to watch the full video"
+      );
+      console.log(
+        "Preview available. Please purchase the course to watch the full video"
+      );
     }
   };
 
