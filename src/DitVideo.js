@@ -91,7 +91,7 @@ const DitVideo = () => {
             className="btn btn-custom"
             onClick={() => EditCourse(course._id)}
           >
-            Edit Course
+            Update Course
           </button>
         </div>
 
