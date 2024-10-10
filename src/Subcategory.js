@@ -316,7 +316,7 @@ const Subcategory = () => {
                       )
                     }
                     onloadstart={() => console.log("Video loading started")}
-                    controlsons
+                    controls
                   >
                     <source
                       src={`${playvideo}?${new Date().getTime()}`}
