@@ -130,7 +130,7 @@
         }
         
     #videos{
-        width: 29.5%;
+        width: 46.5%;
         gap: 5px;
         /* background-color: brown; */
         margin-bottom: 3vh;
@@ -204,7 +204,7 @@
     }
     
     .videoImage {
-        height: 30; 
+        height: 30vh; 
         margin-bottom: 15px;
         /* background-color: red; */
         
@@ -213,7 +213,6 @@
 
 
     .videos{
-        width: 30%;
         display: flex;
         flex-direction: column;
         justify-content: start;
