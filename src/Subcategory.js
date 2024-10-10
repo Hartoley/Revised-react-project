@@ -303,7 +303,7 @@ const Subcategory = () => {
               {playvideo && (
                 <div className="videoPlayer">
                   <video
-                    // controls
+                    controls
                     ref={videoElementRef}
                     onPlay={() =>
                       handlePlay(
@@ -316,7 +316,6 @@ const Subcategory = () => {
                       )
                     }
                     onloadstart={() => console.log("Video loading started")}
-                    controls
                   >
                     <source
                       src={`${playvideo}?${new Date().getTime()}`}
