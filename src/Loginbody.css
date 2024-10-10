@@ -314,4 +314,8 @@
   .buttonSignin {
     height: 5vh;
   }
+
+  .others span{
+    font-size: 12px;
+  }
 }

@@ -208,9 +208,9 @@ const Admindas = () => {
                   className="student-info"
                 >
                   <h4>{student.username}</h4>
-                  <p>Location: {student.location || "Unknown"}</p>
                   <p>Email: {student.email || "No email provided"}</p>
-                  <p>Role: {student.role || "No phone number"}</p>
+                  <p>Location: {student.location || "Unknown"}</p>
+                  <p>Phone Num: {student.role || "No phone number"}</p>
                 </div>
               </div>
             ))}
