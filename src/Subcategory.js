@@ -265,8 +265,14 @@ const Subcategory = () => {
         // alert(response.data.message);
         console.log(response);
 
-        setcertification(response.data.message);
-        setIsEligibleForDownload(true);
+        if (response.data.status === "pending") {
+          setcertification(
+            `${response.data.message} but waiting on admin's approval`
+          );
+        } else if (response.data.status === "Approved") {
+          setcertification(response.data.message);
+          setIsEligibleForDownload(true);
+        }
       } else {
         // alert(response.data.message);
         setcertification(response.data.message);

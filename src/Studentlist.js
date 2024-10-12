@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Table, Container, Card, Alert } from "react-bootstrap";
 import axios from "axios";
 import { useParams } from "react-router-dom";
@@ -16,8 +16,18 @@ const StudentList = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const adminId = JSON.parse(storedadminId);
+  const loadingToastRef = useRef(false);
 
-  // Fetch student data
+  useEffect(() => {
+    if (loading) {
+      if (!loadingToastRef.current) {
+        toast.loading("Processing data...");
+        loadingToastRef.current = true;
+      }
+    } else {
+      loadingToastRef.current = false;
+    }
+  }, [loading]);
   useEffect(() => {
     axios
       .get(
@@ -25,28 +35,30 @@ const StudentList = () => {
       )
       .then((res) => {
         console.log(res.data);
+        setLoading(false);
         setstudentsdata(res.data.studentDetails);
         setNoProgressCourses(res.data.coursesWithNoProgress || []);
         setPaidCourses(res.data.paidCourses || []);
       })
       .catch((err) => {
+        setLoading(false);
         console.error("Failed to fetch student data:", err);
       });
   }, [id]);
 
-  console.log("Student ID:", id);
-  console.log(studentsdata);
+  // console.log("Student ID:", id);
+  // console.log(studentsdata);
 
   const handleRemoveStudent = () => {
     console.log(id);
 
-    toast.loading("Removing video...");
+    toast.loading("Removing student...");
     if (window.confirm("Are you sure you want to remove this student?")) {
       axios
         .delete(`https://react-node-project-1.onrender.com/udemy/delete/${id}`)
         .then((response) => {
           toast.dismiss();
-          toast.success("Course uploaded successfully!");
+          toast.success("Student removed successfully!");
           if (response.status === 200) {
             setTimeout(() => {
               navigate(`/admindashboard/${adminId}`);
@@ -59,6 +71,52 @@ const StudentList = () => {
           toast.error("Failed to remove the student. Please try again.");
         });
     }
+  };
+
+  const handleApprove = (courseId) => {
+    toast.loading("Approving student certification...");
+
+    axios
+      .post(
+        `https://react-node-project-1.onrender.com/udemy/approve/${id}/${courseId}`
+      )
+      .then((response) => {
+        toast.dismiss();
+        toast.success("Certification approved successfully!");
+        console.log(response);
+
+        setTimeout(() => {
+          // navigate(`/admindashboard/${adminId}`);
+        }, 5000);
+      })
+      .catch((error) => {
+        toast.dismiss();
+        console.error("Error approving certification:", error);
+        toast.error(error.response?.data.message || "Approval failed.");
+      });
+  };
+
+  const handleDecline = (courseId) => {
+    toast.loading("Approving student certification...");
+
+    axios
+      .post(
+        `https://react-node-project-1.onrender.com/udemy/decline/${id}/${courseId}`
+      )
+      .then((response) => {
+        toast.dismiss();
+        toast.success("Certification approved successfully!");
+        console.log(response);
+
+        setTimeout(() => {
+          // navigate(`/admindashboard/${adminId}`);
+        }, 5000);
+      })
+      .catch((error) => {
+        toast.dismiss();
+        console.error("Error approving certification:", error);
+        toast.error(error.response?.data.message || "Approval failed.");
+      });
   };
 
   return (
@@ -96,6 +154,8 @@ const StudentList = () => {
                     <th>Course Title</th>
                     <th>Certification</th>
                     <th>Paid</th>
+                    <th>Status</th>
+                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -105,6 +165,18 @@ const StudentList = () => {
                       <td>{course.courseTitle}</td>
                       <td>{course.certified ? "Eligible" : "Not Eligible"}</td>
                       <td>{course.paid ? "Yes" : "No"}</td>
+                      <td>{course.status || "Pending"}</td>
+                      {course.certified &&
+                        (!course.status || course.status === "pending") && (
+                          <>
+                            <td onClick={() => handleApprove(course.courseId)}>
+                              Approve
+                            </td>
+                            <td onClick={() => handleDecline(course.courseId)}>
+                              Decline
+                            </td>
+                          </>
+                        )}
                     </tr>
                   ))}
                 </tbody>
