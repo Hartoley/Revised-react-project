@@ -43,7 +43,7 @@ const StudentList = () => {
     toast.loading("Removing video...");
     if (window.confirm("Are you sure you want to remove this student?")) {
       axios
-        .delete(`http://localhost:5009/udemy/delete/${id}`)
+        .delete(`https://react-node-project-1.onrender.com/udemy/delete/${id}`)
         .then((response) => {
           toast.dismiss();
           toast.success("Course uploaded successfully!");

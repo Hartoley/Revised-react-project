@@ -57,7 +57,7 @@ const DitVideo = () => {
     toast.loading("Deleting Course course...");
     try {
       const response = await axios.delete(
-        `http://localhost:5009/courses/delete/${courseId}`
+        `https://react-node-project-1.onrender.com/courses/delete/${courseId}`
       );
 
       if (response.status === 200) {
