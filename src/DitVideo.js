@@ -9,6 +9,7 @@ import "./dit.css";
 import Dashheader from "./Dashheader";
 import Footer from "./Footer";
 import { useFormik } from "formik";
+import { Container, Row, Col, Card, Button } from "react-bootstrap";
 
 const DitVideo = () => {
   const [videos, setVideos] = useState([]);
@@ -112,7 +113,7 @@ const DitVideo = () => {
   };
 
   const Delete = async (courseId) => {
-    toast.loading("Deleting Course course...");
+    toast.loading("Deleting Course...");
     try {
       const response = await axios.delete(
         `https://react-node-project-1.onrender.com/courses/delete/${courseId}`
@@ -126,9 +127,37 @@ const DitVideo = () => {
           navigate(`/admindashboard/${adminId}`);
         }, 2500);
       } else {
+        toast.dismiss();
         console.log("Failed to delete the course");
       }
     } catch (error) {
+      toast.dismiss();
+      console.error("Error deleting the course:", error.message);
+    }
+  };
+
+  const deleteVideo = async (videoId) => {
+    console.log(videoId, courseId);
+
+    toast.loading("Deleting video...");
+    try {
+      const response = await axios.delete(
+        `https://react-node-project-1.onrender.com/courses/deletevideo/${courseId}/${videoId}`
+      );
+
+      if (response.status === 200) {
+        console.log("Video deleted successfully");
+        toast.dismiss();
+        toast.success("Video deleted successfully!");
+        setTimeout(() => {
+          navigate(`/admindashboard/${adminId}`);
+        }, 2500);
+      } else {
+        toast.dismiss();
+        console.log("Failed to delete the course");
+      }
+    } catch (error) {
+      toast.dismiss();
       console.error("Error deleting the course:", error.message);
     }
   };
@@ -460,6 +489,14 @@ const DitVideo = () => {
                   className="sub-video"
                 ></video>
                 <h4 className="subtitle">Title: {videoItem.sub_title}</h4>
+                <Button
+                  id="edit"
+                  variant="danger"
+                  onClick={() => deleteVideo(videoItem._id)}
+                  className="w-100"
+                >
+                  Delete
+                </Button>
               </div>
             ))}
         </div>
