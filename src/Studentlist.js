@@ -4,12 +4,18 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import Adminheader from "./AdminHeader";
 import Footer from "./Footer";
+import { ToastContainer, toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const StudentList = () => {
-  const { id } = useParams(); // assuming you're getting student ID from URL params
-  const [studentsdata, setstudentsdata] = useState(null); // Set to null initially
-  const [noProgressCourses, setNoProgressCourses] = useState([]); // Initialize as empty array
-  const [paidCourses, setPaidCourses] = useState([]); // Initialize as empty array
+  const { id } = useParams();
+  const [studentsdata, setstudentsdata] = useState(null);
+  const [noProgressCourses, setNoProgressCourses] = useState([]);
+  const [paidCourses, setPaidCourses] = useState([]);
+  const storedadminId = localStorage.getItem("adminId");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const adminId = JSON.parse(storedadminId);
 
   // Fetch student data
   useEffect(() => {
@@ -20,8 +26,8 @@ const StudentList = () => {
       .then((res) => {
         console.log(res.data);
         setstudentsdata(res.data.studentDetails);
-        setNoProgressCourses(res.data.coursesWithNoProgress || []); // Ensure it's an array
-        setPaidCourses(res.data.paidCourses || []); // Ensure it's an array
+        setNoProgressCourses(res.data.coursesWithNoProgress || []);
+        setPaidCourses(res.data.paidCourses || []);
       })
       .catch((err) => {
         console.error("Failed to fetch student data:", err);
@@ -31,6 +37,30 @@ const StudentList = () => {
   console.log("Student ID:", id);
   console.log(studentsdata);
 
+  const handleRemoveStudent = () => {
+    console.log(id);
+
+    toast.loading("Removing video...");
+    if (window.confirm("Are you sure you want to remove this student?")) {
+      axios
+        .delete(`http://localhost:5009/udemy/delete/${id}`)
+        .then((response) => {
+          toast.dismiss();
+          toast.success("Course uploaded successfully!");
+          if (response.status === 200) {
+            setTimeout(() => {
+              navigate(`/admindashboard/${adminId}`);
+            }, 5000);
+          }
+        })
+        .catch((error) => {
+          toast.dismiss();
+          console.error("Error removing student:", error);
+          toast.error("Failed to remove the student. Please try again.");
+        });
+    }
+  };
+
   return (
     <>
       <Adminheader />
@@ -39,6 +69,15 @@ const StudentList = () => {
         <h4 className="mb-4 text-center">
           Student: {studentsdata ? studentsdata.username : "Loading..."}
         </h4>
+
+        <div className="text-center mb-4">
+          <button
+            className="btn btn-danger btn-lg"
+            onClick={() => handleRemoveStudent()}
+          >
+            Remove Student
+          </button>
+        </div>
 
         {noProgressCourses.length === 0 && (
           <Alert variant="info" className="text-center">

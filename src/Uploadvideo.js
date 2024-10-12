@@ -44,7 +44,6 @@ const Uploadvideo = () => {
       const formData = new FormData();
       formData.append("sub_title", values.sub_title);
       formData.append("video_url", values.video_url);
-      setLoading(true);
       axios
         .post(
           `https://react-node-project-1.onrender.com/courses/upload/video/${courseId}`,

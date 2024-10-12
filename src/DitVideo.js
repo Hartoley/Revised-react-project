@@ -17,6 +17,9 @@ const DitVideo = () => {
   const [preview, setPreview] = useState("");
   const [count, setcount] = useState(0);
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const storedadminId = localStorage.getItem("adminId");
+  const adminId = JSON.parse(storedadminId);
 
   useEffect(() => {
     axios
@@ -48,6 +51,28 @@ const DitVideo = () => {
 
   const AddVideos = (courseId) => {
     navigate(`/uploadVideo/${courseId}`);
+  };
+
+  const Delete = async (courseId) => {
+    toast.loading("Deleting Course course...");
+    try {
+      const response = await axios.delete(
+        `http://localhost:5009/courses/delete/${courseId}`
+      );
+
+      if (response.status === 200) {
+        console.log("Course deleted successfully");
+        toast.dismiss();
+        toast.success("Course deleted successfully!");
+        setTimeout(() => {
+          navigate(`/admindashboard/${adminId}`);
+        }, 2500);
+      } else {
+        console.log("Failed to delete the course");
+      }
+    } catch (error) {
+      console.error("Error deleting the course:", error.message);
+    }
   };
 
   const EditCourse = (courseId) => {
@@ -82,6 +107,16 @@ const DitVideo = () => {
             onClick={() => AddVideos(course._id)}
           >
             Add More Videos
+          </button>
+
+          <button
+            style={{
+              color: "blue",
+            }}
+            className="btn btn-custom"
+            onClick={() => Delete(course._id)}
+          >
+            Delete Course
           </button>
 
           <button
