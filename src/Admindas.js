@@ -30,6 +30,9 @@ const Admindas = () => {
   const { id } = useParams();
   const Naira = "$";
   const sub = "Video Title:";
+  const [show, setshow] = useState(false);
+  const [notifications, setNotifications] = useState([]);
+  const [notificationsId, setNotificationsId] = useState([]);
   const loadingToastRef = useRef(false);
 
   useEffect(() => {
@@ -45,6 +48,24 @@ const Admindas = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    const fetchNotifications = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:5009/admin/notifications"
+        );
+        console.log("Fetched notifications:", response.data);
+        setNotifications(response.data.notifications);
+      } catch (err) {
+        console.error("Error fetching notifications:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchNotifications();
   }, []);
 
   useEffect(() => {
@@ -135,7 +156,9 @@ const Admindas = () => {
     // console.log("Student ID:", id);
     navigate(`/studentlist/${id}`);
   };
-
+  const showNotification = () => {
+    setshow((prev) => !prev);
+  };
   const handleFileChange = (event) => {
     try {
       formik.setFieldValue("video_preview", event.currentTarget.files[0]);
@@ -188,10 +211,50 @@ const Admindas = () => {
         scrollToCourses={scrollToCourses}
         scrollToStudents={scrollToStudents}
         scrollToUploadCourses={scrollToUploadCourses}
+        showNotification={showNotification}
       />
 
       <div className="postVideos">
         <h3>Welcome on board {realadmin[1]}</h3>
+        {show && (
+          <div className="container mt-4">
+            <h2 className="text-center mb-4">Student Notifications</h2>
+            <div className="card shadow">
+              <div className="card-header bg-primary text-white">
+                <h5>Notifications</h5>
+              </div>
+              <ul className="list-group list-group-flush">
+                {loading ? (
+                  <li className="list-group-item text-center">
+                    Loading notifications...
+                  </li>
+                ) : notifications.length > 0 ? (
+                  notifications.map((notification, index) => (
+                    <li
+                      key={index}
+                      className="list-group-item d-flex justify-content-between align-items-start"
+                    >
+                      <div onClick={() => getstudent(notification.studentId)}>
+                        <strong>{notification.message}</strong>
+                        <p className="mb-0">
+                          Course Title: {notification.courseTitle}
+                        </p>
+                      </div>
+                      <small className="text-muted">
+                        {new Date().toLocaleString()}{" "}
+                        {/* Display current time */}
+                      </small>
+                    </li>
+                  ))
+                ) : (
+                  <li className="list-group-item text-center">
+                    No notifications at the moment.
+                  </li>
+                )}
+              </ul>
+            </div>
+          </div>
+        )}
         <div className="student-section " ref={studentsSectionRef}>
           <h3>Students List</h3>
           <div className="student-grid">

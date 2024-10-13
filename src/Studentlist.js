@@ -34,7 +34,7 @@ const StudentList = () => {
         `https://react-node-project-1.onrender.com/udemy/student/data/id/${id}`
       )
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setLoading(false);
         setstudentsdata(res.data.studentDetails);
         setNoProgressCourses(res.data.coursesWithNoProgress || []);

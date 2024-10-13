@@ -7,6 +7,7 @@ const Adminheader = ({
   scrollToCourses,
   scrollToUploadCourses,
   scrollToStudents,
+  showNotification,
 }) => {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const storedId = localStorage.getItem("id");
@@ -87,7 +88,13 @@ const Adminheader = ({
           <div className="cart">
             <span className="material-symbols-outlined">favorite</span>
           </div>
-          <div className="cart">
+          <div
+            className="cart"
+            onClick={showNotification}
+            style={{
+              cursor: "pointer",
+            }}
+          >
             <span className="material-symbols-outlined">notifications</span>
           </div>
           <div onClick={logout} className="cart">
@@ -203,8 +210,9 @@ const Adminheader = ({
                 e.target.style.color = "";
                 e.target.style.transform = "scale(1)";
               }}
+              onClick={showNotification}
             >
-              Shopping cart
+              Notifications
             </p>
             <div
               onClick={logout}
@@ -212,7 +220,7 @@ const Adminheader = ({
                 marginTop: "15px", // Space above logout
                 cursor: "pointer",
                 transition: "color 0.3s, transform 0.3s",
-                fontSize: "10px",
+                fontSize: "12px",
                 display: "flex",
                 gap: "5px",
                 alignItems: "center",
