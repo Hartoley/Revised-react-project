@@ -54,7 +54,7 @@ const Admindas = () => {
     const fetchNotifications = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5009/admin/notifications"
+          "https://react-node-project-1.onrender.com/admin/notifications"
         );
         console.log("Fetched notifications:", response.data);
         setNotifications(response.data.notifications);
