@@ -8,6 +8,7 @@ const Adminheader = ({
   scrollToUploadCourses,
   scrollToStudents,
   showNotification,
+  notificationsCount,
 }) => {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const storedId = localStorage.getItem("id");
@@ -93,9 +94,38 @@ const Adminheader = ({
             onClick={showNotification}
             style={{
               cursor: "pointer",
+              position: "relative",
             }}
           >
             <span className="material-symbols-outlined">notifications</span>
+            {notificationsCount > 0 && (
+              <div
+                style={{
+                  width: "25px",
+                  height: "25px",
+                  borderRadius: "100%",
+                  left: "12px",
+                  backgroundColor: "red",
+                  bottom: "15px",
+                  position: "absolute",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "white",
+                  fontSize: "10px",
+                }}
+              >
+                <p
+                  style={{
+                    // backgroundColor: "blue",
+                    margin: "0",
+                    fontWeight: "600",
+                  }}
+                >
+                  {notificationsCount > 10 ? "10+" : notificationsCount}
+                </p>
+              </div>
+            )}
           </div>
           <div onClick={logout} className="cart">
             <span className="material-symbols-outlined">logout</span>

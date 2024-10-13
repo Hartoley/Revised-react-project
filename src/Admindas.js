@@ -54,7 +54,7 @@ const Admindas = () => {
     const fetchNotifications = async () => {
       try {
         const response = await axios.get(
-          "https://react-node-project-1.onrender.com/admin/notifications"
+          "http://localhost:5009/admin/notifications"
         );
         console.log("Fetched notifications:", response.data);
         setNotifications(response.data.notifications);
@@ -185,7 +185,7 @@ const Admindas = () => {
     let courseId = courses._id;
     navigate(`/editOne/${courseId}`);
 
-    // navigate(`/uploadVideo/${courseId}`);
+    // navigate(/uploadVideo/${courseId});
   };
 
   const Editcourse = (courses) => {
@@ -212,6 +212,7 @@ const Admindas = () => {
         scrollToStudents={scrollToStudents}
         scrollToUploadCourses={scrollToUploadCourses}
         showNotification={showNotification}
+        notificationsCount={notifications.length}
       />
 
       <div className="postVideos">
