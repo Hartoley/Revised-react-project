@@ -265,7 +265,7 @@ const Subcategory = () => {
         // alert(response.data.message);
         console.log(response);
 
-        if (response.data.status === "pending") {
+        if (response.data.status === "pending" || !response.data.status) {
           setcertification(
             `${response.data.message} but waiting on admin's approval`
           );
