@@ -56,8 +56,17 @@ const Admindas = () => {
         const response = await axios.get(
           "http://localhost:5009/admin/notifications"
         );
-        console.log("Fetched notifications:", response.data);
-        setNotifications(response.data.notifications);
+        const sortedNotifications = response.data.notifications.sort((a, b) => {
+          // Place new notifications at the top
+          return (b.isNew ? 1 : 0) - (a.isNew ? 1 : 0);
+        });
+
+        setNotifications(sortedNotifications);
+        setNotificationsId(
+          sortedNotifications
+            .filter((notification) => notification.isNew)
+            .map((n) => n.id)
+        );
       } catch (err) {
         console.error("Error fetching notifications:", err);
       } finally {
@@ -212,7 +221,9 @@ const Admindas = () => {
         scrollToStudents={scrollToStudents}
         scrollToUploadCourses={scrollToUploadCourses}
         showNotification={showNotification}
-        notificationsCount={notifications.length}
+        notificationsCount={
+          notifications.filter((notification) => notification.isNew).length
+        }
       />
 
       <div className="postVideos">
@@ -232,8 +243,13 @@ const Admindas = () => {
                 ) : notifications.length > 0 ? (
                   notifications.map((notification, index) => (
                     <li
+                      style={{
+                        cursor: "pointer",
+                      }}
                       key={index}
-                      className="list-group-item d-flex justify-content-between align-items-start"
+                      className={`list-group-item d-flex justify-content-between align-items-start ${
+                        notification.isNew ? "bg-light" : ""
+                      }`}
                     >
                       <div onClick={() => getstudent(notification.studentId)}>
                         <strong>{notification.message}</strong>
@@ -241,10 +257,9 @@ const Admindas = () => {
                           Course Title: {notification.courseTitle}
                         </p>
                       </div>
-                      <small className="text-muted">
-                        {new Date().toLocaleString()}{" "}
-                        {/* Display current time */}
-                      </small>
+                      {notification.isNew && (
+                        <span className="badge bg-success">New</span>
+                      )}
                     </li>
                   ))
                 ) : (
@@ -256,6 +271,7 @@ const Admindas = () => {
             </div>
           </div>
         )}
+
         <div className="student-section " ref={studentsSectionRef}>
           <h3>Students List</h3>
           <div className="student-grid">
