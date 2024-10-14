@@ -64,7 +64,7 @@ const Loginbody = () => {
           })
           .catch((err) => {
             console.log(err);
-            toast.error("Failed to log in. Please try again.");
+            toast.error(err.response.message.data);
           });
       } else {
         console.log("usernot found");
