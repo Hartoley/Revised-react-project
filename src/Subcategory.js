@@ -40,6 +40,7 @@ const Subcategory = () => {
   const navigate = useNavigate();
   let [isEligibleForDownload, setIsEligibleForDownload] = useState(false);
   let [isPaused, setIsPaused] = useState(true);
+  const [notifications, setNotifications] = useState([]);
 
   useEffect(() => {
     // console.log('Is Eligible for Download:', isEligibleForDownload);
@@ -89,6 +90,31 @@ const Subcategory = () => {
         // toast.error("Failed to fetch paid courses. Please try again later.");
       });
   }, [id]);
+
+  useEffect(() => {
+    const studentId = id;
+    const fetchNotifications = async () => {
+      try {
+        const response = await axios.get(
+          `https://react-node-project-1.onrender.com/students/notifications/${studentId}`
+        );
+        if (response.data.success) {
+          setNotifications(response.data.notifications || []);
+        } else {
+          setError("No notifications found.");
+        }
+      } catch (error) {
+        console.error("Error fetching notifications:", error);
+        setError("An error occurred while fetching notifications.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchNotifications();
+  }, [id]);
+
+  const newNotificationCount = notifications.length;
 
   const handleStarClick = () => {
     console.log("Star clicked!");
@@ -292,6 +318,10 @@ const Subcategory = () => {
     const header = headerRef.current;
   };
 
+  const showNotification = () => {
+    navigate(`/notifications/${id}`);
+  };
+
   useEffect(() => {
     window.addEventListener("scroll", headerChange);
     return () => window.removeEventListener("scroll", headerChange);
@@ -299,7 +329,10 @@ const Subcategory = () => {
 
   return (
     <>
-      <Dashheader />
+      <Dashheader
+        showNotification={showNotification}
+        notificationsCount={newNotificationCount}
+      />
       <div onScroll={headerChange} ref={subcategoryRef} className="subCategory">
         <div className="category">
           {/* <div className="category1"></div> */}

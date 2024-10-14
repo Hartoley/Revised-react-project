@@ -13,6 +13,7 @@ import Certificate from "./Certificate";
 import Landing from "./Landing";
 import DitVideo from "./DitVideo";
 import StudentList from "./Studentlist";
+import Notifications from "./Notifications";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
       <Routes>
         <Route path="/students/signup" element={<Stundentsignup />} />
         <Route path="/" element={<Landing />} />
+        <Route path="/notifications/:id" element={<Notifications />} />
         <Route path="/students/dashboard/:id" element={<Studentsdash />} />
         <Route path="/students/login" element={<Studentlogin />} />
         <Route path="/admin/signup" element={<Admin />} />

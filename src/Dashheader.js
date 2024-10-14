@@ -4,7 +4,7 @@ import logo from "./Images/new Udemy.png";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const Dashheader = () => {
+const Dashheader = ({ showNotification, notificationsCount }) => {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const storedId = localStorage.getItem("id");
   const storedadminId = localStorage.getItem("adminId");
@@ -76,8 +76,43 @@ const Dashheader = () => {
           <div className="cart">
             <span className="material-symbols-outlined">favorite</span>
           </div>
-          <div className="cart">
+          <div
+            className="cart"
+            onClick={showNotification}
+            style={{
+              cursor: "pointer",
+              position: "relative",
+            }}
+          >
             <span className="material-symbols-outlined">notifications</span>
+            {notificationsCount > 0 && (
+              <div
+                style={{
+                  width: "25px",
+                  height: "25px",
+                  borderRadius: "100%",
+                  left: "12px",
+                  backgroundColor: "red",
+                  bottom: "15px",
+                  position: "absolute",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "white",
+                  fontSize: "10px",
+                }}
+              >
+                <p
+                  style={{
+                    // backgroundColor: "blue",
+                    margin: "0",
+                    fontWeight: "600",
+                  }}
+                >
+                  {notificationsCount > 10 ? "10+" : notificationsCount}
+                </p>
+              </div>
+            )}
           </div>
           <p
             style={{
@@ -126,9 +161,11 @@ const Dashheader = () => {
             }}
           >
             <p
+              onClick={showNotification}
               style={{
                 margin: "10px 0", // Spacing between menu items
                 cursor: "pointer",
+                position: "relative",
                 transition: "color 0.3s, transform 0.3s", // Smooth transition for hover effects
               }}
               onMouseEnter={(e) => {
@@ -140,7 +177,35 @@ const Dashheader = () => {
                 e.target.style.transform = "scale(1)"; // Reset zoom
               }}
             >
-              Udemy Business
+              Notifications
+              {notificationsCount > 0 && (
+                <div
+                  style={{
+                    width: "20px",
+                    height: "20px",
+                    borderRadius: "100%",
+                    left: "70px",
+                    backgroundColor: "red",
+                    bottom: "3px",
+                    position: "absolute",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    color: "white",
+                    fontSize: "8px",
+                  }}
+                >
+                  <p
+                    style={{
+                      // backgroundColor: "blue",
+                      margin: "0",
+                      fontWeight: "600",
+                    }}
+                  >
+                    {notificationsCount > 10 ? "10+" : notificationsCount}
+                  </p>
+                </div>
+              )}
             </p>
             <p
               style={{

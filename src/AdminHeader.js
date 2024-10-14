@@ -231,6 +231,7 @@ const Adminheader = ({
                 margin: "10px 0",
                 cursor: "pointer",
                 transition: "color 0.3s, transform 0.3s",
+                position: "relative",
               }}
               onMouseEnter={(e) => {
                 e.target.style.color = "#007BFF";
@@ -243,6 +244,34 @@ const Adminheader = ({
               onClick={showNotification}
             >
               Notifications
+              {notificationsCount > 0 && (
+                <div
+                  style={{
+                    width: "20px",
+                    height: "20px",
+                    borderRadius: "100%",
+                    left: "85px",
+                    backgroundColor: "red",
+                    bottom: "3px",
+                    position: "absolute",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    color: "white",
+                    fontSize: "8px",
+                  }}
+                >
+                  <p
+                    style={{
+                      // backgroundColor: "blue",
+                      margin: "0",
+                      fontWeight: "600",
+                    }}
+                  >
+                    {notificationsCount > 10 ? "10+" : notificationsCount}
+                  </p>
+                </div>
+              )}
             </p>
             <div
               onClick={logout}

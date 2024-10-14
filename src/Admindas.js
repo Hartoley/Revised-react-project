@@ -57,7 +57,6 @@ const Admindas = () => {
           "https://react-node-project-1.onrender.com/admin/notifications"
         );
         const sortedNotifications = response.data.notifications.sort((a, b) => {
-          // Place new notifications at the top
           return (b.isNew ? 1 : 0) - (a.isNew ? 1 : 0);
         });
 
