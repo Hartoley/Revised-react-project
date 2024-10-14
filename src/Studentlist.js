@@ -141,7 +141,8 @@ const StudentList = () => {
                     {noProgressCourses.some(
                       (course) =>
                         course.certified &&
-                        (!course.status || course.status === "pending")
+                        (!course.status ||
+                          course.status.toLowerCase() === "pending")
                     ) && <th>Action</th>}
                   </tr>
                 </thead>
@@ -154,7 +155,8 @@ const StudentList = () => {
                       <td>{course.paid ? "Yes" : "No"}</td>
                       <td>{course.status || "Pending"}</td>
                       {course.certified &&
-                      (!course.status || course.status === "pending") ? (
+                      (!course.status ||
+                        course.status.toLowerCase() === "pending") ? (
                         <td>
                           <button
                             className="btn btn-success me-2"
