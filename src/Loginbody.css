@@ -207,6 +207,10 @@
     height: 130vh;
   }
 
+  .others{
+    height: 50%;
+  }
+
   .checkContainer input {
     width: 10px;
     height: 10px;
