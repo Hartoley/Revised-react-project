@@ -230,6 +230,7 @@ const Subcategory = () => {
         setIsPaused(true);
       })
       .catch((error) => {
+        setIsPaused(true);
         console.error("Error updating video status:", error);
       });
   };
@@ -244,6 +245,7 @@ const Subcategory = () => {
   };
 
   const handlePlay = (videoId) => {
+    setIsPaused(false);
     const url = `https://react-node-project-1.onrender.com/udemy/student/isWatched`;
     console.log("Requesting URL:", url);
 
