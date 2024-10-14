@@ -30,7 +30,6 @@ const StudentList = () => {
   }, [loading]);
 
   useEffect(() => {
-    setLoading(true);
     axios
       .get(
         `https://react-node-project-1.onrender.com/udemy/student/data/id/${id}`
