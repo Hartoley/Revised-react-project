@@ -12,6 +12,11 @@ const Notifications = () => {
 
   const studentId = JSON.parse(localStorage.getItem("id"));
 
+  const goHome = () => {
+    const id = studentId;
+    navigate(`/students/dashboard/${id}`);
+  };
+
   useEffect(() => {
     const fetchNotifications = async () => {
       try {
@@ -44,7 +49,7 @@ const Notifications = () => {
 
   return (
     <>
-      <Dashheader notificationsCount={newNotificationCount} />
+      <Dashheader notificationsCount={newNotificationCount} goHome={goHome} />
       <div style={{ height: "10vh" }}></div>
       <div className="container mt-4 mb-5">
         <h2 className="text-center mb-4">Student Notifications</h2>

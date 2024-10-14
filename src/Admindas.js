@@ -174,6 +174,8 @@ const Admindas = () => {
     }, 100);
   };
 
+  const goHome = () => {};
+
   const handleFileChange = (event) => {
     try {
       formik.setFieldValue("video_preview", event.currentTarget.files[0]);
@@ -227,6 +229,7 @@ const Admindas = () => {
         scrollToStudents={scrollToStudents}
         scrollToUploadCourses={scrollToUploadCourses}
         showNotification={showNotification}
+        goHome={goHome}
         notificationsCount={
           notifications.filter((notification) => notification.isNew).length
         }

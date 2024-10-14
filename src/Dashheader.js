@@ -4,7 +4,7 @@ import logo from "./Images/new Udemy.png";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const Dashheader = ({ showNotification, notificationsCount }) => {
+const Dashheader = ({ showNotification, notificationsCount, goHome }) => {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const storedId = localStorage.getItem("id");
   const storedadminId = localStorage.getItem("adminId");
@@ -42,7 +42,7 @@ const Dashheader = ({ showNotification, notificationsCount }) => {
   return (
     <>
       <div className="headers" id="header">
-        <div className="imageCon">
+        <div onClick={goHome} className="imageCon">
           <img className="logo" src={logo} alt="Udemy Logo" />
         </div>
         <div className="main">
@@ -70,8 +70,8 @@ const Dashheader = ({ showNotification, notificationsCount }) => {
             <p>My learning</p>
           </div>
 
-          <div className="cart">
-            <span className="material-symbols-outlined">shopping_cart</span>
+          <div className="cart" onClick={goHome}>
+            <span className="material-symbols-outlined">home</span>
           </div>
           <div className="cart">
             <span className="material-symbols-outlined">favorite</span>
@@ -208,6 +208,7 @@ const Dashheader = ({ showNotification, notificationsCount }) => {
               )}
             </p>
             <p
+              onClick={goHome}
               style={{
                 margin: "10px 0",
                 cursor: "pointer",
@@ -222,7 +223,7 @@ const Dashheader = ({ showNotification, notificationsCount }) => {
                 e.target.style.transform = "scale(1)";
               }}
             >
-              Search
+              Home
             </p>
             <p
               style={{

@@ -239,6 +239,10 @@ const Subcategory = () => {
     console.log("Download certificate");
   };
 
+  const goHome = () => {
+    navigate(`/students/dashboard/${id}`);
+  };
+
   const handlePlay = (videoId) => {
     const url = `https://react-node-project-1.onrender.com/udemy/student/isWatched`;
     console.log("Requesting URL:", url);
@@ -331,6 +335,7 @@ const Subcategory = () => {
     <>
       <Dashheader
         showNotification={showNotification}
+        goHome={goHome}
         notificationsCount={newNotificationCount}
       />
       <div onScroll={headerChange} ref={subcategoryRef} className="subCategory">

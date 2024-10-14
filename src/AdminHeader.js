@@ -9,6 +9,7 @@ const Adminheader = ({
   scrollToStudents,
   showNotification,
   notificationsCount,
+  goHome,
 }) => {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const storedId = localStorage.getItem("id");
@@ -34,7 +35,7 @@ const Adminheader = ({
   return (
     <>
       <div className="headers" id="header">
-        <div className="imageCon">
+        <div onClick={goHome} className="imageCon">
           <img className="logo" src={logo} alt="Udemy Logo" />
         </div>
         <div className="main">
