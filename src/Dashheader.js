@@ -70,7 +70,13 @@ const Dashheader = ({ showNotification, notificationsCount, goHome }) => {
             <p>My learning</p>
           </div>
 
-          <div className="cart" onClick={goHome}>
+          <div
+            className="cart"
+            onClick={goHome}
+            style={{
+              cursor: "pointer",
+            }}
+          >
             <span className="material-symbols-outlined">home</span>
           </div>
           <div className="cart">
@@ -151,13 +157,13 @@ const Dashheader = ({ showNotification, notificationsCount, goHome }) => {
               left: "60vw",
               width: "40vw",
               height: "auto",
-              fontSize: "12px", // Increased font size
-              lineHeight: "20px", // Increased line height
-              padding: "10px 15px", // Increased padding
-              border: "solid 0.5px rgb(135, 137, 138)", // Thicker border for visibility
+              fontSize: "12px",
+              lineHeight: "20px",
+              padding: "10px 15px",
+              border: "solid 0.5px rgb(135, 137, 138)",
               top: "10vh",
-              boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Added shadow for depth
-              transition: "all 0.3s ease", // Smooth transition for hover effects
+              boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+              transition: "all 0.3s ease",
             }}
           >
             <p
