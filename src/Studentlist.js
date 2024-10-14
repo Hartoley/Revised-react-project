@@ -5,15 +5,15 @@ import { useParams } from "react-router-dom";
 import Adminheader from "./AdminHeader";
 import Footer from "./Footer";
 import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 
 const StudentList = () => {
   const { id } = useParams();
   const [studentsdata, setstudentsdata] = useState(null);
   const [noProgressCourses, setNoProgressCourses] = useState([]);
-  const [paidCourses, setPaidCourses] = useState([]);
   const storedadminId = localStorage.getItem("adminId");
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const adminId = JSON.parse(storedadminId);
   const loadingToastRef = useRef(false);
@@ -28,17 +28,17 @@ const StudentList = () => {
       loadingToastRef.current = false;
     }
   }, [loading]);
+
   useEffect(() => {
+    setLoading(true);
     axios
       .get(
         `https://react-node-project-1.onrender.com/udemy/student/data/id/${id}`
       )
       .then((res) => {
-        // console.log(res.data);
         setLoading(false);
         setstudentsdata(res.data.studentDetails);
         setNoProgressCourses(res.data.coursesWithNoProgress || []);
-        setPaidCourses(res.data.paidCourses || []);
       })
       .catch((err) => {
         setLoading(false);
@@ -46,14 +46,9 @@ const StudentList = () => {
       });
   }, [id]);
 
-  // console.log("Student ID:", id);
-  // console.log(studentsdata);
-
   const handleRemoveStudent = () => {
-    console.log(id);
-
-    toast.loading("Removing student...");
     if (window.confirm("Are you sure you want to remove this student?")) {
+      toast.loading("Removing student...");
       axios
         .delete(`https://react-node-project-1.onrender.com/udemy/delete/${id}`)
         .then((response) => {
@@ -75,7 +70,6 @@ const StudentList = () => {
 
   const handleApprove = (courseId) => {
     toast.loading("Approving student certification...");
-
     axios
       .post(
         `https://react-node-project-1.onrender.com/udemy/approve/${id}/${courseId}`
@@ -83,11 +77,6 @@ const StudentList = () => {
       .then((response) => {
         toast.dismiss();
         toast.success("Certification approved successfully!");
-        console.log(response);
-
-        setTimeout(() => {
-          // navigate(`/admindashboard/${adminId}`);
-        }, 5000);
       })
       .catch((error) => {
         toast.dismiss();
@@ -97,25 +86,19 @@ const StudentList = () => {
   };
 
   const handleDecline = (courseId) => {
-    toast.loading("Approving student certification...");
-
+    toast.loading("Declining student certification...");
     axios
       .post(
         `https://react-node-project-1.onrender.com/udemy/decline/${id}/${courseId}`
       )
       .then((response) => {
         toast.dismiss();
-        toast.success("Certification approved successfully!");
-        console.log(response);
-
-        setTimeout(() => {
-          // navigate(`/admindashboard/${adminId}`);
-        }, 5000);
+        toast.success("Certification declined successfully!");
       })
       .catch((error) => {
         toast.dismiss();
-        console.error("Error approving certification:", error);
-        toast.error(error.response?.data.message || "Approval failed.");
+        console.error("Error declining certification:", error);
+        toast.error(error.response?.data.message || "Decline failed.");
       });
   };
 
@@ -131,7 +114,7 @@ const StudentList = () => {
         <div className="text-center mb-4">
           <button
             className="btn btn-danger btn-lg"
-            onClick={() => handleRemoveStudent()}
+            onClick={handleRemoveStudent}
           >
             Remove Student
           </button>
@@ -155,7 +138,11 @@ const StudentList = () => {
                     <th>Certification</th>
                     <th>Paid</th>
                     <th>Status</th>
-                    <th>Action</th>
+                    {noProgressCourses.some(
+                      (course) =>
+                        course.certified &&
+                        (!course.status || course.status === "pending")
+                    ) && <th>Action</th>}
                   </tr>
                 </thead>
                 <tbody>
@@ -167,16 +154,24 @@ const StudentList = () => {
                       <td>{course.paid ? "Yes" : "No"}</td>
                       <td>{course.status || "Pending"}</td>
                       {course.certified &&
-                        (!course.status || course.status === "pending") && (
-                          <>
-                            <td onClick={() => handleApprove(course.courseId)}>
-                              Approve
-                            </td>
-                            <td onClick={() => handleDecline(course.courseId)}>
-                              Decline
-                            </td>
-                          </>
-                        )}
+                      (!course.status || course.status === "pending") ? (
+                        <td>
+                          <button
+                            className="btn btn-success me-2"
+                            onClick={() => handleApprove(course.courseId)}
+                          >
+                            Approve
+                          </button>
+                          <button
+                            className="btn btn-danger"
+                            onClick={() => handleDecline(course.courseId)}
+                          >
+                            Decline
+                          </button>
+                        </td>
+                      ) : (
+                        <td></td>
+                      )}
                     </tr>
                   ))}
                 </tbody>
@@ -188,6 +183,7 @@ const StudentList = () => {
         </Card>
       </Container>
       <Footer />
+      <ToastContainer />
     </>
   );
 };

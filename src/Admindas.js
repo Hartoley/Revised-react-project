@@ -21,6 +21,7 @@ const Admindas = () => {
   const coursesSectionRef = useRef(null);
   const studentsSectionRef = useRef(null);
   const uploadSectionRef = useRef(null);
+  const notificationSectionRef = useRef(null);
   const [studentsdata, setstudentsdata] = useState([]);
   const [loading, setLoading] = useState(true);
   const [realadmin, setrealadmin] = useState({});
@@ -166,7 +167,13 @@ const Admindas = () => {
   };
   const showNotification = () => {
     setshow((prev) => !prev);
+    setTimeout(() => {
+      if (notificationSectionRef.current) {
+        notificationSectionRef.current.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 100);
   };
+
   const handleFileChange = (event) => {
     try {
       formik.setFieldValue("video_preview", event.currentTarget.files[0]);
@@ -228,7 +235,7 @@ const Admindas = () => {
       <div className="postVideos">
         <h3>Welcome on board {realadmin[1]}</h3>
         {show && (
-          <div className="container mt-4">
+          <div ref={notificationSectionRef} className="container mt-4">
             <h2 className="text-center mb-4">Student Notifications</h2>
             <div className="card shadow">
               <div className="card-header bg-primary text-white">
@@ -242,6 +249,7 @@ const Admindas = () => {
                 ) : notifications.length > 0 ? (
                   notifications.map((notification, index) => (
                     <li
+                      onClick={() => getstudent(notification.studentId)}
                       style={{
                         cursor: "pointer",
                       }}
@@ -250,7 +258,7 @@ const Admindas = () => {
                         notification.isNew ? "bg-light" : ""
                       }`}
                     >
-                      <div onClick={() => getstudent(notification.studentId)}>
+                      <div>
                         <strong>{notification.message}</strong>
                         <p className="mb-0">
                           Course Title: {notification.courseTitle}
