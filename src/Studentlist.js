@@ -13,7 +13,7 @@ const StudentList = () => {
   const [studentsdata, setstudentsdata] = useState(null);
   const [noProgressCourses, setNoProgressCourses] = useState([]);
   const storedadminId = localStorage.getItem("adminId");
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const adminId = JSON.parse(storedadminId);
   const loadingToastRef = useRef(false);
