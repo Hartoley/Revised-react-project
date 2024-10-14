@@ -52,7 +52,7 @@ const DitVideo = () => {
       setLoading(true);
       axios
         .post(
-          `http://localhost:5009/courses/edit/course/${courseId}`,
+          `https://react-node-project-1.onrender.com/courses/edit/course/${courseId}`,
           formData,
           {
             headers: {
