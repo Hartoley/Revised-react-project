@@ -176,7 +176,7 @@ const DitVideo = () => {
 
   return (
     <>
-      <Dashheader />
+      <Adminheader />
       <div className="family-div">
         {/* Preview Section */}
         <div id="video-preview" className="video-preview bg-white">
