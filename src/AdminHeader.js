@@ -217,6 +217,7 @@ const Adminheader = ({
               Manage Courses
             </p>
             <p
+              onClick={goHome}
               style={{
                 margin: "10px 0",
                 cursor: "pointer",
@@ -231,7 +232,7 @@ const Adminheader = ({
                 e.target.style.transform = "scale(1)";
               }}
             >
-              Favorite
+              Home
             </p>
             <p
               style={{
