@@ -45,6 +45,11 @@ const StudentList = () => {
       });
   }, [id]);
 
+  const goHome = () => {
+    const id = adminId;
+    navigate(`/admindashboard/${id}`);
+  };
+
   const handleRemoveStudent = () => {
     if (window.confirm("Are you sure you want to remove this student?")) {
       toast.loading("Removing student...");
@@ -103,7 +108,7 @@ const StudentList = () => {
 
   return (
     <>
-      <Adminheader />
+      <Adminheader goHome={goHome} />
       <div style={{ height: "11vh" }}></div>
       <Container className="mt-5">
         <h4 className="mb-4 text-center">
