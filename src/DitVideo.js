@@ -10,6 +10,7 @@ import Dashheader from "./Dashheader";
 import Footer from "./Footer";
 import { useFormik } from "formik";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
+import Adminheader from "./AdminHeader";
 
 const DitVideo = () => {
   const [videos, setVideos] = useState([]);
@@ -136,6 +137,11 @@ const DitVideo = () => {
     }
   };
 
+  const goHome = () => {
+    const id = adminId;
+    navigate(`/admindashboard/${id}`);
+  };
+
   const deleteVideo = async (videoId) => {
     console.log(videoId, courseId);
 
@@ -176,7 +182,7 @@ const DitVideo = () => {
 
   return (
     <>
-      <Adminheader />
+      <Adminheader goHome={goHome} />
       <div className="family-div">
         {/* Preview Section */}
         <div id="video-preview" className="video-preview bg-white">

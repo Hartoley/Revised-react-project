@@ -84,8 +84,14 @@ const Adminheader = ({
             </p>
           </div>
 
-          <div className="cart">
-            <span className="material-symbols-outlined">shopping_cart</span>
+          <div
+            className="cart"
+            onClick={goHome}
+            style={{
+              cursor: "pointer",
+            }}
+          >
+            <span className="material-symbols-outlined">home</span>
           </div>
           <div className="cart">
             <span className="material-symbols-outlined">favorite</span>
