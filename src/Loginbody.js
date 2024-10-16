@@ -29,7 +29,7 @@ const Loginbody = () => {
     axios
       .get(`${endpoint}/udemy/student/getdata`)
       .then((res) => {
-        console.log("students data from API:", res.data);
+        // console.log("students data from API:", res.data);
         setloggedin1(res.data);
       })
       .catch((err) => {
@@ -45,9 +45,6 @@ const Loginbody = () => {
       password: "",
     },
     onSubmit: (value) => {
-      const trimmedEmail = value.email.trim();
-      const trimmedPassword = value.password.trim();
-
       const loggedinstudents = loggedin1.find(
         (exist) => exist.email == value.email
       );
@@ -56,17 +53,22 @@ const Loginbody = () => {
         axios
           .post(
             `https://react-node-project-1.onrender.com/udemy/student/login`,
-            { email: trimmedEmail, password: trimmedPassword }
+            value
           )
           .then((res) => {
-            // Handle success
+            let id = `${loggedinstudents._id}`;
+
+            // console.log(loggedinstudents._id);
+            toast.success("students successfully logged in");
+            navigate(`/students/dashboard/${id}`);
           })
           .catch((err) => {
-            // Handle error
+            console.log(err);
+            toast.error(err.response.data.message);
           });
       } else {
-        console.log("User not found");
-        toast.error("User not found");
+        console.log("usernot found");
+        toast.error("usernot found");
       }
     },
   });
