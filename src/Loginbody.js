@@ -46,9 +46,9 @@ const Loginbody = () => {
     },
     onSubmit: (value) => {
       const loggedinstudents = loggedin1.find(
-        (exist) => exist.email == value.email
+        (exist) => exist.email === value.email
       );
-      // console.log(loggedinstudents);
+      console.log(loggedinstudents);
       if (loggedinstudents) {
         axios
           .post(
