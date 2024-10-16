@@ -58,7 +58,7 @@ const Loginbody = () => {
           .then((res) => {
             let id = `${loggedinstudents._id}`;
 
-            // console.log(loggedinstudents._id);
+            console.log(loggedinstudents._id);
             toast.success("students successfully logged in");
             navigate(`/students/dashboard/${id}`);
           })
