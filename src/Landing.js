@@ -77,7 +77,11 @@ const Landing = () => {
                 <p className="title">{courses.title}</p>
                 <p className="authorName">{courses.authors_name}</p>
                 <p className="price">
-                  {Naira} {courses.price}
+                  {Naira} ₦
+                  {courses.price.toLocaleString("en-NG", {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  })}
                 </p>
               </div>
             ))}
