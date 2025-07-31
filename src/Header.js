@@ -3,6 +3,7 @@ import styles from "./students.module.css";
 import logo from "./Images/new Udemy.png";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { DropdownMenu } from "react-bootstrap";
 
 const Header = () => {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
@@ -83,77 +84,64 @@ const Header = () => {
           <div
             style={{
               position: "absolute",
-              backgroundColor: "white",
-              left: "10%",
-              width: "20vw",
-              height: "auto",
-              fontSize: "14px",
-              lineHeight: "20px",
-              padding: "10px 15px",
-              border: "solid 0.5px rgb(135, 137, 138)",
-              top: "10vh",
-              boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-              transition: "all 0.3s ease",
-              zIndex: "999", // Ensures it's above other elements
-              ...(window.innerWidth <= 600 && {
-                left: "50vw", // Shifted more center on smaller screens
-                width: "50vw", // Take up more space on smaller screens
-                fontSize: "12px", // Reduce font size for better fit
-                padding: "8px 12px",
-              }),
+              top: "12vh",
+              right: "5%",
+              width: "200px",
+              backgroundColor: "#fff",
+              padding: "16px",
+              borderRadius: "10px",
+              boxShadow: "0 6px 16px rgba(0,0,0,0.1)",
+              zIndex: 1000,
+              display: "flex",
+              flexDirection: "column",
+              gap: "10px",
             }}
           >
-            <p
+            <a
+              href="/students/signup"
               style={{
-                margin: "10px 0", // Spacing between menu items
-                cursor: "pointer",
-                transition: "color 0.3s, transform 0.3s", // Smooth transition for hover effects
+                textDecoration: "none",
+                color: "#111",
+                padding: "10px",
+                borderRadius: "8px",
+                fontWeight: "500",
+                transition: "background 0.3s",
               }}
-              onMouseEnter={(e) => {
-                e.target.style.color = "#007BFF"; // Hover color
-                e.target.style.transform = "scale(1.05)"; // Slight zoom
-              }}
-              onMouseLeave={(e) => {
-                e.target.style.color = ""; // Reset hover color
-                e.target.style.transform = "scale(1)"; // Reset zoom
-              }}
+              onMouseEnter={(e) => (e.target.style.background = "#f1f1f1")}
+              onMouseLeave={(e) => (e.target.style.background = "transparent")}
             >
-              <a href="/students/signup">Sign up</a>
-            </p>
-            <p
+              Sign up
+            </a>
+            <a
+              href="/students/login"
               style={{
-                margin: "10px 0",
-                cursor: "pointer",
-                transition: "color 0.3s, transform 0.3s",
+                textDecoration: "none",
+                color: "#111",
+                padding: "10px",
+                borderRadius: "8px",
+                fontWeight: "500",
+                transition: "background 0.3s",
               }}
-              onMouseEnter={(e) => {
-                e.target.style.color = "#007BFF";
-                e.target.style.transform = "scale(1.05)";
-              }}
-              onMouseLeave={(e) => {
-                e.target.style.color = "";
-                e.target.style.transform = "scale(1)";
-              }}
+              onMouseEnter={(e) => (e.target.style.background = "#f1f1f1")}
+              onMouseLeave={(e) => (e.target.style.background = "transparent")}
             >
-              <a href="/students/login">Sign in</a>
-            </p>
-            <p
+              Sign in
+            </a>
+            <a
+              href="/adminlogin"
               style={{
-                margin: "10px 0",
-                cursor: "pointer",
-                transition: "color 0.3s, transform 0.3s",
+                textDecoration: "none",
+                color: "#111",
+                padding: "10px",
+                borderRadius: "8px",
+                fontWeight: "500",
+                transition: "background 0.3s",
               }}
-              onMouseEnter={(e) => {
-                e.target.style.color = "#007BFF";
-                e.target.style.transform = "scale(1.05)";
-              }}
-              onMouseLeave={(e) => {
-                e.target.style.color = "";
-                e.target.style.transform = "scale(1)";
-              }}
+              onMouseEnter={(e) => (e.target.style.background = "#f1f1f1")}
+              onMouseLeave={(e) => (e.target.style.background = "transparent")}
             >
-              <a href="/adminlogin">Admin?</a>
-            </p>
+              Admin?
+            </a>
           </div>
         )}
       </div>

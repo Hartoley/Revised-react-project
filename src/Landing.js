@@ -11,6 +11,9 @@ import Body1 from "./Body1";
 import Footer from "./Footer";
 import Bigvideobox from "./Bigvideobox";
 import { useNavigate } from "react-router-dom";
+import CoursesDisplay from "./CourseDisplay";
+import FeatureSection from "./FeatureSection";
+import LearnAnywhereSection from "./LearnFrom";
 
 const Landing = () => {
   const [adminData, setAdminData] = useState({});
@@ -45,49 +48,9 @@ const Landing = () => {
       <Header></Header>
       <Subheader></Subheader>
       <Body1></Body1>
-      <div
-        className="videoBox1"
-        style={{
-          padding: "20px",
-        }}
-      >
-        <div className="bigContainerDiv">
-          <p className="videoHeadlines">
-            {viewed}
-            <span>{vspan}</span>
-            {extra}{" "}
-          </p>
-          <div
-            className="Mainvideos2"
-            id="Mainvideos3"
-            style={{
-              flexWrap: "wrap",
-            }}
-          >
-            {video.map((courses, index) => (
-              <div
-                key={index}
-                className="videos"
-                id="videos"
-                onClick={() => showmore(courses)}
-              >
-                <div className="videoImage">
-                  <video src={courses.previewVideo} controls></video>
-                </div>
-                <p className="title">{courses.title}</p>
-                <p className="authorName">{courses.authors_name}</p>
-                <p className="price">
-                  ₦
-                  {courses.price.toLocaleString("en-NG", {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2,
-                  })}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+      <FeatureSection />
+      <CoursesDisplay />
+      <LearnAnywhereSection />
       <Footer></Footer>
     </>
   );
