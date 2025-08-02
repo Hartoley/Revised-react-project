@@ -87,7 +87,10 @@ const CoursesDisplay = () => {
                 onClick={() => showmore(course)}
                 style={{ cursor: "pointer" }}
               >
-                <div className="card h-100 shadow-sm border-0">
+                <div
+                  className="card h-100 shadow-sm border-"
+                  style={{ border: "1px solid #d1d2e0" }}
+                >
                   <video
                     src={course.previewVideo}
                     className="card-img-top rounded"
