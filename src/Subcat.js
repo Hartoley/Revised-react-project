@@ -1,4 +1,4 @@
-// Subcat.jsx
+// Subcat.jsx or CourseSidebar.jsx
 import React from "react";
 import { PaystackButton } from "react-paystack";
 import { toast } from "react-toastify";
@@ -31,14 +31,14 @@ const CourseSidebar = ({
       style={{
         backgroundColor: "#fff",
         color: "#1c1d1f",
-        padding: "16px",
+        padding: "20px",
         borderRadius: "8px",
-        boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
+        boxShadow: "0 0 0 1px #d1d1d1",
         width: "100%",
-        boxSizing: "border-box",
+        zIndex: 2,
       }}
     >
-      <div style={{ marginBottom: "16px" }}>
+      <div style={{ marginBottom: "16px", textAlign: "center" }}>
         {course.previewVideo ? (
           <video
             src={course.previewVideo}
@@ -46,7 +46,7 @@ const CourseSidebar = ({
             style={{
               width: "100%",
               borderRadius: "8px",
-              maxHeight: "240px",
+              maxHeight: "300px",
               objectFit: "cover",
             }}
           />
