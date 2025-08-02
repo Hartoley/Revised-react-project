@@ -140,12 +140,44 @@ const Subcat = () => {
             <p>No preview video available</p>
           )}
         </div>
-        <h6>{course.title || "Course Title"}</h6>
-        {isVideoPaid(video._id) ? (
-          <p className="ppp">PAID</p>
-        ) : (
-          <PaystackButton className="paystack-button" {...componentProps} />
-        )}
+        <div
+          style={{
+            padding: "24px 16px",
+            textAlign: "center",
+            backgroundColor: "#f9f9f9",
+            borderRadius: "10px",
+          }}
+        >
+          <h6
+            style={{
+              fontSize: "22px",
+              fontWeight: "500",
+              color: "#1c1c1c",
+              marginBottom: "14px",
+              lineHeight: "1.4",
+            }}
+          >
+            {course.title || "Course Title"}
+          </h6>
+
+          {isVideoPaid(video._id) ? (
+            <span
+              style={{
+                backgroundColor: "#d4f5dd",
+                color: "#107c41",
+                padding: "6px 18px",
+                borderRadius: "999px",
+                fontSize: "14px",
+                fontWeight: "600",
+                display: "inline-block",
+              }}
+            >
+              ✅ PAID
+            </span>
+          ) : (
+            <PaystackButton {...componentProps} className="paystack-button" />
+          )}
+        </div>
       </div>
     </div>
   );
