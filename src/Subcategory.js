@@ -10,6 +10,7 @@ import Star from "./Star";
 import Footer from "./Footer";
 import Subcat from "./Subcat";
 import { useNavigate } from "react-router-dom";
+import CourseHero from "./Star";
 
 const Subcategory = () => {
   const { courseId } = useParams();
@@ -343,122 +344,8 @@ const Subcategory = () => {
         goHome={goHome}
         notificationsCount={newNotificationCount}
       />
+      <CourseHero />
       <div onScroll={headerChange} ref={subcategoryRef} className="subCategory">
-        <div className="category">
-          {/* <div className="category1"></div> */}
-          <Subcat />
-          <div className="Mainvideos3" ref={videoToplayRef}>
-            <div className="playvideo">
-              {playvideo && (
-                <div className="videoPlayer">
-                  <video
-                    controls
-                    ref={videoElementRef}
-                    onPlay={() =>
-                      handlePlay(
-                        videos.find((video) => video.url === playvideo)._id
-                      )
-                    }
-                    onEnded={() =>
-                      handleVideoEnded(
-                        videos.find((video) => video.url === playvideo)._id
-                      )
-                    }
-                    onloadstart={() => console.log("Video loading started")}
-                  >
-                    <source
-                      src={`${playvideo}?${new Date().getTime()}`}
-                      key={playvideo}
-                      type="video/mp4"
-                    />
-                    Your browser does not support the video tag.
-                  </video>
-                  <p className="status">{statusText}</p>
-                </div>
-              )}
-
-              <div className="buttonPay">
-                <span onClick={stop} class="material-symbols-outlined">
-                  close
-                </span>
-                <span onClick={prev} class="material-symbols-outlined">
-                  skip_previous
-                </span>
-                <span onClick={stopVideo} class="material-symbols-outlined">
-                  stop_circle
-                </span>
-                <span
-                  onClick={playPauseVideo}
-                  className="material-symbols-outlined"
-                >
-                  {isPaused ? "play_circle" : "pause_circle"}
-                </span>
-                <span class="material-symbols-outlined">
-                  <span onClick={next} class="material-symbols-outlined">
-                    skip_next
-                  </span>
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div className="category2">
-            <p className="line1">
-              TOTAL: Cloud Computing / CompTIA Cloud+ (CV0-003)
-            </p>
-            <p className="line2" id="line2">
-              Learn the basics of Cloud Computing and/or prepare for the CompTIA
-              Cloud+ Certification Exam.
-            </p>
-            <p>
-              <Star
-                isSelected={false}
-                size={20}
-                color="orange"
-                onClick={handleStarClick}
-              />
-              <Star
-                isSelected={false}
-                size={16}
-                color="orange"
-                onClick={handleStarClick}
-              />
-              <Star
-                isSelected={false}
-                size={16}
-                color="orange"
-                onClick={handleStarClick}
-              />
-              <Star
-                isSelected={false}
-                size={16}
-                color="orange"
-                onClick={handleStarClick}
-              />
-              <Star
-                isSelected={false}
-                size={16}
-                color="orange"
-                onClick={handleStarClick}
-              />
-            </p>
-            <p className="line3">Created by </p>
-          </div>
-          <div className="last">
-            <div className="time">
-              <span className="material-symbols-outlined">new_releases</span>
-              <p>Last updated </p>
-            </div>
-            <div className="time">
-              <span className="material-symbols-outlined">language</span>
-              <p>{course.language}</p>
-            </div>
-            <div className="time">
-              <span className="material-symbols-outlined">subtitles</span>
-              <p>English [Auto], Arabic [Auto] , Italian [Auto]</p>
-            </div>
-          </div>
-        </div>
         <div className="section1">
           <div className="subsection1">
             <div className="sub1">

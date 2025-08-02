@@ -1,186 +1,135 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
-import { useParams } from "react-router-dom";
-import "react-toastify/dist/ReactToastify.css";
+// Subcat.jsx
+import React from "react";
 import { PaystackButton } from "react-paystack";
-import "./subcategory.css";
+import { toast } from "react-toastify";
 
-const Subcat = () => {
-  const { courseId } = useParams();
-  const [course, setCourse] = useState({});
-  const [video, setVideo] = useState({});
-  const [previewVideo, setPreviewVideo] = useState();
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const storedId = localStorage.getItem("id");
-  const id = JSON.parse(storedId);
-  const [userData, setUserData] = useState({});
-  const [paidvideo, setPaidVideo] = useState([]);
-  const [paidvideoId, setPaidVideoId] = useState([]);
-
-  useEffect(() => {
-    const fetchCourse = async () => {
-      try {
-        const response = await axios.get(
-          `https://react-node-project-1.onrender.com/courses/course/${courseId}`
-        );
-        setCourse(response.data);
-        setVideo(response.data);
-        setPreviewVideo(response.data.previewVideo);
-        setLoading(false);
-      } catch (error) {
-        console.error(error);
-        setError("Failed to fetch course data");
-        setLoading(false);
-      }
-    };
-
-    axios
-      .get(
-        `https://react-node-project-1.onrender.com/udemy/student/paidCourses/id/${id}`
-      )
-      .then((res) => {
-        if (res.data) {
-          setPaidVideo(res.data);
-          const ids = res.data.map((course) => course._id);
-          setPaidVideoId(ids);
-          // toast.success("Course fetching successful!");
-        } else {
-          toast.error("Course fetching failed");
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-        toast.error("Failed to fetch paid courses. Please try again later.");
-      });
-
-    axios
-      .get(
-        `https://react-node-project-1.onrender.com/udemy/student/getdata/id/${id}`
-      )
-      .then((res) => {
-        setUserData(res.data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log("Error:", error);
-        setLoading(false);
-        toast.error("Failed to fetch user data");
-      });
-
-    fetchCourse();
-  }, [courseId, id]);
-
-  // console.log('Fetched course IDs:', paidvideoId);
+const CourseSidebar = ({
+  course = {},
+  isPaid = false,
+  userData = {},
+  id = "",
+}) => {
+  const email = userData?.email || "";
+  const username = userData?.username || "";
 
   const componentProps = {
-    email: userData.email || "",
-    amount: video.price * 100,
+    email,
+    amount: (course.price || 9900) * 100,
     reference: new Date().getTime().toString(),
     metadata: {
-      name: userData.username || "",
+      name: username,
       userId: id,
     },
     publicKey: "pk_test_6dbb10e57606b65e31e7be9d5ab4e13b3e5f74e1",
-    text: "Make payment",
-    onSuccess: (reference) => {
-      axios
-        .post(
-          "https://react-node-project-1.onrender.com/udemy/student/payment",
-          {
-            reference: reference,
-            courseTitle: course.title,
-            courseId: course._id,
-            userId: id,
-          }
-        )
-        .then((res) => {
-          if (res.data) {
-            toast.success("Payment successful!");
-          } else {
-            toast.error("Payment verification failed");
-          }
-        })
-        .catch((error) => {
-          console.error("Error verifying payment:", error.message);
-          toast.error("An error occurred during payment verification");
-        });
-    },
-    onClose: () => {
-      console.log("Transaction was not completed.");
-      toast.error("Transaction was not completed.");
-    },
+    text: "Buy now",
+    onSuccess: () => toast.success("Payment successful!"),
+    onClose: () => toast.error("Transaction was not completed."),
   };
-
-  const isVideoPaid = (videoId) => {
-    return paidvideoId.includes(videoId);
-  };
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
 
   return (
-    <div>
-      <ToastContainer
-        className="custom-toast-container"
-        style={{ position: "fixed", zIndex: 9999 }}
-      />
-
-      <div className="category3">
-        <div className="videocon3">
-          {previewVideo ? (
-            <video src={previewVideo} controls />
-          ) : (
-            <p>No preview video available</p>
-          )}
-        </div>
-        <div
-          style={{
-            padding: "24px 16px",
-            textAlign: "center",
-            backgroundColor: "#f9f9f9",
-            borderRadius: "10px",
-          }}
-        >
-          <h6
+    <div
+      style={{
+        backgroundColor: "#fff",
+        color: "#1c1d1f",
+        padding: "16px",
+        borderRadius: "8px",
+        boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
+        width: "100%",
+        boxSizing: "border-box",
+      }}
+    >
+      <div style={{ marginBottom: "16px" }}>
+        {course.previewVideo ? (
+          <video
+            src={course.previewVideo}
+            controls
             style={{
-              fontSize: "22px",
-              fontWeight: "500",
-              color: "#1c1c1c",
-              marginBottom: "14px",
-              lineHeight: "1.4",
+              width: "100%",
+              borderRadius: "8px",
+              maxHeight: "240px",
+              objectFit: "cover",
+            }}
+          />
+        ) : (
+          <div
+            style={{
+              backgroundColor: "#f1f1f1",
+              height: "180px",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              borderRadius: "8px",
             }}
           >
-            {course.title || "Course Title"}
-          </h6>
-
-          {isVideoPaid(video._id) ? (
-            <span
-              style={{
-                backgroundColor: "#d4f5dd",
-                color: "#107c41",
-                padding: "6px 18px",
-                borderRadius: "999px",
-                fontSize: "14px",
-                fontWeight: "600",
-                display: "inline-block",
-              }}
-            >
-              ✅ PAID
-            </span>
-          ) : (
-            <PaystackButton {...componentProps} className="paystack-button" />
-          )}
-        </div>
+            <p>No preview available</p>
+          </div>
+        )}
       </div>
+
+      {!isPaid ? (
+        <>
+          <h2 style={{ fontSize: "24px", fontWeight: "700" }}>₦9,900</h2>
+          <p style={{ fontSize: "14px", textDecoration: "line-through" }}>
+            ₦57,900
+          </p>
+          <p style={{ color: "#b32d0f", fontWeight: "bold", fontSize: "14px" }}>
+            83% off
+          </p>
+          <p style={{ color: "#b32d0f", fontSize: "12px", marginTop: "8px" }}>
+            ⏰ 11 hours left at this price!
+          </p>
+
+          <button
+            style={{
+              width: "100%",
+              marginTop: "16px",
+              backgroundColor: "#a435f0",
+              color: "white",
+              padding: "10px",
+              border: "none",
+              borderRadius: "4px",
+              fontSize: "16px",
+              fontWeight: "bold",
+              cursor: "pointer",
+            }}
+            onClick={() => toast.info("Added to cart (mock logic)")}
+          >
+            Add to cart
+          </button>
+
+          <div style={{ marginTop: "8px" }}>
+            <PaystackButton {...componentProps} className="paystack-button" />
+          </div>
+        </>
+      ) : (
+        <>
+          <div
+            style={{
+              backgroundColor: "#d4f5dd",
+              color: "#107c41",
+              padding: "8px 18px",
+              borderRadius: "999px",
+              fontSize: "14px",
+              fontWeight: "600",
+              display: "inline-block",
+              textAlign: "center",
+            }}
+          >
+            ✅ Already Purchased
+          </div>
+          <p
+            style={{ fontSize: "14px", marginTop: "12px", textAlign: "center" }}
+          >
+            You have access to this course.
+          </p>
+        </>
+      )}
+
+      <p style={{ fontSize: "12px", textAlign: "center", marginTop: "14px" }}>
+        30-Day Money-Back Guarantee
+      </p>
     </div>
   );
 };
 
-export default Subcat;
+export default CourseSidebar;
