@@ -1,181 +1,238 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
-import * as yup from "yup";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
-import { Provider } from "react-redux";
-import Studentlogin, { saving, successful, failed } from "./Studentlogin";
-import { useSelector, useDispatch } from "react-redux";
-import "./Loginbody.css";
-import google from "./Images/google1.png";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-
-import facebook from "./Images/facebook.png";
-import apple from "./Images/apple.png";
+import "react-toastify/dist/ReactToastify.css";
 
 const Loginbody = () => {
   const [showPassword, setShowPassword] = useState(false);
-
-  const disptach = useDispatch();
+  const [loggedin1, setloggedin1] = useState([]);
   const navigate = useNavigate();
   const endpoint = "https://react-node-project-1.onrender.com";
-  const [loggedin1, setloggedin1] = useState([]);
 
   useEffect(() => {
-    // axios
-    //   .get(https://react-node-project-1.onrender.com/udemy/student/getdata)
     axios
       .get(`${endpoint}/udemy/student/getdata`)
-      .then((res) => {
-        // console.log("students data from API:", res.data);
-        setloggedin1(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      .then((res) => setloggedin1(res.data))
+      .catch((err) => console.log(err));
   }, []);
-  // console.log(loggedin1);
 
-  // console.log(loggedin1);
   const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
     },
     onSubmit: (value) => {
-      const loggedinstudents = loggedin1.find(
-        (exist) => exist.email == value.email
-      );
-      // console.log(loggedinstudents);
-      if (loggedinstudents) {
+      const user = loggedin1.find((u) => u.email === value.email);
+      if (user) {
         axios
-          .post(
-            `https://react-node-project-1.onrender.com/udemy/student/login`,
-            value
-          )
-          .then((res) => {
-            let id = `${loggedinstudents._id}`;
-
-            console.log(loggedinstudents._id);
-            toast.success("students successfully logged in");
-            navigate(`/students/dashboard/${id}`);
+          .post(`${endpoint}/udemy/student/login`, value)
+          .then(() => {
+            toast.success("Login successful");
+            navigate(`/students/dashboard/${user._id}`);
           })
-          .catch((err) => {
-            console.log(err);
-            toast.error(err.response.data.message);
-          });
+          .catch((err) => toast.error(err.response.data.message));
       } else {
-        console.log("usernot found");
-        toast.error("usernot found");
+        toast.error("User not found");
       }
     },
   });
 
-  const togglePasswordVisibility = () => {
-    setShowPassword((prev) => !prev);
-  };
-
   return (
     <>
-      {" "}
-      <form action="" id="body" className="body" onSubmit={formik.handleSubmit}>
-        <div id="inputBox" className="inputBox">
-          <p>Log in to your Udemy account</p>
-          <div className="others">
-            <img id="google" src={google} alt="" />
-            <span>Continue with Google</span>
-          </div>
-          <div className="others">
-            <img src={facebook} id="google" alt="" />
-            <span>Continue with Facebook</span>
-          </div>
-          <div className="others">
-            <img src={apple} id="google" alt="" />
+      <style>{`
+        @media (max-width: 768px) {
+          .wrapper {
+            flex-direction: column;
+          }
+          .imageContainer, .formContainer {
+            width: 100% !important;
+            padding: 20px;
+          }
+          .formBox {
+            padding: 20px;
+            max-width: 100% !important;
+          }
+        }
+      `}</style>
 
-            <span> Continue with Apple</span>
-          </div>
-
-          <div
-            className="carrier"
-            style={{
-              height: "auto",
-            }}
-          >
-            <input
-              onBlur={formik.handleBlur}
-              onChange={formik.handleChange}
-              name="email"
-              type="text"
-              placeholder="Email"
-            />
-            <p>
-              {formik.touched.email && formik.errors.email
-                ? formik.errors.email
-                : ""}
-            </p>
-
-            <div className="password-container">
-              <input
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
-                id="input"
-                name="password"
-                type={showPassword ? "text" : "password"}
-                placeholder="Password"
-              />
-              <span
-                onClick={togglePasswordVisibility}
-                className="password-toggle"
-                style={{ cursor: "pointer" }}
-              >
-                {showPassword ? (
-                  <AiFillEyeInvisible size={20} />
-                ) : (
-                  <AiFillEye size={20} />
-                )}
-              </span>
-            </div>
-            <p>
-              {formik.touched.password && formik.errors.password
-                ? formik.errors.password
-                : ""}
-            </p>
-          </div>
-
-          <div className="lineBox">
-            <div className="lines"></div>
-            <div className="lines"></div>
-            <div className="lines"></div>
-            <div className="lines"></div>
-          </div>
-          <div className="carrier">
-            <button type="submit" className="buttonSignin">
-              Sign in
-            </button>
-          </div>
-          <ToastContainer />
-          <div className="carrier1">
-            <div className="termsBox">
-              <p>
-                Or <span>Forgot Password</span>
-              </p>
-            </div>
-
-            <div className="loginBox" id="loginBox">
-              <p>
-                Don't have an account?{" "}
-                <span>
-                  <a href="/students/signup">Sign up with our organization</a>
-                </span>
-              </p>
-            </div>
-          </div>
+      <div style={styles.wrapper} className="wrapper">
+        <div style={styles.imageContainer} className="imageContainer">
+          <img
+            src="https://frontends.udemycdn.com/components/auth/desktop-illustration-step-2-x2.webp"
+            alt="Login Visual"
+            style={styles.image}
+          />
         </div>
-      </form>
+
+        <div style={styles.formContainer} className="formContainer">
+          <form
+            onSubmit={formik.handleSubmit}
+            style={styles.formBox}
+            className="formBox"
+          >
+            <h2 style={styles.heading}>Log in to your Udemy account</h2>
+
+            <div style={styles.inputGroup}>
+              <label style={styles.label}>Email</label>
+              <input
+                style={styles.input}
+                name="email"
+                type="email"
+                placeholder="Enter your email"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.email}
+              />
+              <p style={styles.error}>
+                {formik.touched.email && formik.errors.email}
+              </p>
+            </div>
+
+            <div style={styles.inputGroup}>
+              <label style={styles.label}>Password</label>
+              <div style={styles.passwordWrapper}>
+                <input
+                  style={styles.input}
+                  name="password"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Enter your password"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.password}
+                />
+                <span
+                  onClick={() => setShowPassword(!showPassword)}
+                  style={styles.toggleIcon}
+                >
+                  {showPassword ? <AiFillEyeInvisible /> : <AiFillEye />}
+                </span>
+              </div>
+              <p style={styles.error}>
+                {formik.touched.password && formik.errors.password}
+              </p>
+            </div>
+
+            <button type="submit" style={styles.button}>
+              Log In
+            </button>
+
+            <p style={styles.redirectText}>
+              Don’t have an account?{" "}
+              <a href="/students/signup" style={styles.link}>
+                Sign up
+              </a>
+            </p>
+          </form>
+          <ToastContainer />
+        </div>
+      </div>
     </>
   );
+};
+
+const styles = {
+  wrapper: {
+    display: "flex",
+    flexDirection: "row",
+    width: "100%",
+    minHeight: "120vh",
+    backgroundColor: "#f9f9f9",
+  },
+  imageContainer: {
+    width: "50%",
+    minHeight: "60vh",
+    backgroundColor: "#fff",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: "40px",
+  },
+  image: {
+    width: "100%",
+    maxWidth: "500px",
+    objectFit: "contain",
+  },
+  formContainer: {
+    width: "50%",
+    minHeight: "60vh",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#fff",
+    padding: "40px",
+  },
+  formBox: {
+    width: "100%",
+    maxWidth: "400px",
+    backgroundColor: "#ffffff",
+    padding: "30px",
+    borderRadius: "10px",
+    boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+  },
+  heading: {
+    fontSize: "24px",
+    fontWeight: "bold",
+    marginBottom: "25px",
+    textAlign: "center",
+  },
+  inputGroup: {
+    marginBottom: "20px",
+  },
+  label: {
+    display: "block",
+    fontSize: "14px",
+    fontWeight: "600",
+    marginBottom: "8px",
+  },
+  input: {
+    width: "100%",
+    padding: "10px 12px",
+    fontSize: "14px",
+    border: "1px solid #ccc",
+    borderRadius: "6px",
+    outline: "none",
+    boxSizing: "border-box",
+  },
+  passwordWrapper: {
+    position: "relative",
+  },
+  toggleIcon: {
+    position: "absolute",
+    right: "12px",
+    top: "50%",
+    transform: "translateY(-50%)",
+    cursor: "pointer",
+  },
+  button: {
+    width: "100%",
+    padding: "12px",
+    backgroundColor: "#a435f0",
+    color: "#fff",
+    fontSize: "16px",
+    fontWeight: "600",
+    border: "none",
+    borderRadius: "6px",
+    cursor: "pointer",
+    marginTop: "10px",
+  },
+  redirectText: {
+    fontSize: "14px",
+    textAlign: "center",
+    marginTop: "20px",
+  },
+  link: {
+    color: "#a435f0",
+    textDecoration: "none",
+    fontWeight: "600",
+  },
+  error: {
+    color: "red",
+    fontSize: "12px",
+    marginTop: "4px",
+  },
 };
 
 export default Loginbody;

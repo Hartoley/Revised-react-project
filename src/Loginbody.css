@@ -207,7 +207,7 @@
     height: 130vh;
   }
 
-  .others{
+  .others {
     height: 50%;
   }
 
@@ -245,9 +245,9 @@
     height: 100%;
   }
 
-     #inputBox p{
-       height: 12px;
-     }
+  #inputBox p {
+    height: 12px;
+  }
 
   .buttonSignin {
     height: 5vh;
@@ -319,7 +319,7 @@
     height: 5vh;
   }
 
-  .others span{
+  .others span {
     font-size: 12px;
   }
 }
