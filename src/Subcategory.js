@@ -11,6 +11,7 @@ import Footer from "./Footer";
 import Subcat from "./Subcat";
 import { useNavigate } from "react-router-dom";
 import CourseHero from "./Star";
+import VideoPlayer from "./VideoPlayer.js";
 
 const Subcategory = () => {
   const { courseId } = useParams();
@@ -209,8 +210,14 @@ const Subcategory = () => {
   };
 
   const stop = () => {
-    subcategoryRef.current.style.position = "static";
-    videoToplayRef.current.style.display = "none";
+    if (subcategoryRef.current) {
+      subcategoryRef.current.style.position = "static";
+    }
+
+    if (videoToplayRef.current) {
+      videoToplayRef.current.style.display = "none";
+    }
+
     setStatusText("");
     setIsPaused(true);
     setplayVideo(null);
@@ -339,6 +346,111 @@ const Subcategory = () => {
 
   return (
     <>
+      <style>{`
+  .course-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 2rem 1rem;
+    max-width: 900px;
+    margin-left: 1rem;
+    margin-right: auto;
+    gap: 2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  .block {
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 1rem;
+    border-radius: 8px;
+  }
+
+  .section-title {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: #2d2f31;
+  }
+
+  .text-muted {
+    font-size: 14px;
+    color: #6a6f73;
+  }
+
+  .check-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .check-item {
+    flex: 1 1 45%;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #2d2f31;
+  }
+
+  .video-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .video-item {
+    border: 1px solid #ccc;
+    padding: 0.75rem;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .cert-block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .btn-cert {
+    padding: 0.5rem 1rem;
+    font-size: 14px;
+    border-radius: 6px;
+    border: none;
+    background-color: #2d2f31;
+    color: #fff;
+    cursor: pointer;
+    width: fit-content;
+  }
+
+  @media (max-width: 768px) {
+    .course-section {
+      margin: 0 auto;
+      align-items: center;
+    }
+
+    .section-title {
+      font-size: 18px;
+    }
+
+    .check-item,
+    .video-item {
+      font-size: 12px;
+    }
+
+    .btn-cert {
+      font-size: 12px;
+      width: 100%;
+      padding: 0.5rem;
+    }
+  }
+`}</style>
+
       <Dashheader
         showNotification={showNotification}
         goHome={goHome}
@@ -347,125 +459,133 @@ const Subcategory = () => {
       <CourseHero />
       <div onScroll={headerChange} ref={subcategoryRef} className="subCategory">
         <div className="section1">
-          <div className="subsection1">
-            <div className="sub1">
-              <p className="subtext1">What you'll learn</p>
-              <div className="check">
-                {learn.map((learnItem, index) => (
-                  <div key={index} className="check1">
-                    <p className="checkText">
-                      <span className="material-symbols-outlined" id="span1">
-                        check
-                      </span>
-                      {learnItem}
-                    </p>
+          <div className="course-section">
+            {/* What you'll learn */}
+            <div className="block">
+              <p className="section-title">What you'll learn</p>
+              <div className="check-list">
+                {learn.map((item, idx) => (
+                  <div className="check-item" key={idx}>
+                    <span className="material-symbols-outlined">check</span>
+                    {item}
                   </div>
                 ))}
               </div>
             </div>
-            <div className="sub1">
-              <p className="sub1text">
-                Top companies offer this course to their employees
-              </p>
-              <p className="sub1text1">
+
+            {/* Companies */}
+            <div className="block">
+              <p className="section-title">Top companies offer this course</p>
+              <p className="text-muted">
                 This course was selected for our collection of top-rated courses
-                trusted by businesses worldwide. <span> Learn more</span>
+                trusted by businesses worldwide.{" "}
+                <span style={{ textDecoration: "underline", color: "blue" }}>
+                  Learn more
+                </span>
               </p>
-              <div className="companiesBox1">
-                <img
-                  src="https://s.udemycdn.com/partner-logos/v4/nasdaq-dark.svg"
-                  alt=""
-                />
-                <img
-                  src="https://s.udemycdn.com/partner-logos/v4/volkswagen-dark.svg"
-                  alt=""
-                />
-                <img
-                  src="https://s.udemycdn.com/partner-logos/v4/box-dark.svg"
-                  alt=""
-                />
-                <img
-                  src="https://s.udemycdn.com/partner-logos/v4/netapp-dark.svg"
-                  alt=""
-                />
-                <img
-                  src="https://s.udemycdn.com/partner-logos/v4/eventbrite-dark.svg"
-                  alt=""
-                />
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  flexWrap: "wrap",
+                  marginTop: "1rem",
+                }}
+              >
+                {[
+                  "nasdaq-dark",
+                  "volkswagen-dark",
+                  "box-dark",
+                  "netapp-dark",
+                  "eventbrite-dark",
+                ].map((name) => (
+                  <img
+                    key={name}
+                    src={`https://s.udemycdn.com/partner-logos/v4/${name}.svg`}
+                    alt={name}
+                    style={{
+                      width: "18%",
+                      minWidth: "60px",
+                      maxHeight: "40px",
+                      objectFit: "contain",
+                    }}
+                  />
+                ))}
               </div>
-            </div>
-            <div className="subb">
-              <p>Course content</p>
-            </div>
-            <div className="subb1">
-              <p className="subbtext" id="subtext">
-                {videos.length}
-                <span>{videos.length > 1 ? "Sections" : "Section"}</span>
-              </p>
             </div>
 
-            <div className="sub2" id="sub2">
-              {videos.map((videoItem, index) => (
-                <div key={index} className="videoItem">
-                  <div
-                    onClick={() => playVideo(videoItem._id, index)}
-                    className="videocon"
-                  >
-                    <h4 className="title">
-                      <span className="material-symbols-outlined">
-                        movie_info
-                      </span>
-                      {videoItem.sub_title}
-                    </h4>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div className="sub3">
-              <div className="subb2">
-                <p>Requirements</p>
-              </div>
-              <p className="checkText1">
-                <span className="material-symbols-outlined" id="span1">
-                  check_circle
-                </span>
-                {course.requirements}
+            {/* Course content */}
+            <div className="block">
+              <p className="section-title">Course content</p>
+              <p className="text-muted">
+                {videos.length} {videos.length === 1 ? "Section" : "Sections"}
               </p>
-            </div>
-            <div className="sub4">
-              <div className="subb2">
-                <p>Description</p>
-                <p id="subbP2">{course.description}</p>
-              </div>
-            </div>
-            <div className="subDupli">
-              <div className="subb2">
-                <p>Certification</p>
-                <p className="showlight">
-                  Check for certification Status and download
-                </p>
-              </div>
-              <div className="subb2">
-                <p id="subbP2">{certificationStatus}</p>
-                {isEligibleForDownload && (
-                  <button className="btn-downloaded" onClick={handleDownload}>
-                    Download Certificate
-                  </button>
-                )}
-                {!isEligibleForDownload && (
-                  <button
-                    className="btn-downloaded1"
-                    onClick={() => certified(course._id)}
+              <div className="video-section">
+                {videos.map((v, i) => (
+                  <div
+                    key={i}
+                    className="video-item"
+                    onClick={() => playVideo(v._id, i)}
                   >
-                    Check
-                  </button>
-                )}
+                    <span className="material-symbols-outlined">
+                      movie_info
+                    </span>
+                    {v.sub_title}
+                  </div>
+                ))}
               </div>
+            </div>
+
+            {/* Requirements */}
+            <div className="block">
+              <p className="section-title">Requirements</p>
+              <div className="check-item">
+                <span className="material-symbols-outlined">check_circle</span>
+                {course.requirements}
+              </div>
+            </div>
+
+            {/* Description */}
+            <div className="block">
+              <p className="section-title">Description</p>
+              <p className="text-muted">{course.description}</p>
+            </div>
+
+            {/* Certificate */}
+            <div className="block cert-block">
+              <p className="section-title">Certification</p>
+              <p className="text-muted">
+                Check for certification Status and download
+              </p>
+              <p className="text-muted">{certificationStatus}</p>
+              {isEligibleForDownload ? (
+                <button className="btn-cert" onClick={handleDownload}>
+                  Download Certificate
+                </button>
+              ) : (
+                <button
+                  className="btn-cert"
+                  onClick={() => certified(course._id)}
+                >
+                  Check
+                </button>
+              )}
             </div>
           </div>
         </div>
         <Footer />
       </div>
+      {playvideo && (
+        <VideoPlayer
+          videoUrl={playvideo}
+          onClose={stop}
+          onPlayPause={playPauseVideo}
+          onNext={next}
+          onPrev={prev}
+          isPaused={isPaused}
+          videoElementRef={videoElementRef}
+          statusText={statusText}
+        />
+      )}
     </>
   );
 };
