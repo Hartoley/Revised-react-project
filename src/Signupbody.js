@@ -1,247 +1,247 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useFormik } from "formik";
+import * as yup from "yup";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-import "react-toastify/dist/ReactToastify.css";
 
-const Loginbody = () => {
-  const [showPassword, setShowPassword] = useState(false);
-  const [loggedin1, setloggedin1] = useState([]);
+const Signupbody = () => {
+  const endpoint = "https://react-node-project-3.onrender.com";
   const navigate = useNavigate();
-  const endpoint = "https://react-node-project-1.onrender.com";
+  const [students, setStudents] = useState([]);
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     axios
       .get(`${endpoint}/udemy/student/getdata`)
-      .then((res) => setloggedin1(res.data))
+      .then((res) => setStudents(res.data))
       .catch((err) => console.log(err));
   }, []);
 
   const formik = useFormik({
     initialValues: {
+      username: "",
       email: "",
       password: "",
     },
+    validationSchema: yup.object({
+      username: yup.string().min(4).required("Username required"),
+      email: yup.string().email("Invalid email").required("Email required"),
+      password: yup
+        .string()
+        .min(5)
+        .matches(
+          `^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])`,
+          "Password must include upper, number & special char"
+        )
+        .required("Password required"),
+    }),
     onSubmit: (value) => {
-      const user = loggedin1.find((u) => u.email === value.email);
-      if (user) {
-        axios
-          .post(`${endpoint}/udemy/student/login`, value)
-          .then(() => {
-            toast.success("Login successful");
-            navigate(`/students/dashboard/${user._id}`);
-          })
-          .catch((err) => toast.error(err.response.data.message));
+      toast.loading("Processing...");
+      const exists = students.find(
+        (s) => s.email === value.email || s.username === value.username
+      );
+      if (exists) {
+        toast.dismiss();
+        toast.error("User already exists");
       } else {
-        toast.error("User not found");
+        axios
+          .post(`${endpoint}/udemy/student/register`, value)
+          .then(() => {
+            toast.dismiss();
+            toast.success("Signed up successfully");
+            navigate("/students/login");
+          })
+          .catch((err) => {
+            toast.dismiss();
+            toast.error(err?.response?.data?.message || "Error");
+          });
       }
     },
   });
 
   return (
-    <>
-      <style>{`
-        @media (max-width: 768px) {
-          .wrapper {
-            flex-direction: column;
-          }
-          .imageContainer {
-            width: 100% !important;
-            padding: 20px;
-            order: 1;
-          }
-          .formContainer {
-            width: 100% !important;
-            padding: 20px;
-            order: 2;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-          }
-          .formBox {
-            width: 100%;
-            max-width: 100% !important;
-          }
-        }
-      `}</style>
-
-      <div style={styles.wrapper} className="wrapper">
-        <div style={styles.imageContainer} className="imageContainer">
-          <img
-            src="https://frontends.udemycdn.com/components/auth/desktop-illustration-step-2-x2.webp"
-            alt="Login Visual"
-            style={styles.image}
-          />
-        </div>
-
-        <div style={styles.formContainer} className="formContainer">
-          <form
-            onSubmit={formik.handleSubmit}
-            style={styles.formBox}
-            className="formBox"
-          >
-            <h2 style={styles.heading}>Log in to your Udemy account</h2>
-
-            <div style={styles.inputGroup}>
-              <label style={styles.label}>Email</label>
-              <input
-                style={styles.input}
-                name="email"
-                type="email"
-                placeholder="Enter your email"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.email}
-              />
-              <p style={styles.error}>
-                {formik.touched.email && formik.errors.email}
-              </p>
-            </div>
-
-            <div style={styles.inputGroup}>
-              <label style={styles.label}>Password</label>
-              <div style={styles.passwordWrapper}>
-                <input
-                  style={styles.input}
-                  name="password"
-                  type={showPassword ? "text" : "password"}
-                  placeholder="Enter your password"
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.password}
-                />
-                <span
-                  onClick={() => setShowPassword(!showPassword)}
-                  style={styles.toggleIcon}
-                >
-                  {showPassword ? <AiFillEyeInvisible /> : <AiFillEye />}
-                </span>
-              </div>
-              <p style={styles.error}>
-                {formik.touched.password && formik.errors.password}
-              </p>
-            </div>
-
-            <button type="submit" style={styles.button}>
-              Log In
-            </button>
-
-            <p style={styles.redirectText}>
-              Don’t have an account?{" "}
-              <a href="/students/signup" style={styles.link}>
-                Sign up
-              </a>
-            </p>
-          </form>
-          <ToastContainer />
-        </div>
+    <div style={styles.wrapper}>
+      {/* Image Section */}
+      <div style={styles.imageContainer}>
+        <img
+          src="https://frontends.udemycdn.com/components/auth/desktop-illustration-step-2-x2.webp"
+          alt="Signup"
+          style={styles.image}
+        />
       </div>
-    </>
+
+      {/* Form Section */}
+      <form style={styles.form} onSubmit={formik.handleSubmit}>
+        <h2 style={styles.title}>Sign up with email</h2>
+
+        <input
+          type="text"
+          name="username"
+          placeholder="Full Name"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.username}
+          style={styles.input}
+        />
+        {formik.touched.username && formik.errors.username && (
+          <p style={styles.error}>{formik.errors.username}</p>
+        )}
+
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.email}
+          style={styles.input}
+        />
+        {formik.touched.email && formik.errors.email && (
+          <p style={styles.error}>{formik.errors.email}</p>
+        )}
+
+        <div style={{ position: "relative", width: "100%" }}>
+          <input
+            name="password"
+            type={showPassword ? "text" : "password"}
+            placeholder="Password"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.password}
+            style={{ ...styles.input, paddingRight: "40px" }}
+          />
+          <span
+            onClick={() => setShowPassword((prev) => !prev)}
+            style={styles.eyeIcon}
+          >
+            {showPassword ? <AiFillEyeInvisible /> : <AiFillEye />}
+          </span>
+        </div>
+        {formik.touched.password && formik.errors.password && (
+          <p style={styles.error}>{formik.errors.password}</p>
+        )}
+
+        <label style={styles.checkboxWrapper}>
+          <input type="checkbox" defaultChecked />
+          <span style={styles.checkboxLabel}>
+            Send me offers, recommendations, and tips.
+          </span>
+        </label>
+
+        <button type="submit" style={styles.button}>
+          Continue with email
+        </button>
+
+        <p style={styles.terms}>
+          By signing up, you agree to our <u>Terms of Use</u> and{" "}
+          <u>Privacy Policy</u>.
+        </p>
+        <p style={styles.loginLink}>
+          Already have an account?{" "}
+          <a
+            href="/students/login"
+            style={{ color: "#5624d0", fontWeight: "bold" }}
+          >
+            Log in
+          </a>
+        </p>
+      </form>
+
+      <ToastContainer />
+    </div>
   );
 };
 
+export default Signupbody;
+
 const styles = {
   wrapper: {
+    marginTop: "13vh",
     display: "flex",
     flexDirection: "row",
-    width: "100%",
     minHeight: "120vh",
-    backgroundColor: "#f9f9f9",
+    padding: "2rem",
+    gap: "2rem",
+    background: "#fff",
+    flexWrap: "wrap",
+    justifyContent: "center",
   },
   imageContainer: {
-    width: "50%",
-    minHeight: "60vh",
-    backgroundColor: "#fff",
+    flex: "1 1 300px",
     display: "flex",
-    alignItems: "center",
     justifyContent: "center",
-    padding: "40px",
+    alignItems: "center",
   },
   image: {
     width: "100%",
-    maxWidth: "500px",
+    maxWidth: "400px",
     objectFit: "contain",
   },
-  formContainer: {
-    width: "50%",
-    minHeight: "60vh",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#fff",
-    padding: "40px",
-  },
-  formBox: {
-    width: "100%",
+  form: {
+    flex: "1 1 300px",
     maxWidth: "400px",
-    backgroundColor: "#ffffff",
-    padding: "30px",
-    borderRadius: "10px",
-    boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+    display: "flex",
+    flexDirection: "column",
+    gap: "1rem",
   },
-  heading: {
+  title: {
     fontSize: "24px",
     fontWeight: "bold",
-    marginBottom: "25px",
-    textAlign: "center",
-  },
-  inputGroup: {
-    marginBottom: "20px",
-  },
-  label: {
-    display: "block",
-    fontSize: "14px",
-    fontWeight: "600",
-    marginBottom: "8px",
+    marginBottom: "0.5rem",
   },
   input: {
     width: "100%",
-    padding: "10px 12px",
-    fontSize: "14px",
+    padding: "12px",
     border: "1px solid #ccc",
     borderRadius: "6px",
+    fontSize: "16px",
     outline: "none",
-    boxSizing: "border-box",
-  },
-  passwordWrapper: {
-    position: "relative",
-  },
-  toggleIcon: {
-    position: "absolute",
-    right: "12px",
-    top: "50%",
-    transform: "translateY(-50%)",
-    cursor: "pointer",
   },
   button: {
-    width: "100%",
-    padding: "12px",
-    backgroundColor: "#a435f0",
+    backgroundColor: "#5624d0",
     color: "#fff",
-    fontSize: "16px",
-    fontWeight: "600",
     border: "none",
+    padding: "14px",
+    fontWeight: "bold",
+    fontSize: "16px",
     borderRadius: "6px",
     cursor: "pointer",
-    marginTop: "10px",
-  },
-  redirectText: {
-    fontSize: "14px",
-    textAlign: "center",
-    marginTop: "20px",
-  },
-  link: {
-    color: "#a435f0",
-    textDecoration: "none",
-    fontWeight: "600",
+    marginTop: "1rem",
   },
   error: {
     color: "red",
+    fontSize: "13px",
+    marginTop: "-0.5rem",
+  },
+  checkboxWrapper: {
+    display: "flex",
+    alignItems: "flex-start",
+    gap: "0.5rem",
+    fontSize: "14px",
+  },
+  checkboxLabel: {
+    lineHeight: "1.2",
+  },
+  eyeIcon: {
+    position: "absolute",
+    top: "50%",
+    right: "10px",
+    transform: "translateY(-50%)",
+    cursor: "pointer",
+    fontSize: "20px",
+    color: "#555",
+  },
+  terms: {
     fontSize: "12px",
-    marginTop: "4px",
+    color: "#555",
+    textAlign: "center",
+    marginTop: "1rem",
+  },
+  loginLink: {
+    fontSize: "14px",
+    textAlign: "center",
   },
 };
-
-export default Loginbody;
