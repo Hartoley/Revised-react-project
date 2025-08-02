@@ -153,6 +153,10 @@ const Subcategory = () => {
       console.log(
         "Preview available. Please purchase the course to watch the full video"
       );
+
+      alert(
+        "Preview available. Please purchase the course to watch the full video"
+      );
     }
   };
 
