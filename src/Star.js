@@ -44,9 +44,8 @@ const CourseHero = () => {
     <div
       style={{ backgroundColor: "#1c1d1f", color: "#fff", paddingTop: "13vh" }}
     >
-      <div style={styles.container}>
-        {/* Main Hero Text */}
-        <div style={styles.heroText}>
+      <div className="course-hero-container" style={styles.container}>
+        <div className="course-hero-text" style={styles.heroText}>
           <h1 style={styles.title}>{course.title}</h1>
 
           <div style={styles.stats}>
@@ -66,8 +65,7 @@ const CourseHero = () => {
           </div>
         </div>
 
-        {/* Sidebar (only floats on desktop) */}
-        <div style={styles.sidebarWrapper}>
+        <div className="course-sidebar-wrapper" style={styles.sidebarWrapper}>
           <CourseSidebar
             course={course}
             userData={userData}
@@ -77,34 +75,47 @@ const CourseHero = () => {
         </div>
       </div>
 
-      {/* Responsive CSS */}
       <style>{`
-        @media (max-width: 768px) {
-          .course-hero-container {
-            flex-direction: column !important;
-            height: auto !important;
-          }
+  html, body {
+    overflow-x: hidden;
+  }
 
-          .course-hero-text {
-            max-width: 100% !important;
-          }
+  @media (max-width: 768px) {
+    .course-hero-container {
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1rem !important;
+      width: 100%;
+      box-sizing: border-box;
+    }
 
-          .course-sidebar-wrapper {
-            position: static !important;
-            transform: none !important;
-            margin-top: 1rem;
-            max-width: 100% !important;
-          }
+    .course-hero-text {
+      max-width: 100% !important;
+      box-sizing: border-box;
+    }
 
-          h1 {
-            font-size: 1.4rem !important;
-          }
+    .course-sidebar-wrapper {
+      position: static !important;
+      transform: none !important;
+      max-width: 100% !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      box-sizing: border-box;
+    }
 
-          p, span {
-            font-size: 0.9rem !important;
-          }
-        }
-      `}</style>
+    h1 {
+      font-size: 1.2rem !important;
+    }
+
+    p, span {
+      font-size: 0.85rem !important;
+    }
+
+    .course-sidebar-wrapper video {
+      max-height: 180px !important;
+    }
+  }
+`}</style>
     </div>
   );
 };
@@ -129,10 +140,6 @@ const styles = {
     fontSize: "2.5rem",
     fontWeight: 700,
     lineHeight: 1.2,
-  },
-  description: {
-    fontSize: "1.2rem",
-    margin: "1rem 0",
   },
   stats: {
     display: "flex",
@@ -160,7 +167,7 @@ const styles = {
     maxWidth: "400px",
     position: "absolute",
     right: "2rem",
-    top: "1rem", // FIXED — aligns sidebar near top of hero
+    top: "1rem",
     transform: "translateY(0)",
   },
 };
