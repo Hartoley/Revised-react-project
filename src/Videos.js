@@ -6,6 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 const Videos = ({ viewed, vspan, extra }) => {
   const [video, setvideo] = useState([]);
   const [paidvideo, setpaidvideo] = useState([]);
+  const [loading, setLoading] = useState(true); // ✅ Loading state
   const navigate = useNavigate();
   const storedId = localStorage.getItem("id");
   const id = JSON.parse(storedId);
@@ -14,35 +15,39 @@ const Videos = ({ viewed, vspan, extra }) => {
   const generateRandomReviews = () => Math.floor(Math.random() * 9900 + 100);
 
   useEffect(() => {
-    axios
-      .get("https://react-node-project-1.onrender.com/courses/getallcourses")
-      .then((res) => {
-        const enriched = res.data.map((course) => ({
+    Promise.all([
+      axios.get(
+        "https://react-node-project-1.onrender.com/courses/getallcourses"
+      ),
+      axios.get(
+        `https://react-node-project-1.onrender.com/udemy/student/paidCourses/id/${id}`
+      ),
+    ])
+      .then(([allCoursesRes, paidCoursesRes]) => {
+        const enrichedAll = allCoursesRes.data.map((course) => ({
           ...course,
           rating: parseFloat(generateRandomRating()),
           reviews: generateRandomReviews(),
           isBestseller: Math.random() < 0.4,
         }));
-        setvideo(enriched);
-      })
-      .catch(console.error);
+        setvideo(enrichedAll);
 
-    axios
-      .get(
-        `https://react-node-project-1.onrender.com/udemy/student/paidCourses/id/${id}`
-      )
-      .then((res) => {
-        if (res.data) {
-          const enriched = res.data.map((course) => ({
+        if (paidCoursesRes.data) {
+          const enrichedPaid = paidCoursesRes.data.map((course) => ({
             ...course,
             rating: parseFloat(generateRandomRating()),
             reviews: generateRandomReviews(),
             isBestseller: Math.random() < 0.4,
           }));
-          setpaidvideo(enriched);
+          setpaidvideo(enrichedPaid);
         }
+
+        setLoading(false); // ✅ Set loading to false when both fetches are done
       })
-      .catch(console.error);
+      .catch((error) => {
+        console.error(error);
+        setLoading(false);
+      });
   }, []);
 
   const showmore = (course) => {
@@ -132,21 +137,58 @@ const Videos = ({ viewed, vspan, extra }) => {
     </div>
   );
 
+  const renderLoadingSkeleton = () => (
+    <div className="row">
+      {Array(8)
+        .fill(0)
+        .map((_, i) => (
+          <div className="col-sm-6 col-md-4 col-lg-3 mb-4" key={i}>
+            <div className="card h-100 shadow-sm border">
+              <div
+                className="card-img-top bg-light placeholder-glow"
+                style={{ height: "220px", borderRadius: "0.5rem" }}
+              ></div>
+              <div className="card-body p-2">
+                <p className="placeholder-glow">
+                  <span className="placeholder col-6"></span>
+                </p>
+                <p className="placeholder-glow">
+                  <span className="placeholder col-4"></span>
+                </p>
+                <p className="placeholder-glow">
+                  <span className="placeholder col-7"></span>
+                </p>
+                <p className="placeholder-glow">
+                  <span className="placeholder col-5"></span>
+                </p>
+              </div>
+            </div>
+          </div>
+        ))}
+    </div>
+  );
+
   return (
     <div className="container py-4">
-      {paidvideo.length > 0 && (
+      {loading ? (
+        renderLoadingSkeleton()
+      ) : (
         <>
-          <h4 className="mb-4">Current programs you enrolled in</h4>
-          {renderCourses(paidvideo)}
+          {paidvideo.length > 0 && (
+            <>
+              <h4 className="mb-4">Current programs you enrolled in</h4>
+              {renderCourses(paidvideo)}
+            </>
+          )}
+
+          <h4 className="mt-5 mb-4">
+            {viewed}
+            <span className="text-primary">{vspan}</span> {extra}
+          </h4>
+
+          {renderCourses(video)}
         </>
       )}
-
-      <h4 className="mt-5 mb-4">
-        {viewed}
-        <span className="text-primary">{vspan}</span> {extra}
-      </h4>
-
-      {renderCourses(video)}
     </div>
   );
 };
