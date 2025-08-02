@@ -1,4 +1,3 @@
-// CoursesDisplay.js
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -11,11 +10,20 @@ const CoursesDisplay = () => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
+  const generateRandomRating = () => (Math.random() * 2 + 3).toFixed(1); // between 3.0 and 5.0
+  const generateRandomReviews = () => Math.floor(Math.random() * 9900 + 100); // between 100 and 9999
+
   useEffect(() => {
     axios
       .get("https://react-node-project-1.onrender.com/courses/getallcourses")
       .then((res) => {
-        setCourses(res.data);
+        const enrichedCourses = res.data.map((course) => ({
+          ...course,
+          rating: parseFloat(generateRandomRating()),
+          reviews: generateRandomReviews(),
+          isBestseller: Math.random() < 0.4, // 40% chance
+        }));
+        setCourses(enrichedCourses);
         setLoading(false);
       })
       .catch((err) => {
@@ -26,6 +34,31 @@ const CoursesDisplay = () => {
 
   const showmore = (course) => {
     navigate("/students/login");
+  };
+
+  const renderStars = (rating) => {
+    const fullStars = Math.floor(rating);
+    const halfStar = rating - fullStars >= 0.5;
+    const stars = [];
+
+    for (let i = 0; i < fullStars; i++) {
+      stars.push(
+        <i className="bi bi-star-fill text-warning" key={`full-${i}`}></i>
+      );
+    }
+    if (halfStar) {
+      stars.push(<i className="bi bi-star-half text-warning" key="half"></i>);
+    }
+    while (stars.length < 5) {
+      stars.push(
+        <i
+          className="bi bi-star text-warning"
+          key={`empty-${stars.length}`}
+        ></i>
+      );
+    }
+
+    return stars;
   };
 
   return (
@@ -43,7 +76,7 @@ const CoursesDisplay = () => {
               .fill()
               .map((_, i) => (
                 <div className="col-sm-6 col-md-4 col-lg-3 mb-4" key={i}>
-                  <Skeleton height={180} />
+                  <Skeleton height={220} />
                   <Skeleton count={3} />
                 </div>
               ))
@@ -57,14 +90,42 @@ const CoursesDisplay = () => {
                 <div className="card h-100 shadow-sm border-0">
                   <video
                     src={course.previewVideo}
-                    className="card-img-top"
-                    style={{ height: "180px", objectFit: "cover" }}
+                    className="card-img-top rounded"
+                    style={{
+                      height: "220px",
+                      width: "100%",
+                      objectFit: "cover",
+                      objectPosition: "top",
+                    }}
+                    muted
+                    loop
+                    playsInline
                   ></video>
                   <div className="card-body p-2">
                     <h6 className="card-title text-truncate">{course.title}</h6>
                     <p className="text-muted mb-1" style={{ fontSize: "14px" }}>
                       {course.authors_name}
                     </p>
+
+                    <div className="d-flex align-items-center gap-1 mb-1">
+                      <span className="text-warning fw-bold">
+                        {course.rating}
+                      </span>
+                      <div>{renderStars(course.rating)}</div>
+                      <span className="text-muted" style={{ fontSize: "13px" }}>
+                        ({course.reviews})
+                      </span>
+                    </div>
+
+                    {course.isBestseller && (
+                      <div
+                        className="badge bg-warning text-dark mb-2"
+                        style={{ fontSize: "12px", fontWeight: "500" }}
+                      >
+                        Bestseller
+                      </div>
+                    )}
+
                     <p className="fw-bold text-dark">
                       ₦
                       {course.price.toLocaleString("en-NG", {
