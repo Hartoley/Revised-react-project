@@ -10,6 +10,8 @@ import Footer from "./Footer";
 import "./admin2.css";
 
 const Adminlogin = () => {
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const endpoint = "https://react-node-project-3.onrender.com";
@@ -33,11 +35,18 @@ const Adminlogin = () => {
       password: "",
     },
     onSubmit: (value) => {
+      if (!loggedin) {
+        toast.error("Still loading admin data. Please wait...");
+        return;
+      }
+
       const loggedinadmin = loggedin.find(
         (exist) => exist.email === value.email
       );
 
       if (loggedinadmin) {
+        setIsLoggingIn(true); // Start spinner
+
         axios
           .post(`https://react-node-project-1.onrender.com/admin/login`, value)
           .then((res) => {
@@ -49,7 +58,8 @@ const Adminlogin = () => {
           .catch((err) => {
             console.log(err);
             toast.error("Failed to log in. Please try again.");
-          });
+          })
+          .finally(() => setIsLoggingIn(false)); // Stop spinner
       } else {
         toast.error("User doesn't exist");
       }
@@ -140,12 +150,27 @@ const Adminlogin = () => {
             <button
               type="submit"
               className="btn btn-dark"
+              disabled={isLoggingIn}
               style={{
                 borderRadius: "25px",
                 padding: "10px 0",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
               }}
             >
-              Log in
+              {isLoggingIn ? (
+                <>
+                  <span
+                    className="spinner-border spinner-border-sm me-2"
+                    role="status"
+                    aria-hidden="true"
+                  ></span>
+                  Logging in...
+                </>
+              ) : (
+                "Log in"
+              )}
             </button>
           </div>
 

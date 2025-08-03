@@ -1,35 +1,25 @@
 import React, { useEffect, useRef, useState } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./certificate.css";
 import axios from "axios";
-import { useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import signature from "./Images/0385f5b95a6f4cedacc84c0bd9fccff7-removebg-preview.png";
-import background from "./Images/certi.jpg";
+import { useParams, useNavigate } from "react-router-dom";
 
 const Certificate = () => {
   const [name, setname] = useState("Brock Woodley");
-  const navigate = useNavigate();
   const [courseTitle, settitle] = useState("Digital Marketing Course");
-  const { courseId } = useParams();
-  const { id } = useParams();
+  const { courseId, id } = useParams();
   const [userData, setUserData] = useState({});
   const [course, setcourse] = useState([]);
-  const [loading, setLoading] = useState(true);
   const currentDate = new Date().toLocaleDateString();
   const certificateRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
       .get(
-        ` https://react-node-project-1.onrender.com/courses/course/${courseId}`
+        `https://react-node-project-1.onrender.com/courses/course/${courseId}`
       )
       .then((res) => {
         setcourse(res.data);
         settitle(res.data.title);
-      })
-      .catch((error) => {
-        console.log(error);
       });
 
     axios
@@ -39,95 +29,182 @@ const Certificate = () => {
       .then((res) => {
         setUserData(res.data);
         setname(res.data.studentDetails.username);
-        setLoading(true);
-      })
-      .catch((error) => {
-        console.log("Error:", error);
-        setLoading(false);
       });
-  }, [courseId]);
+  }, [courseId, id]);
 
-  const handleDownload = () => {
-    window.print();
-  };
-
-  const handleClose = () => {
-    navigate(`/students/dashboard/${id}`);
-  };
+  const handleDownload = () => window.print();
+  const handleClose = () => navigate(`/students/dashboard/${id}`);
 
   return (
     <div
-      className="d-flex justify-content-center flex-column align-items-center bg-dark text-light"
-      style={{ height: "100vh" }}
+      className="d-flex flex-column align-items-center justify-content-center"
+      style={{
+        minHeight: "100vh",
+        backgroundColor: "#e6d3b3",
+        padding: "30px",
+      }}
     >
       <div
         ref={certificateRef}
-        className="certificate-container text-center bg-maroon text-gold p-4 rounded shadow-lg"
-        style={{ maxWidth: "85%" }}
+        style={{
+          background: "linear-gradient(135deg, #0c0f14 0%, #1e2129 100%)",
+          color: "#d4af37",
+          padding: "40px 50px",
+          borderRadius: "8px",
+          maxWidth: "900px",
+          width: "100%",
+          fontFamily: "'Georgia', serif",
+          boxShadow: "0 0 40px rgba(0,0,0,0.5)",
+          position: "relative",
+        }}
       >
-        <p id="myP" className="h4 mb-2 mt-3">
-          CERTIFICATE OF COMPLETION
-        </p>
-        <p id="myP" className="h4 mb-2">
-          {name}
-        </p>
-        <p id="myP" className="w-75 mx-auto text-center">
-          Congratulations on completing the <span>{courseTitle}</span>. Your
-          dedication and hard work have truly paid off. We are proud of your
-          achievement and excited to see how you'll apply your new skills!
-        </p>
-
-        <div className="row my-2">
-          <div className="col">
-            <p id="myP">{course.createdBy || "Darren Ko"}</p>
-            <p id="myP">Virtual Teacher</p>
-          </div>
-          <div className="col">
-            <p id="myP">{course.authors_name || "Josh Walter"}</p>
-            <p id="myP">Virtual Instructor</p>
-          </div>
+        {/* Ribbon */}
+        <div
+          style={{
+            position: "absolute",
+            left: "30px",
+            top: "30px",
+            backgroundColor: "gold",
+            color: "#000",
+            padding: "10px 15px",
+            borderRadius: "50%",
+            fontWeight: "bold",
+            fontSize: "14px",
+            boxShadow: "2px 2px 10px rgba(0,0,0,0.3)",
+          }}
+        >
+          2020
+          <br />
+          AWARD
         </div>
 
-        <p id="myP">{currentDate}</p>
-        <p id="myP">Date</p>
+        <h2
+          style={{
+            textAlign: "center",
+            fontSize: "2rem",
+            fontWeight: "700",
+            letterSpacing: "2px",
+            marginBottom: "0.5rem",
+            color: "#d4af37",
+          }}
+        >
+          CERTIFICATE
+        </h2>
+        <p
+          style={{
+            textAlign: "center",
+            fontSize: "1.2rem",
+            marginBottom: "2rem",
+            fontWeight: "500",
+          }}
+        >
+          OF ACHIEVEMENT
+        </p>
 
-        <div className="mt-1">
-          <img
-            src={signature}
-            alt="Signature"
-            className="mb-2"
-            style={{ width: "80px" }}
-          />
-          <p id="myP">Instructor Signature</p>
+        <p
+          style={{
+            textAlign: "center",
+            fontSize: "0.9rem",
+            color: "#ccc",
+            marginBottom: "1.5rem",
+            textTransform: "uppercase",
+            letterSpacing: "1px",
+          }}
+        >
+          Proudly Presented To
+        </p>
+
+        <h3
+          style={{
+            textAlign: "center",
+            fontSize: "2rem",
+            fontWeight: "bold",
+            fontFamily: "cursive",
+            color: "#eac676",
+            marginBottom: "1.5rem",
+          }}
+        >
+          {name}
+        </h3>
+
+        <p
+          style={{
+            fontSize: "14px",
+            textAlign: "center",
+            color: "#aaa",
+            maxWidth: "700px",
+            margin: "0 auto 2rem auto",
+            lineHeight: "1.6",
+          }}
+        >
+          Congratulations on completing the <b>{courseTitle}</b>. Your
+          dedication and hard work have truly paid off. This certificate
+          recognizes your efforts and accomplishments in mastering the content.
+        </p>
+
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            marginTop: "40px",
+          }}
+        >
+          <div>
+            <p
+              style={{
+                borderTop: "1px solid #888",
+                paddingTop: "5px",
+                fontSize: "14px",
+                textAlign: "center",
+              }}
+            >
+              DATE
+            </p>
+          </div>
+          <div>
+            <p
+              style={{
+                borderTop: "1px solid #888",
+                paddingTop: "5px",
+                fontSize: "14px",
+                textAlign: "center",
+              }}
+            >
+              SIGNATURE
+            </p>
+          </div>
         </div>
       </div>
 
-      <div className="d-flex justify-content-center mt-1 gap-3">
+      <div
+        className="d-flex gap-3 mt-4"
+        style={{ display: "flex", justifyContent: "center" }}
+      >
         <button
-          id="downloadBtn"
+          onClick={handleDownload}
           style={{
             backgroundColor: "#ffc107",
-            border: "none",
             color: "#fff",
             padding: "10px 20px",
+            border: "none",
             borderRadius: "5px",
+            fontWeight: "bold",
             cursor: "pointer",
           }}
-          onClick={handleDownload}
         >
-          Download Certificate
+          Download
         </button>
         <button
-          id="closeBtn"
+          onClick={handleClose}
           style={{
             backgroundColor: "#6c757d",
-            border: "none",
             color: "#fff",
             padding: "10px 20px",
+            border: "none",
             borderRadius: "5px",
+            fontWeight: "bold",
             cursor: "pointer",
           }}
-          onClick={handleClose}
         >
           Close
         </button>
