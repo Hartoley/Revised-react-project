@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 // import "./dashheader.css";
-import logo from "./Images/new Udemy.png";
+import logo from "./Images/logo.png";
 import { useNavigate } from "react-router-dom";
 
 const Adminheader = ({
@@ -36,7 +36,7 @@ const Adminheader = ({
     <>
       <div className="headers" id="header">
         <div onClick={goHome} className="imageCon">
-          <img className="logo" src={logo} alt="Udemy Logo" />
+          <img className="logo" src={logo} alt="Learnova Logo" />
         </div>
         <div className="main">
           <div className="search">

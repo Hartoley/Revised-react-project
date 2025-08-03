@@ -1,182 +1,172 @@
-*{
-    margin: 0;
-    padding: 0;
+* {
+  margin: 0;
+  padding: 0;
 }
-.footerBox{
-    height: 70vh;
-    width: 100%;
-    background-color: rgb(45,47,49);
-    display: flex;
-    flex-direction: column;
+.footerBox {
+  height: 70vh;
+  width: 100%;
+  background-color: rgb(45, 47, 49);
+  display: flex;
+  flex-direction: column;
 }
 
 .logobox {
-    max-width: 15%; 
-    height: auto;
-  }
-
-.topBox{
-    height: 25%;
-    width: 100%;
-    /* background-color: red; */
-    display: flex;
-    align-items: center;
-    border-bottom: solid 2px rgb(53,56,58);
-    
+  max-width: 15%;
+  height: auto;
 }
 
-.companiesBox{
-    width: 50%;
-    height: 50%;
-    /* background-color: red; */
-    align-items: center;
-    justify-content: center;
-    Font-size: 19px;
-    Font-weight: 700;
-    Line-height: 22.8px;
-    color: white;
-    padding: 0 50px;
-  
+.topBox {
+  height: 25%;
+  width: 100%;
+  /* background-color: red; */
+  display: flex;
+  align-items: center;
+  border-bottom: solid 2px rgb(53, 56, 58);
 }
 
-
-.companiesBox span{
-    color: rgb(192, 196, 252);
+.companiesBox {
+  width: 50%;
+  height: 50%;
+  /* background-color: red; */
+  align-items: center;
+  justify-content: center;
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 22.8px;
+  color: white;
+  padding: 0 50px;
 }
 
-.companiesBox1{
-    width: 50%;
-    /* background-color: red; */
-    align-items: center;
-    height: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    Font-size: 19px;
-    Font-weight: 700;
-    Line-height: 22.8px;
-    color: white;
-    
-  
+.companiesBox span {
+  color: rgb(192, 196, 252);
 }
 
-.udemyBox{
-    width: 100%;
-    height: 60%;
-    /* background-color: blue; */
-    display: flex;
-    justify-content: space-between;
+.companiesBox1 {
+  width: 50%;
+  /* background-color: red; */
+  align-items: center;
+  height: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 22.8px;
+  color: white;
 }
 
-.udemyBoxText{
-    width: 62%;
-    height: 60%;
-    /* background-color: blue; */
-    display: flex;
-    padding: 0 50px;
-    justify-content: space-between;
+.udemyBox {
+  width: 100%;
+  height: 60%;
+  /* background-color: blue; */
+  display: flex;
+  justify-content: space-between;
 }
 
-.englishBox{
-    width: 38%;
-    height: 60%;
-    /* background-color: brown; */
-    padding-right: 30px;
-    display: flex;
-    justify-content: end;
+.udemyBoxText {
+  width: 62%;
+  height: 60%;
+  /* background-color: blue; */
+  display: flex;
+  padding: 0 50px;
+  justify-content: space-between;
 }
 
-.englishBox button{
-    width: 30%;
-    height: 30%;
-    margin-top: 5%;
-    border: solid 1px white;
-    background-color: rgba(0, 0, 0, 0);
-    color: white;
-    display: flex;
-    align-items: center;
-    padding: 0 10px;
-    gap: 3px;
-    /* justify-content: space-evenly; */
-}
-.udemyMini{
-    padding-top: 20px;
-    width: 25%;
-    /* background-color: blueviolet; */
-    display: flex;
-    flex-direction: column;
-    height: 80%;
-    Font-size: 14px;
-    Font-weight: 400;
-    Line-height: 14.6px;
-    color: rgb(255, 255, 255);
-   
+.englishBox {
+  width: 38%;
+  height: 60%;
+  /* background-color: brown; */
+  padding-right: 30px;
+  display: flex;
+  justify-content: end;
 }
 
-#logo1{
-    width: 100px;
-    height: 30px;
-    margin-top: -20px;
+.englishBox button {
+  width: 30%;
+  height: 30%;
+  margin-top: 5%;
+  border: solid 1px white;
+  background-color: rgba(0, 0, 0, 0);
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  gap: 3px;
+  /* justify-content: space-evenly; */
+}
+.udemyMini {
+  padding-top: 20px;
+  width: 25%;
+  /* background-color: blueviolet; */
+  display: flex;
+  flex-direction: column;
+  height: 80%;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 14.6px;
+  color: rgb(255, 255, 255);
 }
 
-.udemyBox1{
-    width: 100%;
-    height: 20%;
-    /* background-color: blue; */
-    display: flex;
-    padding: 0 40px;
-    align-items: center;
-    justify-content: space-between;
-    Font-size: 12px;
-    Font-weight: 400;
-    Line-height: 18.6px;
-    color: rgb(255, 255, 255);
-    
+#logo1 {
+  width: 100px;
+  height: 90px;
+  margin-top: -20px;
 }
 
+.udemyBox1 {
+  width: 100%;
+  height: 20%;
+  /* background-color: blue; */
+  display: flex;
+  padding: 0 40px;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18.6px;
+  color: rgb(255, 255, 255);
+}
 
 @media (max-width: 768px) {
-    .footerBox {
-      height: auto; 
-      width: 100vw;
-    }
-
-    .companiesBox{
-      Font-size: 15px;
-      Font-weight: 600;
-      Line-height: 20.8px;
-      color: white;
-      padding: 0 20px;
-    }
-  
-    .topBox {
-      flex-direction: column; /* Stack elements vertically on small screens */
-      align-items: flex-start; /* Align top left on small screens */
-    }
-  
-    .companiesBox,
-    .companiesBox1 {
-      width: 100%; /* Make companies boxes full width on small screens */
-      padding: 10px 20px; /* Adjust padding for smaller screens */
-    }
-  
-    .udemyBox {
-      flex-direction: column; /* Stack elements vertically on small screens */
-    }
-  
-    .udemyBoxText,
-    .englishBox {
-      width: 100%; /* Make these sections full width on small screens */
-      padding: 10px 20px; /* Adjust padding for smaller screens */
-    }
-  
-    .udemyMini {
-      margin-bottom: 10px; /* Add spacing between text sections on small screens */
-    }
-  
-    .englishBox button {
-      margin: 10px 0; /* Adjust button margin on small screens */
-    }
-
- 
+  .footerBox {
+    height: auto;
+    width: 100vw;
   }
+
+  .companiesBox {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 20.8px;
+    color: white;
+    padding: 0 20px;
+  }
+
+  .topBox {
+    flex-direction: column; /* Stack elements vertically on small screens */
+    align-items: flex-start; /* Align top left on small screens */
+  }
+
+  .companiesBox,
+  .companiesBox1 {
+    width: 100%; /* Make companies boxes full width on small screens */
+    padding: 10px 20px; /* Adjust padding for smaller screens */
+  }
+
+  .udemyBox {
+    flex-direction: column; /* Stack elements vertically on small screens */
+  }
+
+  .udemyBoxText,
+  .englishBox {
+    width: 100%; /* Make these sections full width on small screens */
+    padding: 10px 20px; /* Adjust padding for smaller screens */
+  }
+
+  .udemyMini {
+    margin-bottom: 10px; /* Add spacing between text sections on small screens */
+  }
+
+  .englishBox button {
+    margin: 10px 0; /* Adjust button margin on small screens */
+  }
+}

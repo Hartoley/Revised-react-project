@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./students.module.css";
-import logo from "./Images/new Udemy.png";
+import logo from "./Images/logo.png";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { DropdownMenu } from "react-bootstrap";
@@ -51,7 +51,7 @@ const Header = () => {
           </div>
           <div className={styles.carier}>
             <div className={styles.dropDown}>
-              <p>Udemy Business</p>
+              <p>Learnova Business</p>
             </div>
             <div className={styles.dropDown}>
               <p>Teach on Udemy</p>

@@ -172,7 +172,7 @@ const Loginbody = () => {
 
         <div className="formContainer">
           <form onSubmit={formik.handleSubmit} className="formBox">
-            <h2 className="heading">Log in to your Udemy account</h2>
+            <h2 className="heading">Log in to your Learnova account</h2>
 
             <div className="inputGroup">
               <label className="label">Email</label>

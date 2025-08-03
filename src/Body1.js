@@ -25,7 +25,7 @@ const Body1 = () => {
           </p>
         </div>
         <div className="buttonBox">
-          <button className="button1">Get Udemy Business</button>
+          <button className="button1">Get Learnova Business</button>
           <button className="button2">Dismiss</button>
         </div>
       </div>

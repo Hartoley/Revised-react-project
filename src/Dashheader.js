@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 // import "./dashheader.css";
-import logo from "./Images/new Udemy.png";
+import logo from "./Images/logo.png";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -43,7 +43,7 @@ const Dashheader = ({ showNotification, notificationsCount, goHome }) => {
     <>
       <div className="headers" id="header">
         <div onClick={goHome} className="imageCon">
-          <img className="logo" src={logo} alt="Udemy Logo" />
+          <img className="logo" src={logo} alt="Learnova Logo" />
         </div>
         <div className="main">
           <div className="search">
@@ -65,7 +65,7 @@ const Dashheader = ({ showNotification, notificationsCount, goHome }) => {
               // backgroundColor: "red",
             }}
           >
-            <p>Udemy Business</p>
+            <p>Learnova Business</p>
             <p>Teach on Udemy</p>
             <p>My learning</p>
           </div>

@@ -1,118 +1,117 @@
 /* Custom Styles */
 .bg-maroon {
-    background-color: #800000;
+  background-color: #800000;
 }
 
 #downloadBtn {
-    background-color: #ffc107;
-    padding: 10px 20px;
-    border: none;
-    color: white;
-    border-radius: 5px;
+  background-color: #ffc107;
+  padding: 10px 20px;
+  border: none;
+  color: white;
+  border-radius: 5px;
 }
 
 #closeBtn {
-    background-color: #6c757d;
-    padding: 10px 20px;
-    border: none;
-    color: white;
-    border-radius: 5px;
+  background-color: #6c757d;
+  padding: 10px 20px;
+  border: none;
+  color: white;
+  border-radius: 5px;
 }
 
 .text-gold {
-    color: gold;
+  color: gold;
 }
 
 .certificate-container {
-    max-width: 800px;
-    border: 3px solid gold;
+  max-width: 800px;
+  border: 3px solid gold;
 }
 
 .shadow-lg {
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
 }
 
 img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 @media (max-width: 768px) {
-    .certificate-container {
-        padding: 20px;
-    }
+  .certificate-container {
+    padding: 20px;
+  }
 
-    /* h2 {
+  /* h2 {
         font-size: 0.5rem;
     } */
 
-    #myP {
-        font-size: 0.5rem;
-    }
+  #myP {
+    font-size: 0.5rem;
+  }
 }
 
 @media print {
+  /* Hide everything except the certificate container */
+  body * {
+    visibility: hidden;
+  }
 
-    /* Hide everything except the certificate container */
-    body * {
-        visibility: hidden;
-    }
+  /* Only show the certificate container and its children */
+  .certificate-container {
+    visibility: visible;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    padding: 20px;
+    margin: 0;
+    border: 2px solid gold;
+    background-color: #a52a2a;
+    /* Your maroon background color */
+    color: #ffd700;
+    /* Gold text color */
+  }
 
-    /* Only show the certificate container and its children */
-    .certificate-container {
-        visibility: visible;
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        padding: 20px;
-        margin: 0;
-        border: 2px solid gold;
-        background-color: #A52A2A;
-        /* Your maroon background color */
-        color: #FFD700;
-        /* Gold text color */
-    }
-
-          #downloadBtn,
-          #closeBtn {
-              padding: 3px 5px;
-              height: 4vh;
-              font-size: 14px;
-              background-color: reds;
-          }
-#d-flex{
+  #downloadBtn,
+  #closeBtn {
+    padding: 3px 5px;
+    height: 4vh;
+    font-size: 14px;
+    background-color: reds;
+  }
+  #d-flex {
     height: auto;
-}
-    /* Ensure text and layout are properly formatted for print */
-    .certificate-container * {
-        visibility: visible;
-    }
+  }
+  /* Ensure text and layout are properly formatted for print */
+  .certificate-container * {
+    visibility: visible;
+  }
 
-    /* Adjust the layout for print to avoid page breaks */
-    .row {
-        display: flex;
-        justify-content: space-between;
-    }
+  /* Adjust the layout for print to avoid page breaks */
+  .row {
+    display: flex;
+    justify-content: space-between;
+  }
 
-    /* Hide buttons to prevent them from showing up in the print */
-    .btn {
-        display: none;
-    }
+  /* Hide buttons to prevent them from showing up in the print */
+  .btn {
+    display: none;
+  }
 
-    /* Full page styling */
-    html,
-    body {
-        height: auto;
-        margin: 0;
-        padding: 0;
-        background-color: white;
-        font-size: 16px;
-        /* Adjust font size for better readability */
-    }
+  /* Full page styling */
+  html,
+  body {
+    height: auto;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    font-size: 16px;
+    /* Adjust font size for better readability */
+  }
 
-    #btn{
-        height: 2vh;
-    }
+  #btn {
+    height: 2vh;
+  }
 }
