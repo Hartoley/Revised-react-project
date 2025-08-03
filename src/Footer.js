@@ -46,7 +46,7 @@ const Footer = () => {
           <div className="udemyBoxText">
             <div className="udemyMini">
               <p>Learnova Business</p>
-              <p>Teach on Udemy</p>
+              <p>Teach on Learnova </p>
               <p>Get the app</p>
               <p>About us</p>
               <p>Contact us</p>

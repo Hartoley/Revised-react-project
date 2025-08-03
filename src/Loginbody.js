@@ -10,6 +10,7 @@ const Loginbody = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [loggedin1, setloggedin1] = useState([]);
   const navigate = useNavigate();
+  const [isLogging, setIsLogging] = useState(false);
   const endpoint = "https://react-node-project-1.onrender.com";
 
   useEffect(() => {
@@ -25,6 +26,7 @@ const Loginbody = () => {
       password: "",
     },
     onSubmit: (value) => {
+      setIsLogging(true);
       const user = loggedin1.find((u) => u.email === value.email);
       if (user) {
         axios
@@ -32,9 +34,12 @@ const Loginbody = () => {
           .then(() => {
             toast.success("Login successful");
             navigate(`/students/dashboard/${user._id}`);
+            setIsLogging(false);
           })
           .catch((err) => toast.error(err.response.data.message));
       } else {
+        setIsLogging(false);
+
         toast.error("User not found");
       }
     },
@@ -172,7 +177,7 @@ const Loginbody = () => {
 
         <div className="formContainer">
           <form onSubmit={formik.handleSubmit} className="formBox">
-            <h2 className="heading">Log in to your Learnova account</h2>
+            <h2 className="heading">Log in to your Udemy account</h2>
 
             <div className="inputGroup">
               <label className="label">Email</label>
@@ -215,8 +220,9 @@ const Loginbody = () => {
             </div>
 
             <button type="submit" className="button">
-              Log In
+              {isLogging ? "Loading" : "Log In"}
             </button>
+
 
             <p className="redirectText">
               Don’t have an account?{" "}

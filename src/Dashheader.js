@@ -65,7 +65,7 @@ const Dashheader = ({ showNotification, notificationsCount, goHome }) => {
             }}
           >
             <span style={{ cursor: "pointer" }}>Learnova Business</span>
-            <span style={{ cursor: "pointer" }}>Teach on Udemy</span>
+            <span style={{ cursor: "pointer" }}>Teach on Learnova </span>
             <span style={{ cursor: "pointer" }}>My learning</span>
           </div>
 

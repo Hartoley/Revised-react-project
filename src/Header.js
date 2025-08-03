@@ -54,7 +54,7 @@ const Header = () => {
               <p>Learnova Business</p>
             </div>
             <div className={styles.dropDown}>
-              <p>Teach on Udemy</p>
+              <p>Teach on Learnova </p>
             </div>
             <div className={styles.cart}>
               <span className="material-symbols-outlined">shopping_cart</span>
