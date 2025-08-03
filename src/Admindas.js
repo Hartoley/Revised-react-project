@@ -149,7 +149,6 @@ const Admindas = () => {
           let courseId = `${res.data.course._id}`;
           // console.log(courseId);
           setLoading(false);
-          console.log(formData);
           navigate(`/uploadVideo/${courseId}`);
         })
         .catch((err) => {

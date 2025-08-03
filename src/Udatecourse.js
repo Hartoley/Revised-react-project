@@ -22,8 +22,6 @@ const Updatecourse = () => {
         console.error("Video upload failed:", err);
         toast.error("Failed to upload video!");
       });
-
-    console.log(courseId);
   }, [courseId]);
 
   const formik = useFormik({
@@ -32,18 +30,15 @@ const Updatecourse = () => {
       value: "",
     },
     onSubmit: (values) => {
-      console.log(values);
       axios
         .post(
           `https://react-node-project-1.onrender.com/courses/update/course/${courseId}`,
           values
         )
         .then((res) => {
-          console.log("Course updated successfully:", res.data);
           toast.success("Course updated successfully!");
         })
         .catch((err) => {
-          console.log(courseId);
           console.error("Course update failed:", err);
           toast.error("Failed to update Course!");
         });

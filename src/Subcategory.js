@@ -38,6 +38,7 @@ const Subcategory = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [playVideoUrl, setPlayVideoUrl] = useState(null);
   const videoElementRef = useRef(null);
+  const [isChecking, setIsChecking] = useState(false);
 
   const navigate = useNavigate();
   let [isEligibleForDownload, setIsEligibleForDownload] = useState(false);
@@ -131,9 +132,6 @@ const Subcategory = () => {
       if (video) {
         setvideosID(index);
         setplayVideo(video.url);
-        console.log(video.url);
-
-        console.log("Video watched status:", video.watched);
 
         // Adjust styles as necessary
         if (subcategoryRef.current) {
@@ -162,14 +160,12 @@ const Subcategory = () => {
 
   const next = useCallback(() => {
     const nextIndex = videosID + 1;
-    console.log(nextIndex);
 
     if (nextIndex < videos.length) {
       const video = videos[nextIndex];
       if (video) {
         setvideosID(nextIndex);
         setplayVideo(video.url);
-        console.log(video.url);
         videoElementRef.current.pause();
         setIsPaused(true);
       }
@@ -186,7 +182,6 @@ const Subcategory = () => {
       if (video) {
         setvideosID(prevIndex);
         setplayVideo(video.url);
-        console.log(video.url);
       }
     } else {
       setStatusText("You have reached the first video.");
@@ -238,7 +233,6 @@ const Subcategory = () => {
         }
       )
       .then((response) => {
-        console.log("Video status updated:", response.data);
         setIsPaused(true);
       })
       .catch((error) => {
@@ -249,7 +243,6 @@ const Subcategory = () => {
 
   const handleDownload = () => {
     navigate(`/download/certificate/${courseId}/${id}`);
-    console.log("Download certificate");
   };
 
   const goHome = () => {
@@ -259,20 +252,15 @@ const Subcategory = () => {
   const handlePlay = (videoId) => {
     setIsPaused(false);
     const url = `https://react-node-project-1.onrender.com/udemy/student/isWatched`;
-    console.log("Requesting URL:", url);
 
     axios
       .post(url, { userId: id, courseId: courseId, videoId: videoId })
       .then((response) => {
-        console.log("API Response:", response.data);
-
         if (response.data.watched) {
           setStatusText("Video has been watched");
         } else {
           setStatusText("Video has not been watched");
         }
-
-        console.log("Video Played Status:", response.data);
       })
       .catch((error) => {
         console.error("Error checking video status:", error);
@@ -281,7 +269,6 @@ const Subcategory = () => {
   };
 
   useEffect(() => {
-    console.log("Is Eligible for Download:", isEligibleForDownload);
     axios
       .post(
         "https://react-node-project-1.onrender.com/udemy/student/certification",
@@ -296,6 +283,7 @@ const Subcategory = () => {
   }, [isEligibleForDownload]);
 
   const certified = async (courseId) => {
+    setIsChecking(true);
     try {
       const response = await axios.post(
         "https://react-node-project-1.onrender.com/udemy/student/certification",
@@ -307,7 +295,6 @@ const Subcategory = () => {
 
       if (response.data.success) {
         // alert(response.data.message);
-        console.log(response);
 
         if (
           response.data.status.toLowerCase() === "pending" ||
@@ -326,12 +313,13 @@ const Subcategory = () => {
       }
       if (response.data.failed) {
         // alert(response.data.message);
-        console.log(response);
         setcertification(response.data.message);
       }
     } catch (error) {
       console.error("Error checking certification:", error);
       // alert('An error occurred while checking eligibility.');
+    } finally {
+      setIsChecking(false);
     }
   };
 
@@ -379,7 +367,7 @@ const Subcategory = () => {
   }
 
   .text-muted {
-    font-size: 14px;
+    font-size: 16px;
     color: #6a6f73;
   }
 
@@ -391,7 +379,7 @@ const Subcategory = () => {
 
   .check-item {
     flex: 1 1 45%;
-    font-size: 14px;
+    font-size: 16px;
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -407,7 +395,7 @@ const Subcategory = () => {
   .video-item {
     border: 1px solid #ccc;
     padding: 0.75rem;
-    font-size: 14px;
+    font-size: 16px;
     border-radius: 5px;
     cursor: pointer;
     display: flex;
@@ -423,7 +411,7 @@ const Subcategory = () => {
 
   .btn-cert {
     padding: 0.5rem 1rem;
-    font-size: 14px;
+    font-size: 16px;
     border-radius: 6px;
     border: none;
     background-color: #2d2f31;
@@ -542,10 +530,14 @@ const Subcategory = () => {
             {/* Requirements */}
             <div className="block">
               <p className="section-title">Requirements</p>
-              <div className="check-item">
-                <span className="material-symbols-outlined">check_circle</span>
-                {course.requirements}
-              </div>
+              {course.requirements?.map((req, index) => (
+                <div key={index} className="check-item">
+                  <span className="material-symbols-outlined">
+                    check_circle
+                  </span>
+                  <span>{req}</span>
+                </div>
+              ))}
             </div>
 
             {/* Description */}
@@ -569,8 +561,9 @@ const Subcategory = () => {
                 <button
                   className="btn-cert"
                   onClick={() => certified(course._id)}
+                  disabled={isChecking}
                 >
-                  Check
+                  {isChecking ? "Checking..." : "Check"}
                 </button>
               )}
             </div>

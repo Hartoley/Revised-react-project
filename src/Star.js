@@ -8,6 +8,8 @@ const CourseHero = () => {
   const [course, setCourse] = useState({});
   const [userData, setUserData] = useState({});
   const [paidVideoIds, setPaidVideoIds] = useState([]);
+  const [showAll, setShowAll] = useState(false);
+  const handleToggle = () => setShowAll(!showAll);
 
   const storedId = localStorage.getItem("id");
   const userId = JSON.parse(storedId);
@@ -47,21 +49,70 @@ const CourseHero = () => {
       <div className="course-hero-container" style={styles.container}>
         <div className="course-hero-text" style={styles.heroText}>
           <h1 style={styles.title}>{course.title}</h1>
-
           <div style={styles.stats}>
             <span style={styles.rating}>4.3</span>
             <span style={styles.link}>(1,937 ratings)</span>
             <span> - 127,428 students</span>
           </div>
-
           <p style={{ marginTop: "1rem" }}>
             Created by <span style={styles.link}>Ing. Tomáš Morávek</span>
           </p>
-
           <div style={styles.meta}>
             <span>🛠 Last updated 7/2025</span>
-            <span>🌍 English</span>
-            <span>🎞 English [Auto], Indonesian [Auto], 1 more</span>
+          </div>{" "}
+          <div
+            className="language-info-block"
+            style={{
+              backgroundColor: "rgb(28,29,31)",
+              marginTop: 2,
+              color: "white",
+              borderRadius: "6px",
+              lineHeight: "1.5",
+            }}
+          >
+            {/* 🌍 Primary language */}
+            {Array.isArray(course.language) && course.language.length > 0 && (
+              <div style={{ marginBottom: "0.5rem" }}>
+                🌍 {course.language.join(", ")}
+              </div>
+            )}
+
+            {/* 🎞 Subtitle languages */}
+            {Array.isArray(course.sub_language) &&
+              course.sub_language.length > 0 && (
+                <div>
+                  🎞{" "}
+                  {showAll ? (
+                    <>
+                      {course.sub_language.join(", ")}{" "}
+                      <span
+                        onClick={handleToggle}
+                        style={{
+                          textDecoration: "underline",
+                          cursor: "pointer",
+                        }}
+                      >
+                        show less
+                      </span>
+                    </>
+                  ) : course.sub_language.length > 2 ? (
+                    <>
+                      {course.sub_language.slice(0, 2).join(", ")},{" "}
+                      <span
+                        onClick={handleToggle}
+                        style={{
+                          textDecoration: "underline",
+                          cursor: "pointer",
+                        }}
+                      >
+                        {course.sub_language.length - 2} more
+                      </span>
+                    </>
+                  ) : (
+                    course.sub_language.join(", ")
+                  )}
+                </div>
+              )}
           </div>
         </div>
 

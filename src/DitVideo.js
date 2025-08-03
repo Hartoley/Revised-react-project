@@ -66,7 +66,6 @@ const DitVideo = () => {
           toast.success("Course edited successfully!");
           setisEditing(false);
           setLoading(false);
-          console.log(formData);
         })
         .catch((err) => {
           console.log(err);
@@ -121,7 +120,6 @@ const DitVideo = () => {
       );
 
       if (response.status === 200) {
-        console.log("Course deleted successfully");
         toast.dismiss();
         toast.success("Course deleted successfully!");
         setTimeout(() => {
@@ -129,7 +127,6 @@ const DitVideo = () => {
         }, 2500);
       } else {
         toast.dismiss();
-        console.log("Failed to delete the course");
       }
     } catch (error) {
       toast.dismiss();
@@ -143,8 +140,6 @@ const DitVideo = () => {
   };
 
   const deleteVideo = async (videoId) => {
-    console.log(videoId, courseId);
-
     toast.loading("Deleting video...");
     try {
       const response = await axios.delete(
@@ -152,7 +147,6 @@ const DitVideo = () => {
       );
 
       if (response.status === 200) {
-        console.log("Video deleted successfully");
         toast.dismiss();
         toast.success("Video deleted successfully!");
         setTimeout(() => {
@@ -160,7 +154,6 @@ const DitVideo = () => {
         }, 2500);
       } else {
         toast.dismiss();
-        console.log("Failed to delete the course");
       }
     } catch (error) {
       toast.dismiss();

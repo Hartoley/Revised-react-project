@@ -53,35 +53,42 @@ const Adminheader = ({
               alignItems: "center",
               width: "28%",
               gap: "0.5rem",
-              left: "0%",
               fontSize: "14px",
-              // backgroundColor: "red",
             }}
           >
-            <p
+            <button
               onClick={scrollToStudents}
               style={{
                 cursor: "pointer",
+                background: "none",
+                border: "none",
+                color: "inherit",
               }}
             >
               Students
-            </p>
-            <p
+            </button>
+            <button
               onClick={scrollToUploadCourses}
               style={{
                 cursor: "pointer",
+                background: "none",
+                border: "none",
+                color: "inherit",
               }}
             >
               Upload course
-            </p>
-            <p
+            </button>
+            <button
               onClick={scrollToCourses}
               style={{
                 cursor: "pointer",
+                background: "none",
+                border: "none",
+                color: "inherit",
               }}
             >
               Manage Courses
-            </p>
+            </button>
           </div>
 
           <div

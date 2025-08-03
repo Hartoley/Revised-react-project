@@ -36,9 +36,6 @@ const Certificate = () => {
         );
         setUserData(userRes.data);
         setName(userRes.data.username);
-
-        console.log(courseRes.data);
-        console.log(userRes.data);
       } catch (error) {
         console.error("Error fetching data:", error);
         toast.error("Failed to fetch data");
@@ -84,7 +81,6 @@ const Certificate = () => {
 
   const handleClose = () => {
     navigate(`/course/${courseId}`);
-    console.log("Close certificate");
   };
 
   return (

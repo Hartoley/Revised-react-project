@@ -21,7 +21,6 @@ const Dashheader = ({ showNotification, notificationsCount, goHome }) => {
       )
       .then((res) => {
         setUserData(res.data);
-        console.log(res.data.username);
       })
       .catch((error) => {
         console.log("Error:", error);
@@ -61,13 +60,13 @@ const Dashheader = ({ showNotification, notificationsCount, goHome }) => {
               width: "28%",
               gap: "0.5rem",
               left: "0%",
-              fontSize: "12px",
-              // backgroundColor: "red",
+              fontSize: "14px",
+              fontWeight: 600,
             }}
           >
-            <p>Learnova Business</p>
-            <p>Teach on Udemy</p>
-            <p>My learning</p>
+            <span style={{ cursor: "pointer" }}>Learnova Business</span>
+            <span style={{ cursor: "pointer" }}>Teach on Udemy</span>
+            <span style={{ cursor: "pointer" }}>My learning</span>
           </div>
 
           <div

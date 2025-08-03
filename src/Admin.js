@@ -21,7 +21,6 @@ const AdminSignup = () => {
     axios
       .get(`${endpoint}/admin/getdata`)
       .then((res) => {
-        console.log("Admin data from API:", res.data);
         setAdmins(res.data);
         dispatch(successful(res.data));
       })
@@ -56,8 +55,6 @@ const AdminSignup = () => {
         .required("Password is required"),
     }),
     onSubmit: (values) => {
-      console.log(values);
-
       const existingAdmin = admins.find(
         (admin) =>
           admin.email === values.email || admin.password === values.password
@@ -69,7 +66,6 @@ const AdminSignup = () => {
         axios
           .post(`${endpoint}/admin/register`, values)
           .then(() => {
-            console.log("Admin signed up successfully");
             toast.success("Admin signed up successfully");
             navigate("/adminlogin");
           })

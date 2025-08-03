@@ -30,9 +30,7 @@ const Uploadvideo = () => {
     }
   }, [loading]);
 
-  useEffect(() => {
-    console.log(courseId);
-  }, [courseId]);
+  useEffect(() => {}, [courseId]);
 
   const formik = useFormik({
     initialValues: {
