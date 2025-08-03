@@ -19,8 +19,6 @@ const Certificate = () => {
       )
       .then((res) => {
         setcourse(res.data);
-        console.log(res);
-
         settitle(res.data.title);
       });
 
@@ -34,64 +32,103 @@ const Certificate = () => {
       });
   }, [courseId, id]);
 
+  // Inject print styles
+  useEffect(() => {
+    const style = document.createElement("style");
+    style.innerHTML = `
+      @media print {
+        body * {
+          visibility: hidden !important;
+        }
+        #certificate-section, #certificate-section * {
+          visibility: visible !important;
+        }
+        #certificate-section {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100vw;
+          background: linear-gradient(to right, #0f1c2e, #1c263b) !important;
+          color: #d4af37 !important;
+          -webkit-print-color-adjust: exact !important;
+          print-color-adjust: exact !important;
+          box-shadow: none !important;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+    return () => {
+      document.head.removeChild(style);
+    };
+  }, []);
+
   const handleDownload = () => window.print();
   const handleClose = () => navigate(`/students/dashboard/${id}`);
 
   return (
     <div
-      className="d-flex flex-column align-items-center justify-content-center"
       style={{
         minHeight: "100vh",
         backgroundColor: "#d6c2a6",
         padding: "30px",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "column",
       }}
     >
       <div
+        id="certificate-section"
         ref={certificateRef}
         style={{
           background: "linear-gradient(to right, #0f1c2e, #1c263b)",
           color: "#d4af37",
-          padding: "60px 70px",
+          padding: "8vw 5vw",
           borderRadius: "10px",
           maxWidth: "950px",
           width: "100%",
           fontFamily: "'Georgia', serif",
           position: "relative",
+          boxSizing: "border-box",
           boxShadow: "0 8px 30px rgba(0,0,0,0.4)",
+          WebkitPrintColorAdjust: "exact",
+          printColorAdjust: "exact",
         }}
       >
-        {/* Ribbon */}
+        {/* Responsive Ribbon */}
         <div
           style={{
             position: "absolute",
-            top: "40px",
-            left: "40px",
+            top: "2vw",
+            left: "2vw",
             backgroundColor: "#d4af37",
             color: "#1a1a1a",
-            padding: "12px",
+            padding: "0.8vw",
             borderRadius: "50%",
             fontWeight: "bold",
-            fontSize: "12px",
-            width: "70px",
-            height: "70px",
+            fontSize: "clamp(10px, 1.2vw, 14px)",
+            width: "clamp(50px, 6vw, 70px)",
+            height: "clamp(50px, 6vw, 70px)",
             textAlign: "center",
             boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
+            alignItems: "center",
+            zIndex: 2,
           }}
         >
           <div>{new Date().getFullYear()}</div>
-          <div style={{ fontSize: "10px" }}>AWARD</div>
+          <div style={{ fontSize: "clamp(8px, 0.9vw, 10px)" }}>AWARD</div>
         </div>
 
-        {/* Header */}
         <h1
           style={{
             textAlign: "center",
             fontWeight: "700",
             letterSpacing: "2px",
             marginBottom: "0.2em",
+            fontSize: "clamp(24px, 5vw, 40px)",
           }}
         >
           CERTIFICATE
@@ -99,7 +136,7 @@ const Certificate = () => {
         <p
           style={{
             textAlign: "center",
-            fontSize: "18px",
+            fontSize: "clamp(16px, 3vw, 20px)",
             fontWeight: "500",
             marginBottom: "30px",
           }}
@@ -107,7 +144,6 @@ const Certificate = () => {
           OF ACHIEVEMENT
         </p>
 
-        {/* Recipient */}
         <p
           style={{
             textAlign: "center",
@@ -122,7 +158,7 @@ const Certificate = () => {
           style={{
             textAlign: "center",
             fontFamily: "cursive",
-            fontSize: "30px",
+            fontSize: "clamp(24px, 4vw, 32px)",
             color: "#eac676",
             marginBottom: "30px",
           }}
@@ -130,7 +166,6 @@ const Certificate = () => {
           {name}
         </h2>
 
-        {/* Description */}
         <p
           style={{
             textAlign: "center",
@@ -147,15 +182,16 @@ const Certificate = () => {
           this certificate.
         </p>
 
-        {/* Footer */}
         <div
           style={{
             display: "flex",
+            flexWrap: "wrap",
             justifyContent: "space-between",
             marginTop: "50px",
+            gap: "20px",
           }}
         >
-          <div style={{ textAlign: "center" }}>
+          <div style={{ textAlign: "center", flex: "1 1 40%" }}>
             <p style={{ fontSize: "14px", color: "#999" }}>{currentDate}</p>
             <div
               style={{
@@ -166,10 +202,10 @@ const Certificate = () => {
             ></div>
             <p style={{ fontSize: "12px", color: "#aaa" }}>DATE</p>
           </div>
-          <div style={{ textAlign: "center" }}>
+          <div style={{ textAlign: "center", flex: "1 1 40%" }}>
             <p
               style={{
-                fontFamily: "'Great Vibes', cursive", // Use a fancy signature font
+                fontFamily: "'Great Vibes', cursive",
                 fontSize: "28px",
                 fontStyle: "italic",
                 color: "#eac676",
@@ -177,9 +213,8 @@ const Certificate = () => {
                 textAlign: "center",
               }}
             >
-              {course.createdBy}
+              {course.createdBy || "Dr. Keena"}
             </p>
-
             <div
               style={{
                 borderTop: "1px solid #888",
