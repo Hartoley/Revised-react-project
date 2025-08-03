@@ -19,6 +19,8 @@ const Certificate = () => {
       )
       .then((res) => {
         setcourse(res.data);
+        console.log(res);
+
         settitle(res.data.title);
       });
 
@@ -40,151 +42,163 @@ const Certificate = () => {
       className="d-flex flex-column align-items-center justify-content-center"
       style={{
         minHeight: "100vh",
-        backgroundColor: "#e6d3b3",
+        backgroundColor: "#d6c2a6",
         padding: "30px",
       }}
     >
       <div
         ref={certificateRef}
         style={{
-          background: "linear-gradient(135deg, #0c0f14 0%, #1e2129 100%)",
+          background: "linear-gradient(to right, #0f1c2e, #1c263b)",
           color: "#d4af37",
-          padding: "40px 50px",
-          borderRadius: "8px",
-          maxWidth: "900px",
+          padding: "60px 70px",
+          borderRadius: "10px",
+          maxWidth: "950px",
           width: "100%",
           fontFamily: "'Georgia', serif",
-          boxShadow: "0 0 40px rgba(0,0,0,0.5)",
           position: "relative",
+          boxShadow: "0 8px 30px rgba(0,0,0,0.4)",
         }}
       >
         {/* Ribbon */}
         <div
           style={{
             position: "absolute",
-            left: "30px",
-            top: "30px",
-            backgroundColor: "gold",
-            color: "#000",
-            padding: "10px 15px",
+            top: "40px",
+            left: "40px",
+            backgroundColor: "#d4af37",
+            color: "#1a1a1a",
+            padding: "12px",
             borderRadius: "50%",
             fontWeight: "bold",
-            fontSize: "14px",
-            boxShadow: "2px 2px 10px rgba(0,0,0,0.3)",
+            fontSize: "12px",
+            width: "70px",
+            height: "70px",
+            textAlign: "center",
+            boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
           }}
         >
-          2020
-          <br />
-          AWARD
+          <div>{new Date().getFullYear()}</div>
+          <div style={{ fontSize: "10px" }}>AWARD</div>
         </div>
 
-        <h2
+        {/* Header */}
+        <h1
           style={{
             textAlign: "center",
-            fontSize: "2rem",
             fontWeight: "700",
             letterSpacing: "2px",
-            marginBottom: "0.5rem",
-            color: "#d4af37",
+            marginBottom: "0.2em",
           }}
         >
           CERTIFICATE
-        </h2>
+        </h1>
         <p
           style={{
             textAlign: "center",
-            fontSize: "1.2rem",
-            marginBottom: "2rem",
+            fontSize: "18px",
             fontWeight: "500",
+            marginBottom: "30px",
           }}
         >
           OF ACHIEVEMENT
         </p>
 
+        {/* Recipient */}
         <p
           style={{
             textAlign: "center",
-            fontSize: "0.9rem",
-            color: "#ccc",
-            marginBottom: "1.5rem",
+            fontSize: "14px",
             textTransform: "uppercase",
             letterSpacing: "1px",
           }}
         >
           Proudly Presented To
         </p>
-
-        <h3
+        <h2
           style={{
             textAlign: "center",
-            fontSize: "2rem",
-            fontWeight: "bold",
             fontFamily: "cursive",
+            fontSize: "30px",
             color: "#eac676",
-            marginBottom: "1.5rem",
+            marginBottom: "30px",
           }}
         >
           {name}
-        </h3>
+        </h2>
 
+        {/* Description */}
         <p
           style={{
-            fontSize: "14px",
             textAlign: "center",
-            color: "#aaa",
+            color: "#cccccc",
+            fontSize: "14px",
+            lineHeight: "1.8",
             maxWidth: "700px",
-            margin: "0 auto 2rem auto",
-            lineHeight: "1.6",
+            margin: "0 auto",
           }}
         >
-          Congratulations on completing the <b>{courseTitle}</b>. Your
-          dedication and hard work have truly paid off. This certificate
-          recognizes your efforts and accomplishments in mastering the content.
+          Congratulations on successfully completing the{" "}
+          <strong>{courseTitle}</strong>. Your commitment and achievement are
+          commendable. We hereby recognize your accomplishment and award you
+          this certificate.
         </p>
 
+        {/* Footer */}
         <div
           style={{
             display: "flex",
             justifyContent: "space-between",
-            marginTop: "40px",
+            marginTop: "50px",
           }}
         >
-          <div>
-            <p
+          <div style={{ textAlign: "center" }}>
+            <p style={{ fontSize: "14px", color: "#999" }}>{currentDate}</p>
+            <div
               style={{
                 borderTop: "1px solid #888",
-                paddingTop: "5px",
-                fontSize: "14px",
-                textAlign: "center",
+                width: "100px",
+                margin: "5px auto 0 auto",
               }}
-            >
-              DATE
-            </p>
+            ></div>
+            <p style={{ fontSize: "12px", color: "#aaa" }}>DATE</p>
           </div>
-          <div>
+          <div style={{ textAlign: "center" }}>
             <p
               style={{
-                borderTop: "1px solid #888",
-                paddingTop: "5px",
-                fontSize: "14px",
+                fontFamily: "'Great Vibes', cursive", // Use a fancy signature font
+                fontSize: "28px",
+                fontStyle: "italic",
+                color: "#eac676",
+                margin: "0",
                 textAlign: "center",
               }}
             >
-              SIGNATURE
+              {course.createdBy}
             </p>
+
+            <div
+              style={{
+                borderTop: "1px solid #888",
+                width: "100px",
+                margin: "5px auto 0 auto",
+              }}
+            ></div>
+            <p style={{ fontSize: "12px", color: "#aaa" }}>SIGNATURE</p>
           </div>
         </div>
       </div>
 
-      <div
-        className="d-flex gap-3 mt-4"
-        style={{ display: "flex", justifyContent: "center" }}
-      >
+      {/* Buttons */}
+      <div style={{ display: "flex", gap: "20px", marginTop: "30px" }}>
         <button
           onClick={handleDownload}
           style={{
-            backgroundColor: "#ffc107",
-            color: "#fff",
+            backgroundColor: "#d4af37",
+            color: "#000",
             padding: "10px 20px",
             border: "none",
             borderRadius: "5px",
