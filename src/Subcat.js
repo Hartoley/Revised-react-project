@@ -2,6 +2,7 @@
 import React from "react";
 import { PaystackButton } from "react-paystack";
 import { toast } from "react-toastify";
+import axios from "axios"
 
 const CourseSidebar = ({
   course = {},
@@ -22,9 +23,35 @@ const CourseSidebar = ({
     },
     publicKey: "pk_test_6dbb10e57606b65e31e7be9d5ab4e13b3e5f74e1",
     text: "Buy now",
-    onSuccess: () => toast.success("Payment successful!"),
+
+    onSuccess: async (response) => {
+      try {
+        await axios.post("https://react-node-project-1.onrender.com/udemy/student/payment", {
+          userId: id,
+          courseId: course._id,
+          courseTitle: course.title,
+          reference: response.reference,
+        });
+
+        toast.success("Payment successful!");
+      } catch (error) {
+        // Proper error logging:
+        if (error.response) {
+          console.error("Backend error:", error.response.data);
+          toast.error(`Server error: ${error.response.data.message || "Failed to save course."}`);
+        } else if (error.message) {
+          console.error("Error message:", error.message);
+          toast.error(`Error: ${error.message}`);
+        } else {
+          console.error("Unknown error:", JSON.stringify(error));
+          toast.error("An unknown error occurred.");
+        }
+      }
+    },
+
     onClose: () => toast.error("Transaction was not completed."),
   };
+
 
   return (
     <div
