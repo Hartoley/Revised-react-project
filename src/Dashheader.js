@@ -60,7 +60,7 @@ const Dashheader = ({ showNotification, notificationsCount, goHome }) => {
               width: "28%",
               gap: "0.5rem",
               left: "0%",
-              fontSize: "14px",
+              fontSize: "13.5px",
               fontWeight: 600,
             }}
           >
